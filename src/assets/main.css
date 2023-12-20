@@ -1,0 +1,17 @@
+@import 'base.css';
+
+#nav {
+	background-color: darkred;
+}
+#nav a {
+	padding: 0.1em 0.2em;
+	display: inline-block;
+	text-decoration: none;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: -0.07em;
+}
+#nav .router-link-active {
+	background-color: cornsilk;
+	color: black;
+}

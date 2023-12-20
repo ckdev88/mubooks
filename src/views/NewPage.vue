@@ -1,0 +1,5 @@
+<script></script>
+<template>
+	<h1>New!</h1>
+	<p></p>
+</template>

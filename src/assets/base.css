@@ -1,0 +1,28 @@
+body {
+	font-size: 16px;
+	padding: 0.5em;
+	background-color: black;
+	color: white;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+}
+a {
+	color: lightcyan;
+}
+a:hover {
+	color: black;
+	background-color: lightcyan;
+	text-decoration: underline;
+}
+h1,
+h2 {
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
+	padding: 0;
+}
+pre {
+	font-size: 0.8em;
+	max-width: calc(100vw);
+	padding: 1em;
+	white-space: wrap;
+	background: hsl(20, 20%, 20%);
+}
