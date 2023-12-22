@@ -1,10 +1,10 @@
 <script setup>
-import BooksList from '@/components/BooksList.vue'
+import BooksList from '../components/BooksList.vue'
 
 import { ref, computed, reactive } from 'vue'
 const countryName = ref('Brasil')
 const countryNameLower = computed(() => {
-	return countryName.value.toLowerCase()
+  return countryName.value.toLowerCase()
 })
 const state = reactive({ continent: 'Europe' })
 // console.log('countryName:', countryName)
@@ -14,19 +14,19 @@ const state = reactive({ continent: 'Europe' })
 // console.log('state.continent:', state.continent)
 
 defineProps({
-	title: {
-		required: true,
-		type: String
-	}
+  title: {
+    required: true,
+    type: String
+  }
 })
 </script>
 
 <template>
-	<h1>Books ({{ this.$route.name }})</h1>
-	<slot subtitel />
-	<Suspense>
-		<!-- <BooksList intitle="potter" subject="magic" /> -->
-		<BooksList />
-		<template #fallback>Loading...</template>
-	</Suspense>
+  <h1>Books ({{ this.$route.name }})</h1>
+  <slot subtitel />
+  <Suspense>
+    <!-- <BooksList intitle="potter" subject="magic" /> -->
+    <BooksList />
+    <template #fallback>Loading...</template>
+  </Suspense>
 </template>
