@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useTypeStore = defineStore('TypeStore', {
+export const useStatiegeldStore = defineStore('StatiegeldStore', {
   //state (data)
   state: () => ({
     statiegeldFlesje: 0.25,
