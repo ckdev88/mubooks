@@ -9,5 +9,3 @@ const StatiegeldStore = useStatiegeldStore()
     <div>Prijs per krat: {{ StatiegeldStore.statiegeldKrat }}</div>
     <input type="submit" />
   </form>
-  <h3>Statiegeld: {{ StatiegeldStore.statiegeldBon }}</h3>
-</template>

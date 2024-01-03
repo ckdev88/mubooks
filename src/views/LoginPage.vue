@@ -21,9 +21,10 @@ const handleSubmit = () => {
 	console.log('state.loginEmail:', state.loginEmail)
 	if (state.loginEmail.length > 8) {
 		state.formNotification = 'submitting form...' + state.loginEmail.length
-		if (state.loginEmail === 'pietjebell@p.com') {
-			loggedIn.username = 'pietjebellll'
+		if (state.loginEmail === 'carla@carla.com') {
+			loggedIn.username = 'carla'
 			loggedIn.status = true
+			loggedIn.link = '/mubooks'
 			router.push('mubooks')
 		}
 		if (state.loginEmail === 'routeinfo@d.d') {
