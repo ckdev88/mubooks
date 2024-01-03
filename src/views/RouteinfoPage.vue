@@ -21,9 +21,9 @@ const props = defineProps({
 console.log('====')
 </script>
 <template>
-  <h1>Dashboard!</h1>
+  <h1>this.$route</h1>
   <pre>{{ this.$route }}</pre>
-  <h1>Dashboard 2!</h1>
+  <h1>this.$router</h1>
   <pre>{{ this.$router }}</pre>
 
   <!-- <Suspense> -->
@@ -34,10 +34,10 @@ console.log('====')
 
 <style lang="scss" scoped></style>
 
-<!-- { "path": "/dashboard", "name": "dashboard", "params": {}, "query": {}, "hash": "", "fullPath": -->
-<!-- "/dashboard", "matched": [ { "path": "/dashboard", "name": "dashboard", "meta": {}, "props": { -->
+<!-- { "path": "/routeinfo", "name": "routeinfo", "params": {}, "query": {}, "hash": "", "fullPath": -->
+<!-- "/routeinfo", "matched": [ { "path": "/routeinfo", "name": "routeinfo", "meta": {}, "props": { -->
 <!-- "default": false }, "children": [], "instances": { "default": {} }, "leaveGuards": {}, -->
-<!-- "updateGuards": {}, "enterCallbacks": {}, "components": { "default": { "__name": "DashboardPage", -->
+<!-- "updateGuards": {}, "enterCallbacks": {}, "components": { "default": { "__name": "RouteinfoPage", -->
 <!-- "props": { "params": { "required": true }, "userid": { "required": false } }, "__hmrId": "a41dce3c", -->
-<!-- "__file": "/home/fernando/Documents/Coding/ckdev88/cest-la-vue/src/views/DashboardPage.vue" } } } ], -->
+<!-- "__file": "/home/fernando/Documents/Coding/ckdev88/cest-la-vue/src/views/RouteinfoPage.vue" } } } ], -->
 <!-- "meta": {} } -->

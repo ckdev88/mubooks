@@ -13,16 +13,25 @@ export const routes = [
     component: HomePage
   },
   {
-    path: '/counter',
-    name: 'counter',
-    component: () => import('./views/CounterPage.vue')
-  },
-  {
     path: '/login',
     name: 'login',
     component: () => import('./views/LoginPage.vue')
   },
+  { path: '/boekzoek', name: 'boekzoek', component: () => import('./views/BoekzoekPage.vue') },
   // { path: '/user', name: 'user', component: () => import('./views/UserPage.vue') },
+  {
+    path: '/books',
+    name: 'books',
+    component: () => import('./views/BooksPage.vue')
+  },
+  { path: '/mubooks', name: 'mubooks', component: () => import('./views/MuPage.vue') },
+  { path: '/bookstore', name: 'bookstore', component: () => import('./views/BookstorePage.vue') },
+  { path: '/series', name: 'series', component: () => import('./views/SeriesPage.vue') },
+  {
+    path: '/compo',
+    name: 'compo',
+    component: () => import('./views/CompoPage.vue')
+  },
   {
     path: '/users',
     name: 'users',
@@ -32,11 +41,6 @@ export const routes = [
     path: '/users/:id',
     component: () => import('./views/UserDetailPage.vue')
     // component: UserDetailPage
-  },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: () => import('./views/DashboardPage.vue')
   },
   // {
   // 	path: '/users/:id',
@@ -54,21 +58,14 @@ export const routes = [
     component: () => import('./views/CommentsPage.vue')
   },
   {
-    path: '/books',
-    name: 'books',
-    component: () => import('./views/BooksPage.vue')
-  },
-  { path: '/series', name: 'series', component: () => import('./views/SeriesPage.vue') },
-  {
-    path: '/compo',
-    name: 'compo',
-    component: () => import('./views/CompoPage.vue')
+    path: '/counter',
+    name: 'counter',
+    component: () => import('./views/CounterPage.vue')
   },
   {
-    path: '/new',
-    name: 'new',
-    component: () => import('./views/NewPage.vue')
-    // component: NewPage
+    path: '/routeinfo',
+    name: 'routeinfo',
+    component: () => import('./views/RouteinfoPage.vue')
   },
   { path: '/states', name: 'states', component: () => import('./views/GlobalStates.vue') }
 ]

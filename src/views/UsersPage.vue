@@ -19,7 +19,6 @@ const props = defineProps({
   Local: {{ countStore.localCount }}<br />
   <button @click="countStore.incrementLocalCount">+1</button>
   <h1>Users ({{ this.$route.name }})</h1>
-  <slot subtitel />
   <Suspense>
     <UsersList />
     <template #fallback>Loading...</template>

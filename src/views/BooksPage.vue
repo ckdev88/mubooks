@@ -23,7 +23,6 @@ defineProps({
 
 <template>
   <h1>Books ({{ this.$route.name }})</h1>
-  <slot subtitel />
   <Suspense>
     <!-- <BooksList intitle="potter" subject="magic" /> -->
     <BooksList />
