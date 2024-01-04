@@ -54,6 +54,10 @@
 	background: black;
 	transform: rotate(45deg);
 }
+.light-mode #toggleNavBurger .close .bar1,
+.light-mode #toggleNavBurger .close .bar2 {
+	background: white;
+}
 #toggleNavBurger .burger div {
 	margin-top: 3px;
 	height: 3px;
@@ -93,9 +97,16 @@
 	text-transform: uppercase;
 	letter-spacing: -0.07em;
 }
+.light-mode #nav a {
+	color: hsl(360, 50%, 90%);
+}
 #nav .router-link-active {
 	background-color: cornsilk;
 	color: black;
+}
+.light-mode #nav .router-link-active {
+	background-color: hsl(360, 50%, 10%);
+	color: white;
 }
 
 #navIcons {
@@ -114,6 +125,9 @@
 #nav.expanded {
 	/* background-color: peachpuff; */
 	background-color: hsl(28, 100%, 86%, 90%);
+}
+.light-mode #nav.expanded {
+	background-color: hsl(28, 100%, 14%, 98%);
 }
 #nav.collapsed {
 	height: 0;

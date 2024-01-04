@@ -3,3 +3,6 @@
 	background: hsl(300, 10%, 2%);
 	padding-bottom: 3rem;
 }
+.light-mode #app {
+	background-color: hsl(300, 10%, 98%);
+}
