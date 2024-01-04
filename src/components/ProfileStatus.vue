@@ -14,7 +14,7 @@ const state = reactive({
 <template>
 	<div id="profile-status">
 		<RouterLink :to="state.loggedin.link">
-			{{ state.loggedin.status === true ? state.loggedin.username : state.welcometext }}
+			👤{{ state.loggedin.status === true ? state.loggedin.username : state.welcometext }}
 		</RouterLink>
 	</div>
 </template>

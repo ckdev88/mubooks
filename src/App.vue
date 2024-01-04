@@ -15,19 +15,14 @@ watch(countStore.globalCount, (value) => {
 
 <template>
 	<header>
-		<p>countStore.globalCount: {{ countStore.globalCount }}</p>
-		<ProfileStatus />
-		<button @click="countStore.incrementGlobalCount">+</button>
 		<NavWrapper />
+		<!-- <ProfileStatus /> -->
 	</header>
 	<main>
 		<RouterView />
 	</main>
+	<footer>
+		<p>countStore.globalCount: {{ countStore.globalCount }}</p>
+		<button @click="countStore.incrementGlobalCount">+</button>
+	</footer>
 </template>
-
-<style scoped>
-header {
-	line-height: 1.5;
-	display: block;
-}
-</style>

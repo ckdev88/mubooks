@@ -74,6 +74,7 @@ credence, penelope douglas (niet te vinden op openlibrary.org)
 </script>
 
 <template>
+	<h1>Zoek boek</h1>
 	<input v-model="boekzoek.author" placeholder="Author..." @keyup.enter="fetchBook" />
 	{{ boekzoek.author }}<br />
 	<input v-model="boekzoek.title" placeholder="Title..." @keyup.enter="fetchBook" />
