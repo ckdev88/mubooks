@@ -11,7 +11,7 @@
 	background: white;
 	border-width: 0.15rem;
 	border-style: solid;
-	border-color: #353535;
+	border-color: rgba(0, 0, 0, 80%);
 	width: 65%;
 	height: 65%;
 	position: absolute;
@@ -32,7 +32,7 @@
 	z-index: 2;
 }
 .stick {
-	background-color: #353535;
+	background-color: rgba(0, 0, 0, 80%);
 	width: 60%;
 	height: 10%;
 	transform: rotate(45deg);
@@ -48,7 +48,7 @@
 	width: 1rem;
 }
 .profileIcon-head {
-	background: #353535;
+	background-color: rgba(0, 0, 0, 80%);
 	width: 35%;
 	border-bottom: 1px solid white;
 	border-left: 1px solid white;
@@ -71,7 +71,7 @@
 	border-color: black;
 }
 .profileIcon-body {
-	background-color: #353535;
+	background-color: rgba(0, 0, 0, 80%);
 	width: 60%;
 	height: 50%;
 	position: absolute;
