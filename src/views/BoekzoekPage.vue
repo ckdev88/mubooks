@@ -8,7 +8,8 @@ const boekzoek = reactive({
 	q: 'language:eng',
 	limit: 20,
 	// fields: '&fields=title,author_name,edition,key,language,ebook_access,thumbnail'
-	fields: '&fields=title,author_name,edition,thumbnail'
+	// fields: '&fields=title,author_name,edition,thumbnail'
+	fields: '&fields=*'
 })
 const fetchCurl = () => {
 	let ret = boekzoek.api
@@ -34,6 +35,7 @@ async function fetchBook() {
 	<button @click="fetchBook">fetch books</button>
 
 	<div v-for="(book, index) in foundBooks" :key="index" class="book-item">
+		<pre>{{ book }}</pre>
 		<h2>
 			{{ book.title }}
 			<br /><sub>
