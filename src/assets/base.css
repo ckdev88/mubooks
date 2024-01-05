@@ -45,7 +45,14 @@ header {
 	box-sizing: border-box;
 	height: 3rem;
 	padding: 0.5rem;
-	background: hsla(300, 50%, 95%, 30%);
+	/* background: hsla(300, 50%, 95%, 30%); */
+}
+header button {
+	/* background: #fff; */
+	/* border-radius: 50%; */
+	/* display: block; */
+	/* width: auto; */
+	/* height: 3rem; */
 }
 main {
 	padding: 3rem 1rem;

@@ -42,13 +42,10 @@ function toggleNav() {
 			:class="navExpanded ? 'expanded' : 'collapsed'"
 		>
 			<div class="burger">
-				<div class="bar1"></div>
-				<div class="bar2"></div>
-				<div class="bar3"></div>
-			</div>
-			<div class="close">
-				<div class="bar1"></div>
-				<div class="bar2"></div>
+				<div class="burgerbar bar1"></div>
+				<div class="burgerbar bar2"></div>
+				<div class="burgerbar bar2duplo"></div>
+				<div class="burgerbar bar3"></div>
 			</div>
 
 			<!-- <span class="on">&equiv;</span><span class="off">x</span> -->
