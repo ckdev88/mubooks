@@ -1,5 +1,5 @@
 <script setup>
-import QuotesList from '../components/QuotesList.vue'
+// import QuotesList from '../components/QuotesList.vue'
 import QuoteCard from '../components/QuoteCard.vue'
 </script>
 <template>

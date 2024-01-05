@@ -2,7 +2,7 @@
 export default {
 	data() {
 		return {
-			apidata: [],
+			foundBooks: [],
 			boekzoek: {
 				api: 'http://openlibrary.org/search.json',
 				title: '',
@@ -17,8 +17,8 @@ export default {
 		fetchCurl() {
 			let ret = this.boekzoek.api
 			ret += `?q=${this.boekzoek.q}`
-			if (this.boekzoek.title !== '') ret += `&title=${this.boekzoek.title}`
-			if (this.boekzoek.author !== '') ret += `&author=${this.boekzoek.author}`
+			if (this.boekzoek.title !== '') ret += `&title=${this.boekzoek.title.toLowerCase()}`
+			if (this.boekzoek.author !== '') ret += `&author=${this.boekzoek.author.toLowerCase()}`
 			if (this.boekzoek.limit > 0) ret += `&limit=${this.boekzoek.limit}`
 			if (this.boekzoek.fields !== '') ret += `&fields=${this.boekzoek.fields}`
 			console.log('ret:', ret)
@@ -26,18 +26,7 @@ export default {
 		}
 	},
 	methods: {
-		loggie() {
-			console.log('asdads')
-		},
-		boekZoeker() {
-			this.boekzoek = boekzoekn
-		},
-		fetchBook() {
-			if (this.boekzoek.title) {
-				console.log(this.boekzoek)
-			}
-
-			/*
+		/*
 			notes for searching:
 			- return only the newest version
 			- use only 1 language for now: eng/en, exclude all others
@@ -62,12 +51,22 @@ https://www.tiktok.com/@sarahsbookss/video/7318622997210746113
 
 credence, penelope douglas (niet te vinden op openlibrary.org)
 
+
+      return this.booklist.filter((book) => book.genres.indexOf('dark romance') > -1)
+
+
 			*/
-			// // fetch('http://openlibrary.org/api/get?key=/b/OL1001932M')
+		// // fetch('http://openlibrary.org/api/get?key=/b/OL1001932M')
+		fetchBook() {
 			fetch(this.fetchCurl)
 				.then((res) => res.json())
-				.then((data) => (this.apidata = data))
-				.then((err) => console.log('error', err.message))
+				.then(
+					(data) =>
+						(this.foundBooks = data.docs.filter(
+							(book) => book.author_name.indexOf(this.boekzoek.author) > -1
+						))
+				)
+				.then((data) => console.log('data:', data))
 		}
 	}
 }
@@ -76,21 +75,18 @@ credence, penelope douglas (niet te vinden op openlibrary.org)
 <template>
 	<h1>Zoek boek</h1>
 	<input v-model="boekzoek.author" placeholder="Author..." @keyup.enter="fetchBook" />
-	{{ boekzoek.author }}<br />
+	<br />
 	<input v-model="boekzoek.title" placeholder="Title..." @keyup.enter="fetchBook" />
 	<button @click="fetchBook">fetch books</button>
 
-	<!-- <p>query: {{ boekzoek }}</p> -->
-	<p>num found: {{ apidata.numFound }}</p>
-
-	<!-- <h2>api data</h2> -->
-	<pre>{{ apidata }}</pre>
-
-	<div v-for="(book, index) in apidata.docs" :key="index" class="book-item">
-		{{ book.title }} - {{ book.author_name }}({{ book.publish_date }}) #{{ book.isbn }}
-		<!-- <pre>{{ book }}</pre> -->
+	<div v-for="(book, index) in foundBooks" :key="index" class="book-item">
 		<h2>
-			{{ book.title }} <br /><sub>{{ book.author_name[0] }}</sub>
+			{{ book.title }}
+			<br /><sub>
+				<span v-for="(author, index) in book.author_name" :key="index"
+					>{{ author }}<span v-if="book.author_name.length > index + 1">, </span></span
+				></sub
+			>
 		</h2>
 		Key: {{ book.key }} <br />
 		Ebook access: {{ book.ebook_access }}<br />
@@ -103,9 +99,14 @@ credence, penelope douglas (niet te vinden op openlibrary.org)
 
 <style scoped>
 .book-item {
-	/* background: #121212; */
-	/* border: 1px dotted #444; */
-	border: 1px dotted #ccc;
-	margin: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid hsl(28, 100%, 6%);
+}
+h2 {
+	line-height: 1em;
+}
+h2 sub {
+	font-style: italic;
+	font-size: 0.7em;
 }
 </style>
