@@ -1,74 +1,28 @@
-<script>
-export default {
-	data() {
-		return {
-			foundBooks: [],
-			boekzoek: {
-				api: 'http://openlibrary.org/search.json',
-				title: '',
-				author: '',
-				q: 'language:eng',
-				limit: 10,
-				fields: '&fields=title,author_name,edition,key,language,ebook_access,thumbnail'
-			}
-		}
-	},
-	computed: {
-		fetchCurl() {
-			let ret = this.boekzoek.api
-			ret += `?q=${this.boekzoek.q}`
-			if (this.boekzoek.title !== '') ret += `&title=${this.boekzoek.title.toLowerCase()}`
-			if (this.boekzoek.author !== '') ret += `&author=${this.boekzoek.author.toLowerCase()}`
-			if (this.boekzoek.limit > 0) ret += `&limit=${this.boekzoek.limit}`
-			if (this.boekzoek.fields !== '') ret += `&fields=${this.boekzoek.fields}`
-			console.log('ret:', ret)
-			return ret
-		}
-	},
-	methods: {
-		/*
-			notes for searching:
-			- return only the newest version
-			- use only 1 language for now: eng/en, exclude all others
-			- only return if it has a book cover
-			- have an option to only search for ebooks. if exists, have 2 possible responses: ebook
-			  & pshysical book
-			- abilities to search for tropes, genres, triggers, subjects etc
-			- response per book: title, writer, cover, links, synopsys, link to forum or something?
-			- writer should be correct, for detection it might be important to do a seperate search
-			  to link the correct writer to the book (relevance, most editions of the book by writer
-			  X, etc.
-
-TODO: my reading journal ideas, per year:
-	TODO: beginning quote, inleiding..
-	TODO: book of the year (tournament playoff layout, maybe divide in months, so 12 in total)
-	TODO: turven how much books... goals on the side (i.e. 50 books per year)
-	TODO: series tracker
-	TODO: reading formats (meh)
-	TODO: anticipated releases
-
-https://www.tiktok.com/@sarahsbookss/video/7318622997210746113
-
-credence, penelope douglas (niet te vinden op openlibrary.org)
-
-
-      return this.booklist.filter((book) => book.genres.indexOf('dark romance') > -1)
-
-
-			*/
-		// // fetch('http://openlibrary.org/api/get?key=/b/OL1001932M')
-		fetchBook() {
-			fetch(this.fetchCurl)
-				.then((res) => res.json())
-				.then(
-					(data) =>
-						(this.foundBooks = data.docs.filter(
-							(book) => book.author_name.indexOf(this.boekzoek.author) > -1
-						))
-				)
-				.then((data) => console.log('data:', data))
-		}
-	}
+<script setup>
+import { reactive, ref } from 'vue'
+const foundBooks = ref({})
+const boekzoek = reactive({
+	api: 'http://openlibrary.org/search.json',
+	title: '',
+	author: '',
+	q: 'language:eng',
+	limit: 20,
+	// fields: '&fields=title,author_name,edition,key,language,ebook_access,thumbnail'
+	fields: '&fields=title,author_name,edition,thumbnail'
+})
+const fetchCurl = () => {
+	let ret = boekzoek.api
+	ret += `?q=${boekzoek.q}`
+	if (boekzoek.title !== '') ret += `&title=${boekzoek.title.toLowerCase()}`
+	if (boekzoek.author !== '') ret += `&author=${boekzoek.author}`
+	if (boekzoek.limit > 0) ret += `&limit=${boekzoek.limit}`
+	if (boekzoek.fields !== '') ret += `&fields=${boekzoek.fields}`
+	return ret
+}
+async function fetchBook() {
+	return await fetch(fetchCurl())
+		.then((res) => res.json())
+		.then((data) => (foundBooks.value = data.docs))
 }
 </script>
 
@@ -88,12 +42,6 @@ credence, penelope douglas (niet te vinden op openlibrary.org)
 				></sub
 			>
 		</h2>
-		Key: {{ book.key }} <br />
-		Ebook access: {{ book.ebook_access }}<br />
-		Languages:
-		<span v-for="(lang, index) in book.language" :key="index">
-			{{ lang }}{{ book.language.length - 1 > index ? ', ' : '' }}
-		</span>
 	</div>
 </template>
 
@@ -107,6 +55,51 @@ h2 {
 }
 h2 sub {
 	font-style: italic;
-	font-size: 0.7em;
+	font-size: 0.6em;
+	font-weight: normal;
+	font-family: 'Merriweather', 'serif';
 }
 </style>
+
+<!---->
+<!-- notes: -->
+<!---->
+<!-- /* -->
+<!-- 			notes for searching: -->
+<!-- 			- return only the newest version -->
+<!-- 			- use only 1 language for now: eng/en, exclude all others -->
+<!-- 			- only return if it has a book cover -->
+<!-- 			- have an option to only search for ebooks. if exists, have 2 possible responses: ebook -->
+<!-- 			  & pshysical book -->
+<!-- 			- abilities to search for tropes, genres, triggers, subjects etc -->
+<!-- 			- response per book: title, writer, cover, links, synopsys, link to forum or something? -->
+<!-- 			- writer should be correct, for detection it might be important to do a seperate search -->
+<!-- 			  to link the correct writer to the book (relevance, most editions of the book by writer -->
+<!-- 			  X, etc. -->
+<!---->
+<!-- TODO: my reading journal ideas, per year: -->
+<!-- 	TODO: beginning quote, inleiding.. -->
+<!-- 	TODO: book of the year (tournament playoff layout, maybe divide in months, so 12 in total) -->
+<!-- 	TODO: turven how much books... goals on the side (i.e. 50 books per year) -->
+<!-- 	TODO: series tracker -->
+<!-- 	TODO: reading formats (meh) -->
+<!-- 	TODO: anticipated releases -->
+<!---->
+<!-- https://www.tiktok.com/@sarahsbookss/video/7318622997210746113 -->
+<!---->
+<!-- credence, penelope douglas (niet te vinden op openlibrary.org) -->
+<!---->
+<!---->
+<!--       return this.booklist.filter((book) => book.genres.indexOf('dark romance') > -1) -->
+<!---->
+<!---->
+<!-- 			*/ -->
+<!-- // // fetch('http://openlibrary.org/api/get?key=/b/OL1001932M') -->
+<!---->
+
+<!-- Key: {{ book.key }} <br /> -->
+<!-- Ebook access: {{ book.ebook_access }}<br /> -->
+<!-- Languages: -->
+<!-- <span v-for="(lang, index) in book.language" :key="index"> -->
+<!-- 	{{ lang }}{{ book.language.length - 1 > index ? ', ' : '' }} -->
+<!-- </span> -->

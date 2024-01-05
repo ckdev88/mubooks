@@ -6,6 +6,11 @@ body {
 	background-color: black;
 	max-width: 100vw;
 	color: white;
+}
+body,
+input,
+button,
+textarea {
 	font-family: 'Merriweather', 'serif';
 }
 .light-mode body {
@@ -29,11 +34,11 @@ h2 {
 	font-family: 'Girassol', serif;
 }
 pre {
-	font-size: 0.8em;
+	font-size: 0.7em;
 	max-width: calc(100vw);
 	padding: 1em;
-	white-space: wrap;
-	background: hsl(20, 20%, 20%);
+	background: black;
+	color: lightgray;
 }
 img {
 	max-width: 100%;
