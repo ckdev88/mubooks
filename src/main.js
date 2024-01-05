@@ -18,8 +18,9 @@ app.use(router)
 app.use(pinia)
 app.mount('#app')
 
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: adark)').matches) {
-	document.getElementsByTagName('html')[0].classList.add('dark-mode')
-} else {
-	document.getElementsByTagName('html')[0].classList.add('light-mode')
-}
+// TODO: apply dark mode option when light mode is all pretty and stuff
+// if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+// 	document.getElementsByTagName('html')[0].classList.add('dark-mode')
+// } else {
+document.getElementsByTagName('html')[0].classList.add('light-mode')
+// }

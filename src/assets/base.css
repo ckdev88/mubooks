@@ -4,6 +4,7 @@ body {
 	padding: 0;
 	margin: 0;
 	background-color: black;
+	max-width: 100vw;
 	color: white;
 	font-family: 'Merriweather', 'serif';
 }
@@ -12,11 +13,12 @@ body {
 	background-color: lightgoldenrodyellow;
 }
 a {
-	color: lightcyan;
+	/* color: cornsilk; */
+	color: black;
 }
 a:hover {
 	color: black;
-	background-color: lightcyan;
+	background-color: cornsilk;
 	text-decoration: underline;
 }
 h1,
@@ -53,5 +55,6 @@ button {
 	cursor: pointer;
 }
 footer {
+	display: none;
 	padding: 1rem;
 }

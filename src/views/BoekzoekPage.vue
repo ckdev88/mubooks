@@ -9,7 +9,7 @@ export default {
 				author: '',
 				q: 'language:eng',
 				limit: 10,
-				fields: '&fields=title,author_name,edition,key,language,ebook_access'
+				fields: '&fields=title,author_name,edition,key,language,ebook_access,thumbnail'
 			}
 		}
 	},
@@ -80,11 +80,11 @@ credence, penelope douglas (niet te vinden op openlibrary.org)
 	<input v-model="boekzoek.title" placeholder="Title..." @keyup.enter="fetchBook" />
 	<button @click="fetchBook">fetch books</button>
 
-	<p>query: {{ boekzoek }}</p>
+	<!-- <p>query: {{ boekzoek }}</p> -->
 	<p>num found: {{ apidata.numFound }}</p>
 
 	<!-- <h2>api data</h2> -->
-	<!-- <pre>{{ apidata }}</pre> -->
+	<pre>{{ apidata }}</pre>
 
 	<div v-for="(book, index) in apidata.docs" :key="index" class="book-item">
 		{{ book.title }} - {{ book.author_name }}({{ book.publish_date }}) #{{ book.isbn }}
@@ -101,10 +101,11 @@ credence, penelope douglas (niet te vinden op openlibrary.org)
 	</div>
 </template>
 
-<style>
+<style scoped>
 .book-item {
-	background: #121212;
-	border: 1px dotted #444;
+	/* background: #121212; */
+	/* border: 1px dotted #444; */
+	border: 1px dotted #ccc;
 	margin: 1rem;
 }
 </style>
