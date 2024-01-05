@@ -47,12 +47,21 @@ function toggleNav() {
 				<div class="burgerbar bar2duplo"></div>
 				<div class="burgerbar bar3"></div>
 			</div>
-
-			<!-- <span class="on">&equiv;</span><span class="off">x</span> -->
 		</button>
 		<div>
-			<button class="toggleZoekNav" @click="goSearch">&#x1F50D;</button>
-			<button class="toggleProfileNav" @click="goLogin">👤</button>
+			<button class="toggleZoekNav" @click="goSearch">
+				<div class="zoekIcon">
+					<div class="glass"></div>
+					<div class="glassOuter"></div>
+					<div class="stick"></div>
+				</div>
+			</button>
+			<button class="toggleProfileNav" @click="goLogin">
+				<div class="profileIcon">
+					<div class="profileIcon-head"></div>
+					<div class="profileIcon-body"></div>
+				</div>
+			</button>
 		</div>
 	</nav>
 	<nav
@@ -73,3 +82,5 @@ function toggleNav() {
 		</div>
 	</nav>
 </template>
+<style></style>
+}
