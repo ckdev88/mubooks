@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { watch } from 'vue'
 
 import NavWrapper from './components/NavWrapper.vue'
 import { useCount } from './composables/useCountStore'
@@ -19,9 +19,6 @@ watch(countStore.globalCount, (value) => {
 		<NavWrapper />
 	</header>
 	<main>
-		<div class="supabase-test">
-			<h1>Profile</h1>
-		</div>
 		<RouterView />
 	</main>
 	<footer>

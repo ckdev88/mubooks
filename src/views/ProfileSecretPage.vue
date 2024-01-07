@@ -25,7 +25,6 @@ async function retrieveUser() {
 // 	// return true
 // }
 onMounted(() => {
-	console.log('onmounted')
 	retrieveUser()
 })
 
