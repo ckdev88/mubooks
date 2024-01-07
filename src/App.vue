@@ -1,10 +1,11 @@
 <script setup>
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
+
 import NavWrapper from './components/NavWrapper.vue'
-import ProfileStatus from './components/ProfileStatus.vue'
 import { useCount } from './composables/useCountStore'
 
 useCount().incrementGlobalCount
+
 const countStore = useCount()
 watch(countStore.globalCount, (value) => {
 	if (value % 2 === 0) {
@@ -16,9 +17,11 @@ watch(countStore.globalCount, (value) => {
 <template>
 	<header>
 		<NavWrapper />
-		<!-- <ProfileStatus /> -->
 	</header>
 	<main>
+		<div class="supabase-test">
+			<h1>Profile</h1>
+		</div>
 		<RouterView />
 	</main>
 	<footer>

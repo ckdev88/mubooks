@@ -4,8 +4,8 @@ import { useRoute } from 'vue-router'
 // const user = await fetch('https://jsonplaceholder.typicode.com/users/7').then((res) => res.json())
 const user = {
 	name: {
-		first: 'Carla',
-		last: 'Bonita'
+		first: 'Carmen',
+		last: 'Miranda'
 	},
 	pet: 'Dog',
 	food: 'Lasagne'

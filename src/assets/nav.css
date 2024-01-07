@@ -10,7 +10,7 @@
 	transition: background-color 0.15s ease-in-out;
 	height: 2rem;
 	line-height: 2rem;
-	padding: 1rem;
+	padding: 1rem 0.5rem;
 }
 #nav .history {
 	display: none; /* hide for now */
@@ -63,7 +63,7 @@
 	border-radius: 50%;
 	width: 2rem;
 	height: 2rem;
-	margin: 0.25rem 0.5rem;
+	margin: 0.25rem;
 }
 #navIcons button:hover {
 	background: #fff;

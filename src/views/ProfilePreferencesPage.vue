@@ -1,0 +1,34 @@
+<script setup>
+import { onMounted, reactive } from 'vue'
+import { supabase } from '../clients/supabase'
+const account = reactive({
+	screenname: 'scrname',
+	username: '',
+	email: '',
+	password: 'should not show, only push to update'
+})
+
+async function showCurrentUser() {
+	const { data } = await supabase.auth.getUser()
+	console.log('data (profilePreferencesPage):', data.user)
+	const u = data.user
+	account.email = u.email
+	console.log('data.user.email:', data.user.email)
+	// account.screenname =
+}
+
+onMounted(() => {
+	showCurrentUser()
+})
+</script>
+<template>
+	<h1>ProfilePreferencesPage</h1>
+	<dl>
+		<dt>Screen name:</dt>
+		<dd>{{ account.screenname }}</dd>
+		<dt>Email address</dt>
+		<dd>{{ account.email }}</dd>
+		<dt>Password</dt>
+		<dd>****** <button>change</button></dd>
+	</dl>
+</template>

@@ -1,13 +1,13 @@
 <script setup>
-import { timesTen, timesN } from '../composables/useState.js'
-import { computed, onMounted, onUnmounted, reactive } from 'vue'
-import { useCount } from '@/composables/useCountStore'
+// import { timesTen, timesN } from '../composables/useState.js'
+import { ref, reactive, onMounted, onUpdated } from 'vue'
+// import { useCount } from '@/composables/useCountStore'
 // import { useLoginStore } from '../stores/LoggedinStore'
-
+import { supabase } from '../clients/supabase'
 import QuoteCard from '../components/QuoteCard.vue'
 import { useLoggedinStore } from '../stores/LoggedinStore'
 
-const countStore = useCount()
+// const countStore = useCount()
 // const loggedin = useLoginStore()
 // console.log('loggedin:', loggedin)
 // console.l g(bla)
@@ -19,6 +19,43 @@ const props = defineProps({
 		type: String,
 		required: false
 	}
+})
+
+// async function seeCurrentUser() {
+// 	console.log('see current user')
+// 	const { data, error } = await supabase.auth.getSession()
+// 	if (error) console.log('error:', error)
+// 	else console.log('data:', data)
+// }
+//
+let currentUserEmail = ref('')
+let reactiveVars = reactive({
+	currentUserEmailadres: ''
+})
+const seeCurrentUser = async () => {
+	console.log('see current user')
+	// const {data,error}=await supabase.auth.getSession()
+	const { data, error } = await supabase.auth.getSession()
+
+	if (error) console.log('error:', error)
+	else {
+		console.log('data:', data.session.user.email)
+		// currentUserEmail.value=data.session.user.email
+		currentUserEmail.value = data.session.user.email
+		reactiveVars.currentUserEmailadres = data.session.user.email
+		console.log('currentUserEmail:', reactiveVars.currentUserEmailadres)
+		// console.log('currentUserEmailRef:', currentUserEmailRef)
+	}
+	// const { data: { user } } = await supabase.auth.getUser()
+}
+onMounted(() => {
+	console.log('mounted')
+
+	console.log('currentUserEmail (mounted):', currentUserEmail)
+	seeCurrentUser()
+})
+onUpdated(() => {
+	console.log('updated!')
 })
 
 // const state = reactive({
@@ -41,20 +78,16 @@ const props = defineProps({
 
 // countStore.incrementLocalCount()
 //
-// onMounted(() => {
-// 	state.localCount += 1
-// })
-// onUnmounted(() => {
-// 	console.log('unmounted homepage')
-// })
 </script>
-
 <template>
 	<div>
 		<!-- TODO: improve var names and not make it look like easy to hack -->
 		<h1>
-			Ola <span class="name">{{ loggedinStore.username }}</span
-			>!
+			<!-- Ola <span class="name">{{ loggedinStore.username }} (pinia)</span>! -->
+			Ola <span class="name">{{ supabase.auth.username }} </span>!
+			<button @click="seeCurrentUser">Who?</button>
+			1 {{ currentUserEmailRef }} 2 {{ currentUserEmail }} 3
+			{{ reactiveVars.currentUserEmailadres }} =
 		</h1>
 		<QuoteCard />
 		<!-- Local: {{ countStore.localCount }}<br /> -->

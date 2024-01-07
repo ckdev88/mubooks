@@ -23,8 +23,6 @@ function goLogin() {
 }
 function toggleNav() {
 	navExpanded.value = !navExpanded.value
-	console.log('toggling nav')
-	console.log('navExpanded:', navExpanded.value)
 }
 // const routes = router.getRoutes() // dit is niet nodig als onderstaand commented this.$router wordt
 // console.log('router:', router.currentRoute.value.name)
