@@ -55,9 +55,11 @@ async function logoutAccount() {
 	if (error) console.log('error:', error)
 	else console.log('signed out!')
 }
+//ilike.espressoalot
 </script>
 <template>
 	<h1>ProfileLoginPage</h1>
+
 	<form @submit="loginAccount">
 		<label for="email">Email</label>
 		<input type="email" id="email" v-model="email" required />

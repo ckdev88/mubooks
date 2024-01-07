@@ -37,6 +37,7 @@ onUpdated(() => {
 </script>
 <template>
 	<div>
+		<!-- <pre>{{ $router.getRoutes('misc') }}</pre> -->
 		<!-- TODO: improve var names and not make it look like easy to hack -->
 		<h1>
 			<!-- Ola <span class="name">{{ loggedinStore.username }} (pinia)</span>! -->

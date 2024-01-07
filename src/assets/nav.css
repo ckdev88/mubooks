@@ -1,39 +1,46 @@
 @import './navToggleBurger.css';
 @import './navIcons.css';
-#nav {
+#nav,
+#nav1 {
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100vw;
-	background-color: transparent;
 	background-color: hsla(360, 50%, 90%, 50%);
 	transition: background-color 0.15s ease-in-out;
 	height: 2rem;
 	line-height: 2rem;
 	padding: 1rem 0.5rem;
 }
-#nav .history {
+#nav .history,
+#nav1 .history {
 	display: none; /* hide for now */
 }
-#nav.expanded {
+#nav.expanded,
+#nav1.expanded {
 	width: 100vw;
 	height: 100vh;
 }
-#nav {
+#nav,
+#nav1 {
 	box-sizing: border-box;
 }
 #nav ul,
-#nav li {
+#nav li,
+#nav1 ul,
+#nav1 li {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	display: block;
 }
-#nav ul {
+#nav ul,
+#nav1 ul {
 	z-index: 1;
 	margin-top: 2rem;
 }
-#nav a {
+#nav a,
+#nav1 a {
 	color: hsl(360, 50%, 20%);
 	padding: 0.1em 0.2em;
 	display: block;
@@ -43,7 +50,9 @@
 	letter-spacing: -0.07em;
 }
 #nav .router-link-active,
-#nav .router-link:hover {
+#nav .router-link:hover,
+#nav1 .router-link-active,
+#nav1 .router-link:hover {
 	background-color: cornsilk;
 	color: black;
 }
@@ -71,24 +80,33 @@
 #navIcons div button {
 	margin-left: 0;
 }
-#nav.expanded {
+#nav.expanded,
+#nav1.expanded {
 	background-color: hsl(28, 100%, 86%, 90%);
 }
-.light-mode #nav.expanded {
+.light-mode #nav.expanded,
+.light-mode #nav1.expanded {
 	background-color: hsl(28, 100%, 93%);
 }
-#nav.collapsed {
+#nav.collapsed,
+#nav1.collapsed {
 	height: 0;
 	max-height: 0;
 	overflow: hidden;
 	padding: 0;
 }
-#nav.collapsed li {
+
+#nav.collapsed li,
+#nav1.collapsed li {
 	opacity: 0;
 }
-#nav.expanded li {
+#nav.expanded li,
+#nav1.collapsed li {
 	opacity: 1;
 }
 #navIcons {
 	width: calc(100vw - 1rem);
+}
+#nav1 {
+	text-align: right;
 }

@@ -1,7 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { routes } from '../router'
+// TODO: nav & nav1 super dirty, make it nice, also in css #nav #nav1
 const navExpanded = ref(false)
+const nav1Expanded = ref(false)
+
 const router = useRouter()
 const goBack = () => {
 	router.go(-1)
@@ -20,10 +24,17 @@ function goSearch() {
 function goLogin() {
 	router.push('login')
 	navExpanded.value = false
+	nav1Expanded.value = false
 }
 function toggleNav() {
 	navExpanded.value = !navExpanded.value
+	nav1Expanded.value = false
 }
+function toggleNav1() {
+	nav1Expanded.value = !nav1Expanded.value
+	navExpanded.value = false
+}
+console.log(routes[1].children)
 // const routes = router.getRoutes() // dit is niet nodig als onderstaand commented this.$router wordt
 // console.log('router:', router.currentRoute.value.name)
 // const navroutes = routes.filter((route) => route.name !== 'login')
@@ -54,7 +65,11 @@ function toggleNav() {
 					<div class="stick"></div>
 				</div>
 			</button>
-			<button class="toggleProfileNav" @click="goLogin">
+			<button
+				id="toggleNavProfile"
+				@click="toggleNav1"
+				:class="nav1Expanded ? 'expanded' : 'collapsed'"
+			>
 				<div class="profileIcon">
 					<div class="profileIcon-head"></div>
 					<div class="profileIcon-body"></div>
@@ -78,6 +93,17 @@ function toggleNav() {
 		<div class="history">
 			<button @click="goBack">&lt;</button> <button @click="goForward">&gt;</button>
 		</div>
+	</nav>
+	<nav
+		id="nav1"
+		:class="nav1Expanded ? 'expanded' : 'collapsed'"
+		:aria-expanded="nav1Expanded ? 'expanded' : 'collapsed'"
+	>
+		<ul>
+			<li v-for="(route, index) in routes[1].children" :key="index">
+				<RouterLink :to="route.path" @click="toggleNav1">{{ route.name }}</RouterLink>
+			</li>
+		</ul>
 	</nav>
 </template>
 <style></style>
