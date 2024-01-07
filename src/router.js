@@ -113,5 +113,5 @@ export const routes = [
 	// },
 	{ path: '/quotes', name: 'quotes', component: () => import('./views/QuotesPage.vue') },
 	{ path: '/states', name: 'states', component: () => import('./views/GlobalStates.vue') },
-	{ path: '/:catchAll(.*)', name: '404', component: () => import('./views/ProfileLoginPage.vue') }
+	{ path: '/:catchAll(.*)', name: '404', component: () => import('./views/404Page.vue') }
 ]
