@@ -7,12 +7,6 @@ import { routes } from './router'
 
 import { supabase } from './clients/supabase'
 
-const state = reactive({
-	userarr: await supabase.auth.getSession()
-})
-watch(state.userarr, () => {
-	console.log('userarr changed', state)
-})
 import App from './App.vue'
 
 const app = createApp(App)
@@ -21,17 +15,20 @@ let router = createRouter({
 	routes
 })
 let isAuthenticated = ref(false)
-router.beforeEach((to) => {
-	console.log('isAuthenticated:', isAuthenticated)
-	if (state.userarr.data.session === null) isAuthenticated.value = false
-	else isAuthenticated.value = true
 
-	if (!isAuthenticated.value && to.meta.requiresAuth) {
-		console.log('not authenticated, redirecting to login')
-		return { name: 'profile-login' }
-	} else if (isAuthenticated.value && to.meta.requiresNoAuth) {
-		console.log('already authenticated, redirecting to preferences')
-		return { name: 'profile-preferences' }
+router.beforeEach(async (to) => {
+	if (to.meta.requiresAuth || to.meta.requiresNoAuth) {
+		const localUser = await supabase.auth.getSession()
+		if (localUser.data.session === null) isAuthenticated = false
+		else isAuthenticated = true
+
+		if (!isAuthenticated && to.meta.requiresAuth) {
+			// not authenticated, redirect to login')
+			return { name: 'profile-login' }
+		} else if (isAuthenticated && to.meta.requiresNoAuth) {
+			// already authenticated, redirect to preferences
+			return { name: 'profile-preferences' }
+		}
 	}
 })
 
