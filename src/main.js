@@ -24,7 +24,7 @@ router.beforeEach(async (to) => {
 
 		if (!isAuthenticated && to.meta.requiresAuth) {
 			// not authenticated, redirect to login')
-			return { name: 'profile-login' }
+			return { name: 'login' }
 		} else if (isAuthenticated && to.meta.requiresNoAuth) {
 			// already authenticated, redirect to preferences
 			return { name: 'profile-preferences' }

@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { supabase } from '../clients/supabase'
+import { supabase } from '../../clients/supabase'
 
 let isLoggedin = ref(false)
 

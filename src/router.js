@@ -4,7 +4,6 @@
 // maargoed
 // import HomePage from './views/HomePage.vue'
 import HomePage from './views/HomePage.vue'
-import ProfileSecretPageVue from './views/ProfileSecretPage.vue'
 // import UserDetailPage from './views/UserDetailPage.vue'
 
 import { supabase } from './clients/supabase'
@@ -47,45 +46,46 @@ export const routes = [
 		]
 	},
 	{
-		path: '/profile-login',
+		path: '/login',
 		children: [
 			{
-				path: '/profile-login',
-				name: 'profile-login',
-				component: () => import('./views/ProfileLoginPage.vue'),
+				path: '/login',
+				name: 'login',
+				component: () => import('./views/account/LoginPage.vue'),
 				meta: { requiresNoAuth: true }
 			},
 			{
 				path: '/profile-create',
 				name: 'profile-create',
-				component: () => import('./views/ProfileCreatePage.vue'),
+				component: () => import('./views/account/CreatePage.vue'),
 				meta: { requiresNoAuth: true }
 			},
 			{
 				path: '/profile-preferences',
 				name: 'profile-preferences',
-				component: () => import('./views/ProfilePreferencesPage.vue'),
+				component: () => import('./views/account/PreferencesPage.vue'),
 				meta: { requiresAuth: true }
 			},
 			{
 				path: '/profile-secret',
 				name: 'profile-secret',
-				component: () => import('./views/ProfileSecretPage.vue'),
+				component: () => import('./views/account/SecretPage.vue'),
 				meta: { requiresAuth: true }
 			},
 			{
-				path: '/profile-logout',
-				name: 'profile-logout',
-				component: () => import('./views/ProfileLogoutPage.vue')
+				path: '/logout',
+				name: 'logout',
+				component: () => import('./views/account/LogoutPage.vue'),
+				meta: { requiresAuth: true }
 			},
 			{
 				path: '/profile-unauthorized',
 				name: 'profile-unauthorized',
-				component: () => import('./views/ProfileUnauthorizedPage.vue')
+				component: () => import('./views/status/UnauthorizedPage.vue')
 			},
 			{
-				path: '/login',
-				name: 'login',
+				path: '/loginpage',
+				name: 'loginpage',
 				component: () => import('./views/LoginPage.vue')
 			},
 			{
@@ -142,5 +142,5 @@ export const routes = [
 	},
 
 	{},
-	{ path: '/:catchAll(.*)', name: '404', component: () => import('./views/404Page.vue') }
+	{ path: '/:catchAll(.*)', name: '404', component: () => import('./views/status/404Page.vue') }
 ]
