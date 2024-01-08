@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+
 // TODO: apply supabase to global states
 export const useLoggedinStore = defineStore('Loggedin', {
 	state: () => ({

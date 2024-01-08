@@ -13,14 +13,41 @@ let localUser
 export const routes = [
 	{
 		path: '/',
-		name: 'home',
-		// component: () => import('./views/HomePage.vue')
-		component: HomePage
+		children: [
+			{ path: '/', name: 'home', component: HomePage },
+			{
+				path: '/routeinfo',
+				name: 'routeinfo',
+				component: () => import('./views/RouteinfoPage.vue')
+			},
+			{ path: '/quotes', name: 'quotes', component: () => import('./views/QuotesPage.vue') },
+			{
+				path: '/states',
+				name: 'states',
+				component: () => import('./views/GlobalStates.vue')
+			},
+			{
+				path: '/boekzoek',
+				name: 'boekzoek',
+				component: () => import('./views/BoekzoekPage.vue')
+			},
+			// { path: '/user', name: 'user', component: () => import('./views/UserPage.vue') },
+			{
+				path: '/books',
+				name: 'books',
+				component: () => import('./views/BooksPage.vue')
+			},
+			{ path: '/mubooks', name: 'mubooks', component: () => import('./views/MuPage.vue') },
+			{
+				path: '/bookstore',
+				name: 'bookstore',
+				component: () => import('./views/BookstorePage.vue')
+			},
+			{ path: '/series', name: 'series', component: () => import('./views/SeriesPage.vue') }
+		]
 	},
 	{
-		path: '/login',
-		name: 'profile-login',
-		component: () => import('./views/ProfileLoginPage.vue'),
+		path: '/profile-login',
 		children: [
 			{
 				path: '/profile-login',
@@ -73,22 +100,13 @@ export const routes = [
 			}
 		]
 	},
-	{ path: '/boekzoek', name: 'boekzoek', component: () => import('./views/BoekzoekPage.vue') },
-	// { path: '/user', name: 'user', component: () => import('./views/UserPage.vue') },
-	{
-		path: '/books',
-		name: 'books',
-		component: () => import('./views/BooksPage.vue')
-	},
-	{ path: '/mubooks', name: 'mubooks', component: () => import('./views/MuPage.vue') },
-	{ path: '/bookstore', name: 'bookstore', component: () => import('./views/BookstorePage.vue') },
-	{ path: '/series', name: 'series', component: () => import('./views/SeriesPage.vue') },
 	,
 	// {
 	// 	path: '/users/:id',
 	// 	name: 'user',
 	// 	component: () => import('./views/UserPage.vue')
 	// },
+
 	{
 		path: '/misc',
 		name: 'misc',
@@ -122,13 +140,7 @@ export const routes = [
 			}
 		]
 	},
+
 	{},
-	{
-		path: '/routeinfo',
-		name: 'routeinfo',
-		component: () => import('./views/RouteinfoPage.vue')
-	},
-	{ path: '/quotes', name: 'quotes', component: () => import('./views/QuotesPage.vue') },
-	{ path: '/states', name: 'states', component: () => import('./views/GlobalStates.vue') },
 	{ path: '/:catchAll(.*)', name: '404', component: () => import('./views/404Page.vue') }
 ]

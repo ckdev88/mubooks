@@ -1,6 +1,9 @@
 <script setup>
 import { onMounted, reactive } from 'vue'
 import { supabase } from '../clients/supabase'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
 const account = reactive({
 	screenname: 'scrname',
 	username: '',
@@ -14,9 +17,24 @@ async function showCurrentUser() {
 	const u = data.user
 	account.email = u.email
 	console.log('data.user.email:', data.user.email)
-	// account.screenname =
+	// TODO: add screen name
 }
 
+//logout
+async function logoutAccount() {
+	console.log('logout account')
+
+	const { error } = await supabase.auth.signOut()
+	if (error) console.log('error:', error)
+	else {
+		console.log('signed out!')
+		router.push('profile-login')
+	}
+}
+function goLogin() {
+	console.log('go login')
+	router.push('profile-login')
+}
 onMounted(() => {
 	showCurrentUser()
 })
@@ -31,4 +49,6 @@ onMounted(() => {
 		<dt>Password</dt>
 		<dd>****** <button>change</button></dd>
 	</dl>
+	<button @click="logoutAccount">Log out</button>
+	<button @click="goLogin">Log in</button>
 </template>

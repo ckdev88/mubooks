@@ -34,13 +34,6 @@ function toggleNav1() {
 	nav1Expanded.value = !nav1Expanded.value
 	navExpanded.value = false
 }
-console.log(routes[1].children)
-// const routes = router.getRoutes() // dit is niet nodig als onderstaand commented this.$router wordt
-// console.log('router:', router.currentRoute.value.name)
-// const navroutes = routes.filter((route) => route.name !== 'login')
-// function filterroutes(routes) { // zelfde werking als bovenstaand
-// 	return routes.path !== '/login'
-// }
 </script>
 
 <template>
@@ -83,12 +76,9 @@ console.log(routes[1].children)
 		:aria-expanded="navExpanded ? 'expanded' : 'collapsed'"
 	>
 		<ul>
-			<li v-for="(route, index) in $router.getRoutes()" :key="index">
+			<li v-for="(route, index) in routes[0].children" :key="index">
 				<RouterLink :to="route.path" @click="toggleNav">{{ route.name }}</RouterLink>
 			</li>
-			<!-- <RouterLink v-for="(route, index) in $router.getRoutes()" :key="index" :to="route.path" -->
-			<!-- 	><li>{{ route.name }}</li></RouterLink -->
-			<!-- > -->
 		</ul>
 		<div class="history">
 			<button @click="goBack">&lt;</button> <button @click="goForward">&gt;</button>
@@ -106,5 +96,3 @@ console.log(routes[1].children)
 		</ul>
 	</nav>
 </template>
-<style></style>
-}

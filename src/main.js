@@ -1,6 +1,6 @@
 import './assets/main.css'
 
-import { createApp, reactive } from 'vue'
+import { createApp, reactive, watch, ref } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { createPinia } from 'pinia'
 import { routes } from './router'
@@ -10,7 +10,9 @@ import { supabase } from './clients/supabase'
 const state = reactive({
 	userarr: await supabase.auth.getSession()
 })
-
+watch(state.userarr, () => {
+	console.log('userarr changed', state)
+})
 import App from './App.vue'
 
 const app = createApp(App)
@@ -18,14 +20,17 @@ let router = createRouter({
 	history: createWebHashHistory(),
 	routes
 })
-let isAuthenticated = false
-router.beforeEach(async (to) => {
-	if (state.userarr.data.session === null) isAuthenticated = false
-	else isAuthenticated = true
+let isAuthenticated = ref(false)
+router.beforeEach((to) => {
+	console.log('isAuthenticated:', isAuthenticated)
+	if (state.userarr.data.session === null) isAuthenticated.value = false
+	else isAuthenticated.value = true
 
-	if (!isAuthenticated && to.meta.requiresAuth) {
+	if (!isAuthenticated.value && to.meta.requiresAuth) {
+		console.log('not authenticated, redirecting to login')
 		return { name: 'profile-login' }
-	} else if (isAuthenticated && to.meta.requiresNoAuth) {
+	} else if (isAuthenticated.value && to.meta.requiresNoAuth) {
+		console.log('already authenticated, redirecting to preferences')
 		return { name: 'profile-preferences' }
 	}
 })

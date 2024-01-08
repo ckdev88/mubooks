@@ -31,7 +31,7 @@ async function loginAccount() {
 	})
 	if (error) console.log(error)
 	else {
-		console.log(data)
+		console.log('loginaccount data:', data)
 		router.push('profile-preferences')
 	}
 }
@@ -55,6 +55,10 @@ async function logoutAccount() {
 	if (error) console.log('error:', error)
 	else console.log('signed out!')
 }
+
+function toPrefs() {
+	router.push('profile-preferences')
+}
 //ilike.espressoalot
 </script>
 <template>
@@ -69,6 +73,7 @@ async function logoutAccount() {
 	</form>
 	<br style="clear: both" />
 	<br />
+	<button @click="toPrefs">To preferences</button>
 	<button @click="createAccount">Create</button>
 	<button @click="loginAccount">Login</button>
 	<button @click="seeCurrentUser">See user</button>
