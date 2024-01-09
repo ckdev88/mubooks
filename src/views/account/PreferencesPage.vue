@@ -2,6 +2,10 @@
 import { onMounted, reactive } from 'vue'
 import { supabase } from '../../clients/supabase'
 import { useRouter } from 'vue-router'
+import { useLoggedinStore } from '../../stores/LoggedinStore'
+
+const loggedinstore = useLoggedinStore()
+
 const router = useRouter()
 
 const account = reactive({

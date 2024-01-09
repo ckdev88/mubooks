@@ -2,6 +2,10 @@
 import { supabase } from '../../clients/supabase'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+
+import { useLoggedinStore } from '../../stores/LoggedinStore'
+const loggedinstore = useLoggedinStore()
+
 const router = useRouter()
 let errorMsg = ref('Just one moment...')
 async function logoutAccount() {
@@ -12,6 +16,7 @@ async function logoutAccount() {
 		errorMsg.value = error
 		return false
 	} else {
+		loggedinstore.loginStatus(false)
 		return true
 	}
 }

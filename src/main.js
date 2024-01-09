@@ -1,6 +1,6 @@
 import './assets/main.css'
 
-import { createApp, reactive, watch, ref } from 'vue'
+import { createApp, ref } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { createPinia } from 'pinia'
 import { routes } from './router'

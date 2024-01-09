@@ -1,7 +1,10 @@
 <script setup>
-import { ref } from 'vue'
+import { onUpdated, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '../../clients/supabase'
+
+import { useLoggedinStore } from '../../stores/LoggedinStore'
+const loggedinstore = useLoggedinStore()
 
 const router = useRouter()
 //connect inputs
@@ -32,6 +35,7 @@ async function loginAccount() {
 	if (error) console.log(error)
 	else {
 		console.log('loginaccount data:', data)
+		loggedinstore.loginStatus(true)
 		router.push('profile-preferences')
 	}
 }
@@ -53,12 +57,18 @@ async function logoutAccount() {
 
 	const { error } = await supabase.auth.signOut()
 	if (error) console.log('error:', error)
-	else console.log('signed out!')
+	else {
+		loggedinstore.loginStatus(false)
+		console.log('signed out!')
+	}
 }
 
 function toPrefs() {
 	router.push('profile-preferences')
 }
+onUpdated(() => {
+	console.log('loginstatus in loginpage.vue:', loggedinstore.loginStatus)
+})
 //ilike.espressoalot
 </script>
 <template>

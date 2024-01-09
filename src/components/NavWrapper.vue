@@ -1,18 +1,16 @@
 <script setup>
-import { reactive, ref, onMounted, onUpdated } from 'vue'
+import { ref, onUpdated } from 'vue'
 import { useRouter } from 'vue-router'
 import { routes } from '../router'
-import { supabase } from '../clients/supabase'
 import PostsPage from '../views/PostsPage.vue'
+import { useLoggedinStore } from '../stores/LoggedinStore'
+const loggedinstore = useLoggedinStore()
 
 // TODO: nav & nav1 super dirty, make it nice, also in css #nav #nav1
 const nav0Expanded = ref(false)
 const nav1Expanded = ref(false)
 const router = useRouter()
 const nav = (nr) => router.options.routes[nr].children
-const state = reactive({
-	isLoggedin: false
-})
 
 const goBack = () => {
 	router.go(-1)
@@ -51,27 +49,12 @@ for (let i = 0; i < nav(1).length; i++) {
 			nav1notloggedin[i] = nav(1)[i]
 		}
 	}
-	// console.log('A', nav(1)[i].meta.requiresAuth)
 }
-console.log('nav1loggedin:', nav1loggedin)
-console.log('nav1notloggedin:', nav1notloggedin)
 
-async function checkIsLoggedin() {
-	const { data } = await supabase.auth.getUser()
-
-	console.log('data (profilePreferencesPage):', data.user)
-	if (data.user === null) state.isLoggedin = false
-	else state.isLoggedin = true
-}
-onMounted(() => {
-	checkIsLoggedin()
-})
 onUpdated(() => {
-	checkIsLoggedin()
+	console.log('loggedinstore:', loggedinstore)
+	console.log('loggedinstore.status:', loggedinstore.status)
 })
-
-// const accountNav = r1c.filter((child) => child.meta.requiresAuth === true)
-// console.log('accountNav:', accountNav)
 </script>
 
 <template>
@@ -130,7 +113,7 @@ onUpdated(() => {
 	>
 		<ul>
 			<li
-				v-if="state.isLoggedin === true"
+				v-if="loggedinstore.status === true"
 				v-for="(route, index) in nav(1).filter(
 					(item) => item.meta.requiresAuth === true || item.meta.requiresNoAuth === false
 				)"
@@ -139,7 +122,7 @@ onUpdated(() => {
 				<RouterLink :to="route.path" @click="toggleNav1">{{ route.name }}</RouterLink>
 			</li>
 			<li
-				v-if="state.isLoggedin === false"
+				v-if="loggedinstore.status === false"
 				v-for="(route, index) in nav(1).filter(
 					(item) => item.meta.requiresAuth === false || item.meta.requiresNoAuth === true
 				)"
