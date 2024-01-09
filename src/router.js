@@ -52,50 +52,54 @@ export const routes = [
 				path: '/login',
 				name: 'login',
 				component: () => import('./views/account/LoginPage.vue'),
-				meta: { requiresNoAuth: true }
+				meta: { requiresAuth: false, requiresNoAuth: true }
 			},
 			{
 				path: '/profile-create',
 				name: 'profile-create',
 				component: () => import('./views/account/CreatePage.vue'),
-				meta: { requiresNoAuth: true }
+				meta: { requiresAuth: false, requiresNoAuth: true }
 			},
 			{
 				path: '/profile-preferences',
 				name: 'profile-preferences',
 				component: () => import('./views/account/PreferencesPage.vue'),
-				meta: { requiresAuth: true }
+				meta: { requiresAuth: true, requiresNoAuth: false }
 			},
 			{
 				path: '/profile-secret',
 				name: 'profile-secret',
 				component: () => import('./views/account/SecretPage.vue'),
-				meta: { requiresAuth: true }
+				meta: { requiresAuth: true, requiresNoAuth: false }
 			},
 			{
 				path: '/logout',
 				name: 'logout',
 				component: () => import('./views/account/LogoutPage.vue'),
-				meta: { requiresAuth: true }
+				meta: { requiresAuth: true, requiresNoAuth: false }
 			},
 			{
 				path: '/profile-unauthorized',
 				name: 'profile-unauthorized',
-				component: () => import('./views/status/UnauthorizedPage.vue')
+				component: () => import('./views/status/UnauthorizedPage.vue'),
+				meta: { requiresAuth: false, requiresNoAuth: false }
 			},
 			{
 				path: '/loginpage',
 				name: 'loginpage',
-				component: () => import('./views/LoginPage.vue')
+				component: () => import('./views/LoginPage.vue'),
+				meta: { requiresAuth: false, requiresNoAuth: true }
 			},
 			{
 				path: '/users',
 				name: 'users',
-				component: () => import('./views/UsersPage.vue')
+				component: () => import('./views/UsersPage.vue'),
+				meta: { requiresAuth: true, requiresNoAuth: false }
 			},
 			{
 				path: '/users/:id',
-				component: () => import('./views/UserDetailPage.vue')
+				component: () => import('./views/UserDetailPage.vue'),
+				meta: { requiresAuth: true, requiresNoAuth: false }
 				// component: UserDetailPage
 			}
 		]
