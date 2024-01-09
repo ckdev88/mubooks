@@ -3,8 +3,9 @@ import { ref, onUpdated } from 'vue'
 import { useRouter } from 'vue-router'
 import { routes } from '../router'
 import PostsPage from '../views/PostsPage.vue'
-import { useLoggedinStore } from '../stores/LoggedinStore'
-const loggedinstore = useLoggedinStore()
+import { useAuthStore } from '../stores/AuthStore'
+const authStore = useAuthStore()
+import { supabase } from '../clients/supabase'
 
 // TODO: nav & nav1 super dirty, make it nice, also in css #nav #nav1
 const nav0Expanded = ref(false)
@@ -40,7 +41,6 @@ let nav1notloggedin = nav(1).filter((item) => {
 })
 for (let i = 0; i < nav(1).length; i++) {
 	if (nav(1)[i].meta.requiresAuth !== undefined) {
-		console.log(nav(1)[i])
 		if (nav(1)[i].meta.requiresAuth === true) {
 			nav1loggedin[i] = nav(1)[i]
 		} else if (nav(1)[i].meta.requiresNoAuth === true) nav1notloggedin[i] = nav(1)[i]
@@ -50,11 +50,6 @@ for (let i = 0; i < nav(1).length; i++) {
 		}
 	}
 }
-
-onUpdated(() => {
-	console.log('loggedinstore:', loggedinstore)
-	console.log('loggedinstore.status:', loggedinstore.status)
-})
 </script>
 
 <template>
@@ -113,7 +108,7 @@ onUpdated(() => {
 	>
 		<ul>
 			<li
-				v-if="loggedinstore.status === true"
+				v-if="authStore.status === true"
 				v-for="(route, index) in nav(1).filter(
 					(item) => item.meta.requiresAuth === true || item.meta.requiresNoAuth === false
 				)"
@@ -122,7 +117,7 @@ onUpdated(() => {
 				<RouterLink :to="route.path" @click="toggleNav1">{{ route.name }}</RouterLink>
 			</li>
 			<li
-				v-if="loggedinstore.status === false"
+				v-if="authStore.status === false"
 				v-for="(route, index) in nav(1).filter(
 					(item) => item.meta.requiresAuth === false || item.meta.requiresNoAuth === true
 				)"

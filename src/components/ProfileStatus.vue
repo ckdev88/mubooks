@@ -1,10 +1,12 @@
 <script setup>
 import { reactive } from 'vue'
-import { useLoggedinStore } from '../stores/LoggedinStore'
+import { useAuthStore } from '../stores/AuthStore'
+const log = useAuthStore()
 // TODO: apply supabase account management
 
 const state = reactive({
-	loggedin: useLoggedinStore(),
+	loggedin: useAuthStore(),
+	username: '',
 	welcometext: 'Log in',
 	welcomelink: 'login'
 })

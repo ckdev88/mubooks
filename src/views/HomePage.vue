@@ -1,14 +1,9 @@
 <script setup>
-// import { timesTen, timesN } from '../composables/useState.js'
-import { ref, onMounted, onUpdated } from 'vue'
-// import { useCount } from '@/composables/useCountStore'
-// import { useLoginStore } from '../stores/LoggedinStore'
-import { supabase } from '../clients/supabase'
 import QuoteCard from '../components/QuoteCard.vue'
-import { useLoggedinStore } from '../stores/LoggedinStore'
+import { useAuthStore } from '../stores/AuthStore'
 
-const loggedinStore = useLoggedinStore()
-console.log('store:', loggedinStore.username)
+const loggedinStore = useAuthStore()
+console.log('loggedinStore.username (from HomePage.vue):', loggedinStore.username)
 
 const props = defineProps({
 	title: {
@@ -16,39 +11,17 @@ const props = defineProps({
 		required: false
 	}
 })
-
-let currentUserEmail = ref('')
-
-const seeCurrentUser = async () => {
-	const { data, error } = await supabase.auth.getSession()
-	if (data.session !== null) {
-		console.log('data:', data.session)
-		currentUserEmail.value = data.session.user.email
-	}
-	if (error) console.log('error:', error)
-}
-onMounted(() => {
-	console.log('currentUserEmail (onMounted):', currentUserEmail)
-	seeCurrentUser()
-})
-onUpdated(() => {
-	console.log('updated!')
-})
 </script>
 <template>
 	<div>
-		<!-- <pre>{{ $router.getRoutes('misc') }}</pre> -->
 		<!-- TODO: improve var names and not make it look like easy to hack -->
 		<h1>
-			<!-- Ola <span class="name">{{ loggedinStore.username }} (pinia)</span>! -->
-			Ola <span class="name">{{ supabase.auth.username }} </span>!
-			{{ currentUserEmail }}
+			Ola <span class="name"> {{ loggedinStore.username }} </span>!
 		</h1>
+		<RouterLink to="login" v-if="!loggedinStore.username">Want to log in?</RouterLink>
 		<QuoteCard />
 		<!-- Local: {{ countStore.localCount }}<br /> -->
 		<!-- <button @click="countStore.incrementLocalCount">+1</button> -->
-		<!-- <hr /> -->
-		<!-- <hr /> -->
 		<slot counter /><br />
 		<h1>{{ title }}</h1>
 	</div>

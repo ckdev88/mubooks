@@ -86,7 +86,10 @@ export default {
 </script>
 <template>
 	<!-- {{h1template}} -->
-	<a :href="homepage">Home</a><br />
+	<RouterLink :to="{ name: 'home', params: 'title', query: { title: 'lekkeerrrrrr' } }"
+		>HOME</RouterLink
+	><br />
+
 	{{ filteredBooks }}
 	<button v-if="showBooks" @click="toggleShowBooks">Hide books</button>
 	<button v-else @click="toggleShowBooks">Show books</button>

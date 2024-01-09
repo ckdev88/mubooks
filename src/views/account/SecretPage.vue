@@ -9,7 +9,6 @@ async function retrieveUser() {
 		data: { session },
 		error
 	} = await supabase.auth.getSession()
-	console.log('session:', session)
 	if (session !== null) isLoggedin.value = true
 }
 // const isLoggedin = async () => {

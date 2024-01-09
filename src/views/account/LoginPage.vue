@@ -3,8 +3,8 @@ import { onUpdated, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '../../clients/supabase'
 
-import { useLoggedinStore } from '../../stores/LoggedinStore'
-const loggedinstore = useLoggedinStore()
+import { useAuthStore } from '../../stores/AuthStore'
+const loggedinstore = useAuthStore()
 
 const router = useRouter()
 //connect inputs
@@ -35,7 +35,8 @@ async function loginAccount() {
 	if (error) console.log(error)
 	else {
 		console.log('loginaccount data:', data)
-		loggedinstore.loginStatus(true)
+		loggedinstore.setLoginStatus(true)
+		loggedinstore.setUsername(email.value)
 		router.push('profile-preferences')
 	}
 }
@@ -43,12 +44,10 @@ async function loginAccount() {
 //see currentuser
 async function seeCurrentUser() {
 	console.log('see current user')
-	// const {data,error}=await supabase.auth.getSession()
 	const { data, error } = await supabase.auth.getSession()
 
 	if (error) console.log('error:', error)
 	else console.log('data:', data)
-	// const { data: { user } } = await supabase.auth.getUser()
 }
 
 //logout
@@ -58,7 +57,7 @@ async function logoutAccount() {
 	const { error } = await supabase.auth.signOut()
 	if (error) console.log('error:', error)
 	else {
-		loggedinstore.loginStatus(false)
+		loggedinstore.setLoginStatus(false)
 		console.log('signed out!')
 	}
 }
@@ -67,14 +66,13 @@ function toPrefs() {
 	router.push('profile-preferences')
 }
 onUpdated(() => {
-	console.log('loginstatus in loginpage.vue:', loggedinstore.loginStatus)
+	console.log('loginstatus in loginpage.vue:', loggedinstore.status)
 })
-//ilike.espressoalot
 </script>
 <template>
 	<h1>ProfileLoginPage</h1>
 
-	<form @submit="loginAccount">
+	<form @submit.prevent="loginAccount">
 		<label for="email">Email</label>
 		<input type="email" id="email" v-model="email" required />
 		<label for="password">Password</label>

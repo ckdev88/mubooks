@@ -3,8 +3,8 @@ import { supabase } from '../../clients/supabase'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { useLoggedinStore } from '../../stores/LoggedinStore'
-const loggedinstore = useLoggedinStore()
+import { useAuthStore } from '../../stores/AuthStore'
+const authStore = useAuthStore()
 
 const router = useRouter()
 let errorMsg = ref('Just one moment...')
@@ -16,7 +16,8 @@ async function logoutAccount() {
 		errorMsg.value = error
 		return false
 	} else {
-		loggedinstore.loginStatus(false)
+		console.log('loggingout "logoutpage.vue"')
+		authStore.setLoginStatus(false)
 		return true
 	}
 }

@@ -1,13 +1,4 @@
-// later balans zoeken wat sneller/beter is, een voor een inladen, of alle componenten direct de
-// eerste keer... voor nu doen we een voor een, ze zeggen dat dit best practice is... ze zeggen ook
-// dat de homepage niet dynamisch ingeladen kan worden... ik weet het zo net nog niet hoor...
-// maargoed
-// import HomePage from './views/HomePage.vue'
 import HomePage from './views/HomePage.vue'
-// import UserDetailPage from './views/UserDetailPage.vue'
-
-import { supabase } from './clients/supabase'
-let localUser
 
 export const routes = [
 	{
@@ -17,7 +8,8 @@ export const routes = [
 			{
 				path: '/routeinfo',
 				name: 'routeinfo',
-				component: () => import('./views/RouteinfoPage.vue')
+				component: () => import('./views/RouteinfoPage.vue'),
+				props: { username: 'proptest' }
 			},
 			{ path: '/quotes', name: 'quotes', component: () => import('./views/QuotesPage.vue') },
 			{
@@ -30,7 +22,6 @@ export const routes = [
 				name: 'boekzoek',
 				component: () => import('./views/BoekzoekPage.vue')
 			},
-			// { path: '/user', name: 'user', component: () => import('./views/UserPage.vue') },
 			{
 				path: '/books',
 				name: 'books',
@@ -82,35 +73,10 @@ export const routes = [
 				path: '/profile-unauthorized',
 				name: 'profile-unauthorized',
 				component: () => import('./views/status/UnauthorizedPage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: false }
-			},
-			{
-				path: '/loginpage',
-				name: 'loginpage',
-				component: () => import('./views/LoginPage.vue'),
 				meta: { requiresAuth: false, requiresNoAuth: true }
-			},
-			{
-				path: '/users',
-				name: 'users',
-				component: () => import('./views/UsersPage.vue'),
-				meta: { requiresAuth: true, requiresNoAuth: false }
-			},
-			{
-				path: '/users/:id',
-				component: () => import('./views/UserDetailPage.vue'),
-				meta: { requiresAuth: true, requiresNoAuth: false }
-				// component: UserDetailPage
 			}
 		]
 	},
-	,
-	// {
-	// 	path: '/users/:id',
-	// 	name: 'user',
-	// 	component: () => import('./views/UserPage.vue')
-	// },
-
 	{
 		path: '/misc',
 		name: 'misc',

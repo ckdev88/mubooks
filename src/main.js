@@ -1,7 +1,7 @@
 import './assets/main.css'
 
 import { createApp, ref } from 'vue'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
 import { routes } from './router'
 
@@ -11,9 +11,30 @@ import App from './App.vue'
 
 const app = createApp(App)
 let router = createRouter({
-	history: createWebHashHistory(),
+	history: createWebHistory(),
 	routes
 })
+
+// ---------------------------------------------------------------
+//
+// router.beforeEach(async (to) => {
+// 	// clear alert on route change
+// 	const alertStore = useAlertStore()
+// 	alertStore.clear()
+//
+// 	// redirect to login page if not logged in and trying to access a restricted page
+// 	const publicPages = ['/account/login', '/account/register']
+// 	const authRequired = !publicPages.includes(to.path)
+// 	const authStore = useAuthStore()
+//
+// 	if (authRequired && !authStore.user) {
+// 		authStore.returnUrl = to.fullPath
+// 		return '/account/login'
+// 	}
+// })
+
+// ---------------------------------------------------------------
+
 let isAuthenticated = ref(false)
 
 router.beforeEach(async (to) => {
@@ -21,11 +42,10 @@ router.beforeEach(async (to) => {
 		const localUser = await supabase.auth.getSession()
 		if (localUser.data.session === null) isAuthenticated = false
 		else isAuthenticated = true
-
-		if (!isAuthenticated && to.meta.requiresAuth) {
+		if (isAuthenticated.value === false && to.meta.requiresAuth) {
 			// not authenticated, redirect to login')
 			return { name: 'login' }
-		} else if (isAuthenticated && to.meta.requiresNoAuth) {
+		} else if (isAuthenticated === true && to.meta.requiresNoAuth) {
 			// already authenticated, redirect to preferences
 			return { name: 'profile-preferences' }
 		}
