@@ -4,27 +4,13 @@ import { useRouter } from 'vue-router'
 import { supabase } from '../../clients/supabase'
 
 import { useAuthStore } from '../../stores/AuthStore'
-const loggedinstore = useAuthStore()
+const authStore = useAuthStore()
 
 const router = useRouter()
-//connect inputs
+
 let email = ref('')
 let password = ref('')
 
-//create account
-async function createAccount() {
-	console.log('create account')
-	console.log('email,password:', email.value, password.value)
-	const { data, error } = await supabase.auth.signUp({
-		email: email.value,
-		password: password.value
-	})
-	if (error) {
-		console.log(error)
-	} else {
-		console.log('data:', data)
-	}
-}
 //login
 async function loginAccount() {
 	console.log('login account')
@@ -34,10 +20,13 @@ async function loginAccount() {
 	})
 	if (error) console.log(error)
 	else {
-		console.log('loginaccount data:', data)
-		loggedinstore.setLoginStatus(true)
-		loggedinstore.setUsername(email.value)
-		router.push('profile-preferences')
+		// TODO: convert to object and update the 1 object in 1 function
+		authStore.setLoginStatus(true)
+		authStore.setEmail(data.session.user.email)
+		authStore.setUsername(data.session.user.email)
+		authStore.setUid(data.session.user.id)
+		authStore.setScreenname(data.session.user.user_metadata.screenname)
+		router.push('welcome')
 	}
 }
 
@@ -57,7 +46,7 @@ async function logoutAccount() {
 	const { error } = await supabase.auth.signOut()
 	if (error) console.log('error:', error)
 	else {
-		loggedinstore.setLoginStatus(false)
+		authStore.setLoginStatus(false)
 		console.log('signed out!')
 	}
 }
@@ -66,12 +55,11 @@ function toPrefs() {
 	router.push('profile-preferences')
 }
 onUpdated(() => {
-	console.log('loginstatus in loginpage.vue:', loggedinstore.status)
+	console.log('loginstatus in loginpage.vue:', authStore.status)
 })
 </script>
 <template>
-	<h1>ProfileLoginPage</h1>
-
+	<h1>Let yourself in mladay</h1>
 	<form @submit.prevent="loginAccount">
 		<label for="email">Email</label>
 		<input type="email" id="email" v-model="email" required />
@@ -82,14 +70,12 @@ onUpdated(() => {
 	<br style="clear: both" />
 	<br />
 	<button @click="toPrefs">To preferences</button>
-	<button @click="createAccount">Create</button>
 	<button @click="loginAccount">Login</button>
 	<button @click="seeCurrentUser">See user</button>
 	<button @click="logoutAccount">Log out</button>
 	<br style="clear: both" />
 	Or...<br />
 	Use google auth, apple id, etc
-	<!-- <RouterLink :to="profileCreate" /> -->
 </template>
 <style scoped>
 h1,

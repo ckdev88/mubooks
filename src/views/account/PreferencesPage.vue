@@ -1,30 +1,36 @@
 <script setup>
-import { onMounted, reactive } from 'vue'
+import { onBeforeMount } from 'vue'
 import { supabase } from '../../clients/supabase'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../../stores/AuthStore'
 
+const router = useRouter()
 const authStore = useAuthStore()
 
 async function showCurrentUser() {
 	// TODO: needs proper fix, not dirty like this...  pinia, store, login
-	if (authStore.loginStatus !== true) {
-		const { data } = await supabase.auth.getUser()
-
-		authStore.email = data.user.email
-		authStore.screenname = data.user.email
-		authStore.username = data.user.email
-		authStore.status = true
+	if (authStore.status !== true) {
+		const { data, error } = await supabase.auth.getUser()
+		if (error) {
+			router.push('login')
+			console.log('error:', error)
+		} else {
+			authStore.email = data.user.email
+			authStore.screenname = data.user.user_metadata.screenname
+			authStore.username = data.user.email
+			authStore.status = true
+			authStore.uid = data.user.id
+		}
 	}
 	// TODO: add screen name
+	// TODO: add possibilities to modify data
 }
-
-onMounted(() => {
+onBeforeMount(() => {
 	showCurrentUser()
 })
 </script>
 <template>
-	<h1>ProfilePreferencesPage</h1>
+	<h1>My preferences</h1>
 	<dl>
 		<dt>Screen name:</dt>
 		<dd>{{ authStore.screenname }}</dd>
