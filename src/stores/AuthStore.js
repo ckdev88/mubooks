@@ -8,7 +8,7 @@ export const useAuthStore = defineStore('AuthStore', {
 		screenname: '',
 		username: '',
 		email: '',
-		uid: 1337,
+		uid: '',
 		link: 'login'
 	}),
 	actions: {
@@ -16,11 +16,24 @@ export const useAuthStore = defineStore('AuthStore', {
 			this.username = s
 		},
 		setLoginStatus(s = false) {
+			// user.role: authenticated / user.aud: authenticated
 			console.log('set loginStatus to ', s)
 			this.status = s
 			if (s === false) {
 				this.setUsername()
 			}
+		},
+		setEmail(s = '') {
+			// user.email
+			this.email = s
+		},
+		setScreenname(s = '') {
+			// user.user_metadata.screenname
+			this.screenname = s
+		},
+		setUid(s = '') {
+			// user.id
+			this.uid = s
 		}
 	}
 })
