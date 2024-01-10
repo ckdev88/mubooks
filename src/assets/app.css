@@ -15,8 +15,7 @@
 }
 
 #app,
-#nav0,
-#nav1,
+.nav-collapsable,
 header,
 #navIcons {
 	max-width: 600px;

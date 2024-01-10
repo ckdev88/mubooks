@@ -84,6 +84,7 @@ watch(useAuthStore(), () => {
 	</nav>
 	<nav
 		id="nav0"
+		class="nav-collapsable"
 		:class="nav0Expanded ? 'expanded' : 'collapsed'"
 		:aria-expanded="nav0Expanded ? 'expanded' : 'collapsed'"
 	>
@@ -100,6 +101,7 @@ watch(useAuthStore(), () => {
 
 	<nav
 		id="nav1"
+		class="nav-collapsable"
 		:class="nav1Expanded ? 'expanded' : 'collapsed'"
 		:aria-expanded="nav1Expanded ? 'expanded' : 'collapsed'"
 	>
