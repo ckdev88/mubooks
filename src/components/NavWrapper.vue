@@ -1,33 +1,8 @@
 <script setup>
-import { ref, onMounted, onUpdated } from 'vue'
+import { ref, onMounted, onUpdated, watch, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/AuthStore'
 const authStore = useAuthStore()
-
-// TODO: nav & nav1 super dirty, make it nice, also in css #nav #nav1
-const nav0Expanded = ref(false)
-const nav1Expanded = ref(false)
-const router = useRouter()
-
-const nav = (nr) => router.options.routes[nr].children
-const nav0 = nav(0).filter((item) => item.meta.includeNav === true)
-let nav1
-function populateNav() {
-	// TODO: add watch to authStore.status so switch on time, or anything that works for this
-	if (authStore.status === true) {
-		nav1 = nav(1).filter(
-			(item) =>
-				item.meta.includeNav === true &&
-				(item.meta.requiresAuth === true || item.meta.requiresNoAuth === false)
-		)
-	} else {
-		nav1 = nav(1).filter(
-			(item) =>
-				item.meta.includeNav === true &&
-				(item.meta.requiresAuth === false || item.meta.requiresNoAuth === true)
-		)
-	}
-}
 
 function goSearch() {
 	router.push('boekzoek')
@@ -42,11 +17,33 @@ function toggleNav1() {
 	nav1Expanded.value = !nav1Expanded.value
 	nav0Expanded.value = false
 }
-onMounted(() => {
+// TODO: nav & nav1 super dirty, make it nice, also in css #nav #nav1
+const nav0Expanded = ref(false)
+const nav1Expanded = ref(false)
+const router = useRouter()
+
+const nav = (nr) => router.options.routes[nr].children
+const nav0 = nav(0).filter((item) => item.meta.includeNav === true)
+let nav1
+function populateNav() {
+	if (authStore.status === true) {
+		nav1 = nav(1).filter(
+			(item) =>
+				item.meta.includeNav === true &&
+				(item.meta.requiresAuth === true || item.meta.requiresNoAuth === false)
+		)
+	} else {
+		nav1 = nav(1).filter(
+			(item) =>
+				item.meta.includeNav === true &&
+				(item.meta.requiresAuth === false || item.meta.requiresNoAuth === true)
+		)
+	}
+}
+onBeforeMount(() => {
 	populateNav()
 })
-onUpdated(() => {
-	// not really applicable since the nav doesnt change when page changes
+watch(useAuthStore(), () => {
 	populateNav()
 })
 </script>
@@ -86,7 +83,7 @@ onUpdated(() => {
 		</div>
 	</nav>
 	<nav
-		id="nav"
+		id="nav0"
 		:class="nav0Expanded ? 'expanded' : 'collapsed'"
 		:aria-expanded="nav0Expanded ? 'expanded' : 'collapsed'"
 	>

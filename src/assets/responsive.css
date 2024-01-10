@@ -25,7 +25,7 @@
 	#nav1 {
 		text-align: left !important;
 	}
-	#nav.expanded,
+	#nav0.expanded,
 	#nav1.expanded {
 		width: 100%;
 	}
