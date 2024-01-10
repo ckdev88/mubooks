@@ -13,3 +13,20 @@
 		hsl(28, 100%, 91%) 100%
 	);
 }
+
+#app,
+#nav,
+#nav1,
+header,
+#navIcons {
+	max-width: 600px;
+}
+#navIcons {
+	min-width: 300px;
+}
+#app {
+	width: 100%;
+	margin: 0 auto;
+	min-width: 300px;
+	overflow-x: auto;
+}

@@ -4,8 +4,7 @@
 #nav1 {
 	position: fixed;
 	top: 0;
-	left: 0;
-	width: 100vw;
+	width: calc(100% - 2rem);
 	background-color: hsla(360, 50%, 90%, 50%);
 	transition: background-color 0.15s ease-in-out;
 	height: 2rem;
@@ -18,7 +17,7 @@
 }
 #nav.expanded,
 #nav1.expanded {
-	width: 100vw;
+	width: calc(100% - 1rem);
 	height: 100vh;
 }
 #nav,
@@ -105,7 +104,7 @@
 	opacity: 1;
 }
 #navIcons {
-	width: calc(100vw - 1rem);
+	margin: 0 auto;
 }
 #nav1 {
 	text-align: right;
