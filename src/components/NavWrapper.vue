@@ -1,26 +1,35 @@
 <script setup>
-import { ref, onUpdated } from 'vue'
+import { ref, onMounted, onUpdated } from 'vue'
 import { useRouter } from 'vue-router'
-import { routes } from '../router'
-import PostsPage from '../views/PostsPage.vue'
 import { useAuthStore } from '../stores/AuthStore'
 const authStore = useAuthStore()
-import { supabase } from '../clients/supabase'
 
 // TODO: nav & nav1 super dirty, make it nice, also in css #nav #nav1
 const nav0Expanded = ref(false)
 const nav1Expanded = ref(false)
 const router = useRouter()
-const nav = (nr) => router.options.routes[nr].children
 
-const goBack = () => {
-	router.go(-1)
+const nav = (nr) => router.options.routes[nr].children
+const nav0 = nav(0).filter((item) => item.meta.includeNav === true)
+let nav1
+function populateNav() {
+	// TODO: add watch to authStore.status so switch on time, or anything that works for this
+	if (authStore.status === true) {
+		nav1 = nav(1).filter(
+			(item) =>
+				item.meta.includeNav === true &&
+				(item.meta.requiresAuth === true || item.meta.requiresNoAuth === false)
+		)
+	} else {
+		nav1 = nav(1).filter(
+			(item) =>
+				item.meta.includeNav === true &&
+				(item.meta.requiresAuth === false || item.meta.requiresNoAuth === true)
+		)
+	}
 }
-const goForward = () => {
-	router.go(1)
-}
+
 function goSearch() {
-	console.log('go zoek')
 	router.push('boekzoek')
 	nav0Expanded.value = false
 	nav1Expanded.value = false
@@ -33,23 +42,13 @@ function toggleNav1() {
 	nav1Expanded.value = !nav1Expanded.value
 	nav0Expanded.value = false
 }
-let nav1loggedin = nav(1).filter((item) => {
-	item.meta.requiresAuth === true || item.meta.requiresNoAuth === false
+onMounted(() => {
+	populateNav()
 })
-let nav1notloggedin = nav(1).filter((item) => {
-	item.meta.requiresNoAuth === true || item.meta.requiresAuth === false
+onUpdated(() => {
+	// not really applicable since the nav doesnt change when page changes
+	populateNav()
 })
-for (let i = 0; i < nav(1).length; i++) {
-	if (nav(1)[i].meta.requiresAuth !== undefined) {
-		if (nav(1)[i].meta.requiresAuth === true) {
-			nav1loggedin[i] = nav(1)[i]
-		} else if (nav(1)[i].meta.requiresNoAuth === true) nav1notloggedin[i] = nav(1)[i]
-		else {
-			nav1loggedin[i] = nav(1)[i]
-			nav1notloggedin[i] = nav(1)[i]
-		}
-	}
-}
 </script>
 
 <template>
@@ -92,12 +91,13 @@ for (let i = 0; i < nav(1).length; i++) {
 		:aria-expanded="nav0Expanded ? 'expanded' : 'collapsed'"
 	>
 		<ul>
-			<li v-for="(route, index) in nav(0)" :key="index">
+			<li v-for="(route, index) in nav0" :key="index">
 				<RouterLink :to="route.path" @click="toggleNav">{{ route.name }}</RouterLink>
 			</li>
 		</ul>
 		<div class="history">
-			<button @click="goBack">&lt;</button> <button @click="goForward">&gt;</button>
+			<button @click="router.go(-1)">&lt;</button>
+			<button @click="router.go(1)">&gt;</button>
 		</div>
 	</nav>
 
@@ -107,22 +107,7 @@ for (let i = 0; i < nav(1).length; i++) {
 		:aria-expanded="nav1Expanded ? 'expanded' : 'collapsed'"
 	>
 		<ul>
-			<li
-				v-if="authStore.status === true"
-				v-for="(route, index) in nav(1).filter(
-					(item) => item.meta.requiresAuth === true || item.meta.requiresNoAuth === false
-				)"
-				:key="index"
-			>
-				<RouterLink :to="route.path" @click="toggleNav1">{{ route.name }}</RouterLink>
-			</li>
-			<li
-				v-if="authStore.status === false"
-				v-for="(route, index) in nav(1).filter(
-					(item) => item.meta.requiresAuth === false || item.meta.requiresNoAuth === true
-				)"
-				:key="index"
-			>
+			<li v-for="(route, index) in nav1" :key="index">
 				<RouterLink :to="route.path" @click="toggleNav1">{{ route.name }}</RouterLink>
 			</li>
 		</ul>
