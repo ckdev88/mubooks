@@ -8,7 +8,7 @@
 	transition: background-color 0.15s ease-in-out;
 	height: 2rem;
 	line-height: 2rem;
-	padding: 1rem 0.5rem;
+	padding: 1rem 0.25rem;
 }
 .nav-collapsable .history {
 	display: none; /* hide for now */
