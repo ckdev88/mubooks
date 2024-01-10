@@ -2,8 +2,7 @@
 import QuoteCard from '../components/QuoteCard.vue'
 import { useAuthStore } from '../stores/AuthStore'
 
-const loggedinStore = useAuthStore()
-console.log('loggedinStore.username (from HomePage.vue):', loggedinStore.username)
+const authStore = useAuthStore()
 
 const props = defineProps({
 	title: {
@@ -16,9 +15,9 @@ const props = defineProps({
 	<div>
 		<!-- TODO: improve var names and not make it look like easy to hack -->
 		<h1>
-			Ola <span class="name"> {{ loggedinStore.username }} </span>!
+			Ola <span class="name"> {{ authStore.screenname }} </span>!
 		</h1>
-		<RouterLink to="login" v-if="!loggedinStore.username">Want to log in?</RouterLink>
+		<RouterLink to="login" v-if="!authStore.username">Want to log in?</RouterLink>
 		<QuoteCard />
 		<!-- Local: {{ countStore.localCount }}<br /> -->
 		<!-- <button @click="countStore.incrementLocalCount">+1</button> -->

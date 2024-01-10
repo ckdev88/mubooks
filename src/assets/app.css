@@ -1,10 +1,9 @@
 #app {
-	background: hsl(28, 100%, 6%);
 	padding-bottom: 3rem;
 	min-height: 100vh;
 	box-sizing: border-box;
 }
-.light-mode #app {
+.light-mode body {
 	background: linear-gradient(
 		90deg,
 		hsl(28, 100%, 88%) 0%,
@@ -13,7 +12,6 @@
 		hsl(28, 100%, 91%) 100%
 	);
 }
-
 #app,
 .nav-collapsable,
 header,

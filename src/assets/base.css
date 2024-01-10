@@ -58,7 +58,7 @@ header {
 	box-sizing: border-box;
 }
 main {
-	padding: 3rem 0.5rem;
+	padding: 3rem 0.25rem;
 }
 
 button {
@@ -67,4 +67,10 @@ button {
 footer {
 	display: none;
 	padding: 1rem;
+}
+dl dd {
+	font-weight: bold;
+}
+dt {
+	font-style: italic;
 }

@@ -38,7 +38,6 @@ onBeforeMount(() => {
 		<dd>{{ authStore.email }}</dd>
 		<dt>Password</dt>
 		<dd>****** <button>change</button></dd>
-		{{ authStore.status }}
 	</dl>
 	<RouterLink to="logout">Log out</RouterLink>
 </template>
