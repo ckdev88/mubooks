@@ -4,76 +4,109 @@ export const routes = [
 	{
 		path: '/',
 		children: [
-			{ path: '/', name: 'home', component: HomePage },
+			{ path: '/', name: 'home', component: HomePage, meta: { includeNav: true } },
 			{
 				path: '/routeinfo',
 				name: 'routeinfo',
 				component: () => import('./views/RouteinfoPage.vue'),
-				props: { username: 'proptest' }
+				props: { username: 'proptest' },
+				meta: { includeNav: true }
 			},
-			{ path: '/quotes', name: 'quotes', component: () => import('./views/QuotesPage.vue') },
+			{
+				path: '/quotes',
+				name: 'quotes',
+				component: () => import('./views/QuotesPage.vue'),
+				meta: { includeNav: true }
+			},
 			{
 				path: '/states',
 				name: 'states',
-				component: () => import('./views/GlobalStates.vue')
+				component: () => import('./views/GlobalStates.vue'),
+				meta: { includeNav: false }
 			},
 			{
 				path: '/boekzoek',
 				name: 'boekzoek',
-				component: () => import('./views/BoekzoekPage.vue')
+				component: () => import('./views/BoekzoekPage.vue'),
+				meta: { includeNav: true }
 			},
 			{
 				path: '/books',
 				name: 'books',
-				component: () => import('./views/BooksPage.vue')
+				component: () => import('./views/BooksPage.vue'),
+				meta: { includeNav: true }
 			},
-			{ path: '/mubooks', name: 'mubooks', component: () => import('./views/MuPage.vue') },
+			{
+				path: '/mubooks',
+				name: 'mubooks',
+				component: () => import('./views/MuPage.vue'),
+				meta: { includeNav: true }
+			},
 			{
 				path: '/bookstore',
 				name: 'bookstore',
-				component: () => import('./views/BookstorePage.vue')
+				component: () => import('./views/BookstorePage.vue'),
+				meta: { includeNav: true }
 			},
-			{ path: '/series', name: 'series', component: () => import('./views/SeriesPage.vue') }
+			{
+				path: '/series',
+				name: 'series',
+				component: () => import('./views/SeriesPage.vue'),
+				meta: { includeNav: true }
+			}
 		]
 	},
 	{
 		path: '/login',
 		children: [
 			{
-				path: '/login',
-				name: 'login',
-				component: () => import('./views/account/LoginPage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: true }
-			},
-			{
 				path: '/profile-create',
 				name: 'profile-create',
 				component: () => import('./views/account/CreatePage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: true }
+				meta: { requiresAuth: false, requiresNoAuth: true, includeNav: true }
+			},
+			{
+				path: '/checkmail',
+				name: 'checkmail',
+				component: () => import('./views/account/CheckMailPage.vue'),
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false },
+				props: true
+			},
+			{
+				path: '/welcome',
+				name: 'welcome',
+				component: () => import('./views/account/WelcomePage.vue'),
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false }
+			},
+			{
+				path: '/login',
+				name: 'login',
+				component: () => import('./views/account/LoginPage.vue'),
+				meta: { requiresAuth: false, requiresNoAuth: true, includeNav: true }
 			},
 			{
 				path: '/profile-preferences',
 				name: 'profile-preferences',
 				component: () => import('./views/account/PreferencesPage.vue'),
-				meta: { requiresAuth: true, requiresNoAuth: false }
+				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: true }
 			},
 			{
 				path: '/profile-secret',
 				name: 'profile-secret',
 				component: () => import('./views/account/SecretPage.vue'),
-				meta: { requiresAuth: true, requiresNoAuth: false }
+				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: false }
 			},
 			{
 				path: '/logout',
 				name: 'logout',
 				component: () => import('./views/account/LogoutPage.vue'),
-				meta: { requiresAuth: true, requiresNoAuth: false }
+				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: true }
 			},
 			{
 				path: '/profile-unauthorized',
 				name: 'profile-unauthorized',
 				component: () => import('./views/status/UnauthorizedPage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: true }
+				meta: { requiresAuth: false, requiresNoAuth: true, includeNav: false }
 			}
 		]
 	},
