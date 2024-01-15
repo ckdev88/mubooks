@@ -3,7 +3,7 @@ import { onUpdated, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '../../clients/supabase'
 // export default {
-import useRotateCard from '../../composables/useCardRotate'
+import useCardRotate from '../../composables/useCardRotate'
 // name: 'LoginCard'
 // }
 import { useAuthStore } from '../../stores/AuthStore'
@@ -63,7 +63,7 @@ onUpdated(() => {
 </script>
 
 <template>
-	<article class="card">
+	<article class="card" id="card-login">
 		<header>Log in</header>
 		<form @submit.prevent="loginAccount">
 			<label for="email">Email</label>
@@ -73,8 +73,8 @@ onUpdated(() => {
 			<button>Log in</button>
 		</form>
 		<footer>
-			<a href="#">Forgot password</a>
-			<a @click="useRotateCard()">New here? Join now.</a>
+			<a @click="useCardRotate('login', 'recover')">Forgot password</a>
+			<a @click="useCardRotate('login', 'signup')">New here? Join now.</a>
 		</footer>
 	</article>
 </template>

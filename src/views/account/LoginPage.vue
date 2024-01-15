@@ -2,6 +2,7 @@
 import { ref, watch, onMounted } from 'vue'
 import LoginCard from '../../components/account/LoginCard.vue'
 import SignupCard from '../../components/account/SignupCard.vue'
+import RecoverCard from '../../components/account/RecoverCard.vue'
 </script>
 <template>
 	<div id="welcome-logo">
@@ -13,6 +14,7 @@ import SignupCard from '../../components/account/SignupCard.vue'
 		<div class="axis">
 			<LoginCard />
 			<SignupCard />
+			<RecoverCard />
 		</div>
 	</div>
 	<br style="clear: both" />

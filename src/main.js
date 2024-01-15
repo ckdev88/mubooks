@@ -46,7 +46,7 @@ router.beforeEach(async (to, from) => {
 		if (localUser.data.session === null) isAuthenticated = false
 		else isAuthenticated = true
 		if (isAuthenticated.value === false && to.meta.requiresAuth) {
-			// not authenticated, redirect to login')
+			// not authenticated, redirect to login'
 			return { name: 'login' }
 		} else if (isAuthenticated === true && to.meta.requiresNoAuth) {
 			// already authenticated, redirect to preferences

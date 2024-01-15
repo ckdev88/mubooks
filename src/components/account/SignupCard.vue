@@ -41,7 +41,7 @@ async function createAccount() {
 </script>
 
 <template>
-	<article class="card">
+	<article class="card" id="card-signup">
 		<header>Create an account</header>
 		<form @submit.prevent="createAccount">
 			<label for="screenname">Screen name</label>
@@ -53,7 +53,7 @@ async function createAccount() {
 			<button>Vamos</button>
 		</form>
 		<footer class="content-right">
-			<a @click="useCardRotate">Already have an account</a>
+			<a @click="useCardRotate('signup', 'login')">Already have an account</a>
 		</footer>
 	</article>
 </template>
