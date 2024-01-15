@@ -8,7 +8,8 @@ import RecoverCard from '../../components/account/RecoverCard.vue'
 	<div id="welcome-logo">
 		<!-- <img id="welcome-logo1" src="../../../../public/img/mubook-logo.png" /> -->
 		<!-- <img id="welcome-logo2" src="../../../../public/img/mubook.png" /> -->
-		<img id="welcome-logo-img" src="/public/img/mubook-logo-large.png" />
+		<h1>MuBooks</h1>
+		<img id="welcome-logo-img" src="/public/img/logo.svg" />
 	</div>
 	<div class="cards-draaideur">
 		<div class="axis">
@@ -31,12 +32,14 @@ import RecoverCard from '../../components/account/RecoverCard.vue'
 </template>
 <style scoped>
 /* superexperimenteel, later mooi maken */
+h1 {
+	text-align: center;
+}
 #welcome-logo-img {
-	max-width: 75%;
+	max-width: 33%;
 	display: block;
 	margin: 0 auto;
 	position: relative;
-	margin-bottom: -2.5rem;
 	z-index: 2;
 }
 </style>
