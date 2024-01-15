@@ -89,7 +89,6 @@ h2 sub {
 <!---->
 <!-- https://www.tiktok.com/@sarahsbookss/video/7318622997210746113 -->
 <!---->
-<!-- credence, penelope douglas (niet te vinden op openlibrary.org) -->
 <!---->
 <!---->
 <!--       return this.booklist.filter((book) => book.genres.indexOf('dark romance') > -1) -->
@@ -105,3 +104,13 @@ h2 sub {
 <!-- <span v-for="(lang, index) in book.language" :key="index"> -->
 <!-- 	{{ lang }}{{ book.language.length - 1 > index ? ', ' : '' }} -->
 <!-- </span> -->
+
+<!-- 
+
+test books: 
+K. M. Moronova - the fabric of our souls
+Penelope Douglas - Credence
+
+
+
+-->

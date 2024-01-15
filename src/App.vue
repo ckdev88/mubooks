@@ -4,7 +4,7 @@ import NavWrapper from './components/NavWrapper.vue'
 </script>
 
 <template>
-	<header>
+	<header id="navigation">
 		<NavWrapper />
 	</header>
 	<main>

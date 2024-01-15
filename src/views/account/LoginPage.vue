@@ -59,35 +59,58 @@ onUpdated(() => {
 })
 </script>
 <template>
-	<h1>Let yourself in mladay</h1>
-	<form @submit.prevent="loginAccount">
-		<label for="email">Email</label>
-		<input type="email" id="email" v-model="email" required />
-		<label for="password">Password</label>
-		<input type="password" id="password" v-model="password" />
-		<button>Log in</button>
-	</form>
+	<div id="welcome-logos">
+		<!-- <img id="welcome-logo1" src="../../../../public/img/mubook-logo.png" /> -->
+		<!-- <img id="welcome-logo2" src="../../../../public/img/mubook.png" /> -->
+		<img id="welcome-logo1" src="/public/img/mubook-logo.png" />
+		<img id="welcome-logo2" src="/public/img/mubook.png" />
+	</div>
+	<article class="card">
+		<header>Log in</header>
+		<form @submit.prevent="loginAccount">
+			<label for="email">Email</label>
+			<input type="email" id="email" v-model="email" required />
+			<label for="password">Password</label>
+			<input type="password" id="password" v-model="password" />
+			<button>Log in</button>
+		</form>
+		<footer><a href="#">Forgot password</a> <a href="#">New here? Join now.</a></footer>
+	</article>
 	<br style="clear: both" />
-	<br />
-	<button @click="toPrefs">To preferences</button>
-	<button @click="loginAccount">Login</button>
-	<button @click="seeCurrentUser">See user</button>
-	<button @click="logoutAccount">Log out</button>
-	<br style="clear: both" />
-	Or...<br />
-	Use google auth, apple id, etc
+	<div class="hidden">
+		<br />
+		<button @click="toPrefs">To preferences</button>
+		<button @click="loginAccount">Login</button>
+		<button @click="seeCurrentUser">See user</button>
+		<button @click="logoutAccount">Log out</button>
+		<br style="clear: both" />
+		Or...<br />
+		Use google auth, apple id, etc
+	</div>
 </template>
 <style scoped>
-h1,
-form,
-label,
-input,
-button {
-	display: block;
-	text-align: left;
+/* superexperimenteel, later mooi maken */
+#welcome-logos {
+	max-height: 4rem;
 }
-button {
-	margin-bottom: 0.5rem;
-	margin-top: 0.5rem;
+#welcome-logo1,
+#welcome-logo2 {
+	max-width: 50%;
+	display: block;
+	margin: 0 auto;
+	position: relative;
+}
+#welcome-logo1 {
+	margin-bottom: -2.5rem;
+	z-index: 2;
+}
+#welcome-logo2 {
+	margin-top: -3.5rem;
+	z-index: 1;
+}
+.card {
+	position: relative;
+	z-index: 3;
+	margin-top: 7rem;
 }
 </style>

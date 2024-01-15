@@ -48,7 +48,7 @@ pre {
 img {
 	max-width: 100%;
 }
-header {
+#navigation {
 	position: fixed;
 	top: 0;
 	width: calc(100% - 2rem);
@@ -61,16 +61,41 @@ main {
 	padding: 3rem 0.25rem;
 }
 
-button {
-	cursor: pointer;
-}
-footer {
-	display: none;
-	padding: 1rem;
-}
 dl dd {
 	font-weight: bold;
 }
 dt {
 	font-style: italic;
+}
+input[type='text'],
+input[type='password'],
+input[type='number'],
+input[type='email'],
+input[type='submit'],
+textarea,
+button {
+	box-sizing: border-box;
+	width: 100%;
+	display: block;
+	padding: 0.75rem;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 0.2rem;
+	margin-bottom: 0.75rem;
+}
+input[type='text'],
+input[type='password'],
+input[type='number'],
+input[type='email'],
+textarea {
+	border-color: white;
+	background: white;
+}
+button,
+input[type='submit'] {
+	cursor: pointer;
+	background-color: #b73581;
+	color: white;
+	font-weight: bold;
+	text-align: center;
 }

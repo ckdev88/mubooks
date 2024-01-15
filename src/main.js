@@ -37,7 +37,10 @@ let router = createRouter({
 
 let isAuthenticated = ref(false)
 
-router.beforeEach(async (to) => {
+router.beforeEach(async (to, from) => {
+	document.body.classList.add(to.name)
+	document.body.classList.remove(from.name)
+
 	if (to.meta.requiresAuth || to.meta.requiresNoAuth) {
 		const localUser = await supabase.auth.getSession()
 		if (localUser.data.session === null) isAuthenticated = false
