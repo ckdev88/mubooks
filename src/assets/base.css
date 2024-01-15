@@ -73,7 +73,7 @@ input[type='number'],
 input[type='email'],
 input[type='submit'],
 textarea,
-#main button {
+main button {
 	box-sizing: border-box;
 	width: 100%;
 	display: block;
@@ -91,15 +91,19 @@ textarea {
 	border-color: white;
 	background: white;
 }
+a,
 button,
 input[type='submit'] {
 	cursor: pointer;
 }
-#main button,
+main button,
 input[type='submit'] {
 	background-color: #b73581;
 	color: white;
 	font-weight: bold;
 	text-align: center;
 	font-size: 1rem;
+}
+a {
+	color: #0d99ff;
 }

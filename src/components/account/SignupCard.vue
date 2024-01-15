@@ -42,7 +42,7 @@ async function createAccount() {
 
 <template>
 	<article class="card">
-		<header>Let me join</header>
+		<header>Create an account</header>
 		<form @submit.prevent="createAccount">
 			<label for="screenname">Screen name</label>
 			<input type="text" id="signup-screenname" v-model="f.screenname" />
@@ -52,6 +52,8 @@ async function createAccount() {
 			<input type="password" id="signup-password" v-model="f.password" required />
 			<button>Vamos</button>
 		</form>
-		<footer><button class="btn-text" @click="useCardRotate">login</button></footer>
+		<footer class="content-right">
+			<a @click="useCardRotate">Already have an account</a>
+		</footer>
 	</article>
 </template>

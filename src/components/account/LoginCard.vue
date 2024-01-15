@@ -74,7 +74,7 @@ onUpdated(() => {
 		</form>
 		<footer>
 			<a href="#">Forgot password</a>
-			<button class="btn-text" @click="useRotateCard()">New here? Join now.</button>
+			<a @click="useRotateCard()">New here? Join now.</a>
 		</footer>
 	</article>
 </template>

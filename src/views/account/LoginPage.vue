@@ -36,44 +36,5 @@ import SignupCard from '../../components/account/SignupCard.vue'
 	position: relative;
 	margin-bottom: -2.5rem;
 	z-index: 2;
-	display: none;
-}
-.axis {
-	/* position: relative; */
-	/* z-index: 3; */
-	background-color: #f4f1ea;
-}
-.cards-draaideur {
-	perspective: 500px;
-	height: 420px;
-	margin: 0 auto;
-	background: red;
-}
-.card {
-	height: 420px;
-}
-.cards-draaideur.rotate .axis {
-	transform: rotateY(180deg);
-}
-.axis {
-	transition: transform 0.85s;
-	transform-style: preserve-3d;
-	position: relative;
-}
-
-/* hide back of pane during swap */
-.cards-draaideur .card {
-	backface-visibility: hidden;
-	position: absolute;
-	width: 100%;
-}
-
-.cards-draaideur .card:first-child {
-	z-index: 2;
-}
-
-.cards-draaideur .card + .card {
-	transform: rotateY(180deg);
-	z-index: 3;
 }
 </style>
