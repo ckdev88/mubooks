@@ -29,9 +29,8 @@ async function fetchBook() {
 
 <template>
 	<h1>Zoek boek</h1>
-	<input v-model="boekzoek.author" placeholder="Author..." @keyup.enter="fetchBook" />
-	<br />
-	<input v-model="boekzoek.title" placeholder="Title..." @keyup.enter="fetchBook" />
+	<input type="text" v-model="boekzoek.author" placeholder="Author..." @keyup.enter="fetchBook" />
+	<input type="text" v-model="boekzoek.title" placeholder="Title..." @keyup.enter="fetchBook" />
 	<button @click="fetchBook">fetch books</button>
 
 	<div v-for="(book, index) in foundBooks" :key="index" class="book-item">

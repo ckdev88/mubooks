@@ -4,13 +4,13 @@ import NavWrapper from './components/NavWrapper.vue'
 </script>
 
 <template>
-	<header id="navigation">
+	<header id="header">
 		<NavWrapper />
 	</header>
-	<main>
+	<main id="main">
 		<RouterView />
 	</main>
-	<footer>
+	<footer id="footer">
 		<!-- <GlobalCounter /> -->
 	</footer>
 </template>

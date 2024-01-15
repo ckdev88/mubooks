@@ -48,7 +48,7 @@ pre {
 img {
 	max-width: 100%;
 }
-#navigation {
+#header {
 	position: fixed;
 	top: 0;
 	width: calc(100% - 2rem);
@@ -73,7 +73,7 @@ input[type='number'],
 input[type='email'],
 input[type='submit'],
 textarea,
-button {
+#main button {
 	box-sizing: border-box;
 	width: 100%;
 	display: block;
@@ -94,8 +94,12 @@ textarea {
 button,
 input[type='submit'] {
 	cursor: pointer;
+}
+#main button,
+input[type='submit'] {
 	background-color: #b73581;
 	color: white;
 	font-weight: bold;
 	text-align: center;
+	font-size: 1rem;
 }

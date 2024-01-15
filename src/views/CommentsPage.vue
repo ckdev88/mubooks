@@ -1,5 +1,5 @@
 <script setup>
-import CommentsList from '@/components/CommentsList.vue'
+import CommentsList from '/src/components/CommentsList.vue'
 
 const props = defineProps({
 	title: { type: String, required: false }

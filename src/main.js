@@ -5,7 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
 import { routes } from './router'
 
-import { supabase } from './clients/supabase'
+import { supabase } from '/src/clients/supabase'
 
 import App from './App.vue'
 
