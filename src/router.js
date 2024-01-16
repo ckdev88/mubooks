@@ -25,9 +25,9 @@ export const routes = [
 				meta: { includeNav: false }
 			},
 			{
-				path: '/boekzoek',
-				name: 'boekzoek',
-				component: () => import('./views/BoekzoekPage.vue'),
+				path: '/explore',
+				name: 'explore',
+				component: () => import('./views/ExplorePage.vue'),
 				meta: { includeNav: true }
 			},
 			{

@@ -3,3 +3,26 @@ main button.alt {
 	color: #333;
 	border-color: transparent;
 }
+.adder header {
+	font-family: Girassol, serif;
+	font-weight: bold;
+	font-size: 1.4rem;
+	margin-bottom: 0;
+}
+.adder button {
+	background-color: white;
+	background-size: cover;
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: 0;
+	margin-right: 1rem;
+	overflow: hidden;
+	border-color: white;
+}
+.adder button img {
+	box-sizing: border-box;
+	height: 100%;
+	padding: 0.25rem;
+	width: auto;
+	/* transform: translateY(50%), translateX(50%); */
+}

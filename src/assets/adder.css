@@ -1,0 +1,50 @@
+.adder {
+	margin-bottom: 1rem;
+}
+.adder img {
+	cursor: pointer;
+}
+.adder header {
+	font-family: Girassol, serif;
+	font-weight: bold;
+	font-size: 1.2rem;
+	margin-bottom: 1rem;
+	display: flex;
+	justify-content: space-between;
+}
+.adder a {
+	text-decoration: none;
+	color: #6a0088;
+}
+
+.adder main {
+	border-radius: 0.3rem;
+	background-color: #f4f1ea;
+	/* background-color: #409970; */
+	padding: 0.5rem;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+}
+.adder main:hover {
+	background-color: lightcyan;
+}
+.adder aside {
+	font-size: 0.9rem;
+}
+
+.adder.alt header {
+	font-size: 1.3rem;
+	text-align: center;
+	display: block;
+}
+.adder .adder.alt {
+	text-align: center;
+	justify-content: space-around;
+}
+.adder.alt img {
+	margin: 1rem auto;
+}
+.adder.alt aside {
+	text-align: center;
+}

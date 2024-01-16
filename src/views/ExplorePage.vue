@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
 const foundBooks = ref({})
-const boekzoek = reactive({
+const explore = reactive({
 	api: 'http://openlibrary.org/search.json',
 	title: '',
 	author: '',
@@ -12,12 +12,12 @@ const boekzoek = reactive({
 	fields: '&fields=*'
 })
 const fetchCurl = () => {
-	let ret = boekzoek.api
-	ret += `?q=${boekzoek.q}`
-	if (boekzoek.title !== '') ret += `&title=${boekzoek.title.toLowerCase()}`
-	if (boekzoek.author !== '') ret += `&author=${boekzoek.author}`
-	if (boekzoek.limit > 0) ret += `&limit=${boekzoek.limit}`
-	if (boekzoek.fields !== '') ret += `&fields=${boekzoek.fields}`
+	let ret = explore.api
+	ret += `?q=${explore.q}`
+	if (explore.title !== '') ret += `&title=${explore.title.toLowerCase()}`
+	if (explore.author !== '') ret += `&author=${explore.author}`
+	if (explore.limit > 0) ret += `&limit=${explore.limit}`
+	if (explore.fields !== '') ret += `&fields=${explore.fields}`
 	return ret
 }
 async function fetchBook() {
@@ -28,9 +28,9 @@ async function fetchBook() {
 </script>
 
 <template>
-	<h1>Zoek boek</h1>
-	<input type="text" v-model="boekzoek.author" placeholder="Author..." @keyup.enter="fetchBook" />
-	<input type="text" v-model="boekzoek.title" placeholder="Title..." @keyup.enter="fetchBook" />
+	<h1>Explore</h1>
+	<input type="text" v-model="explore.author" placeholder="Author..." @keyup.enter="fetchBook" />
+	<input type="text" v-model="explore.title" placeholder="Title..." @keyup.enter="fetchBook" />
 	<button @click="fetchBook">fetch books</button>
 
 	<div v-for="(book, index) in foundBooks" :key="index" class="book-item">
