@@ -21,7 +21,7 @@ import RecoverCard from '../../components/account/RecoverCard.vue'
 	<br style="clear: both" />
 	<div class="hidden">
 		<br />
-		<button @click="toPrefs">To preferences</button>
+		<button @click="toProfile">To profile</button>
 		<button @click="loginAccount">Login</button>
 		<button @click="seeCurrentUser">See user</button>
 		<button @click="logoutAccount">Log out</button>

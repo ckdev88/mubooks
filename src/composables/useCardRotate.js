@@ -6,12 +6,9 @@ export default function useCardRotate(from = '', to = '') {
 	const el = document.getElementsByClassName('cards-draaideur')[0]
 
 	if (to !== '') {
-		// console.log('aaaaaaaaaaa')
 		const cards = el.getElementsByClassName('card')
-		console.log(cards)
 
 		for (let i = 0; i < cards.length; i++) {
-			console.log(cards[i].id)
 			if (cards[i].id === 'card-' + from || cards[i].id === 'card-' + to)
 				cards[i].style.display = 'block'
 			else cards[i].style.display = 'none'

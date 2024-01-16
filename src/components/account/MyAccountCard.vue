@@ -1,10 +1,9 @@
 <script setup>
-import { onBeforeMount } from 'vue'
+import { onBeforeMount, onMounted } from 'vue'
 import { supabase } from '../../clients/supabase'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '../../stores/AuthStore'
-
 const router = useRouter()
+import { useAuthStore } from '../../stores/AuthStore'
 const authStore = useAuthStore()
 
 async function showCurrentUser() {
@@ -28,16 +27,24 @@ async function showCurrentUser() {
 onBeforeMount(() => {
 	showCurrentUser()
 })
+onMounted(() => {
+	console.log(authStore.username)
+})
 </script>
 <template>
-	<h1>My preferences</h1>
-	<dl>
-		<dt>Screen name:</dt>
-		<dd>{{ authStore.screenname }}</dd>
-		<dt>Email address</dt>
-		<dd>{{ authStore.email }}</dd>
-		<dt>Password</dt>
-		<dd>****** <button>change</button></dd>
-	</dl>
-	<RouterLink to="logout">Log out</RouterLink>
+	<div class="card">
+		<header>My account</header>
+		<main>
+			<dl>
+				<dt>Screen name:</dt>
+				<dd>{{ authStore.screenname }}</dd>
+				<dt>Email address</dt>
+				<dd>{{ authStore.email }}</dd>
+				<dt>Password</dt>
+				<dd>******</dd>
+			</dl>
+			<button>change</button>
+		</main>
+		<footer></footer>
+	</div>
 </template>

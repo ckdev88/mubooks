@@ -2,10 +2,7 @@
 import { onUpdated, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '../../clients/supabase'
-// export default {
 import useCardRotate from '../../composables/useCardRotate'
-// name: 'LoginCard'
-// }
 import { useAuthStore } from '../../stores/AuthStore'
 const authStore = useAuthStore()
 
@@ -54,8 +51,8 @@ async function logoutAccount() {
 	}
 }
 
-function toPrefs() {
-	router.push('profile-preferences')
+function toProfile() {
+	router.push('profile')
 }
 onUpdated(() => {
 	console.log('loginstatus in loginpage.vue:', authStore.status)
@@ -65,13 +62,15 @@ onUpdated(() => {
 <template>
 	<article class="card" id="card-login">
 		<header>Log in</header>
-		<form @submit.prevent="loginAccount">
-			<label for="email">Email</label>
-			<input type="email" id="login-email" v-model="email" required />
-			<label for="password">Password</label>
-			<input type="password" id="login-password" v-model="password" />
-			<button>Log in</button>
-		</form>
+		<main>
+			<form @submit.prevent="loginAccount">
+				<label for="email">Email</label>
+				<input type="email" id="login-email" v-model="email" required />
+				<label for="password">Password</label>
+				<input type="password" id="login-password" v-model="password" />
+				<button>Log in</button>
+			</form>
+		</main>
 		<footer>
 			<a @click="useCardRotate('login', 'recover')">Forgot password</a>
 			<a @click="useCardRotate('login', 'signup')">New here? Join now.</a>

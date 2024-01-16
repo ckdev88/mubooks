@@ -4,6 +4,10 @@ import { useRouter } from 'vue-router'
 import { supabase } from '../../clients/supabase'
 import { useAuthStore } from '../../stores/AuthStore'
 
+import SignupCard from '../../components/account/SignupCard.vue'
+import LoginCard from '../../components/account/LoginCard.vue'
+import RecoverCard from '../../components/account/RecoverCard.vue'
+
 const authStore = useAuthStore()
 const router = useRouter()
 const f = reactive({
@@ -36,16 +40,13 @@ async function createAccount() {
 }
 </script>
 <template>
-	<h1>Let me join</h1>
-	<form @submit.prevent="createAccount">
-		<label for="screenname">Screen name</label>
-		<input type="text" id="screenname" v-model="f.screenname" />
-		<label for="email">Email address: *</label>
-		<input type="email" id="email" v-model="f.email" required />
-		<label for="password">Password: *</label>
-		<input id="password" type="password" v-model="f.password" required />
-		<button>Vamos</button>
-	</form>
+	<div class="cards-draaideur">
+		<div class="axis">
+			<SignupCard />
+			<LoginCard />
+			<RecoverCard />
+		</div>
+	</div>
 </template>
 <style scoped>
 h1,

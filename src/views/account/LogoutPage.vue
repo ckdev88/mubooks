@@ -8,6 +8,7 @@ const authStore = useAuthStore()
 
 const router = useRouter()
 let errorMsg = ref('Just one moment...')
+
 async function logoutAccount() {
 	console.log('logout account')
 

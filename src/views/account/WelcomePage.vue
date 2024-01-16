@@ -1,6 +1,7 @@
 <script setup>
 import { useAuthStore } from '../../stores/AuthStore'
 const authStore = useAuthStore()
+console.log('authStore:', authStore)
 
 // TODO: make pinia sync with supabase auth.users
 </script>

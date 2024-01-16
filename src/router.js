@@ -60,9 +60,15 @@ export const routes = [
 		path: '/login',
 		children: [
 			{
-				path: '/profile-create',
-				name: 'profile-create',
-				component: () => import('./views/account/CreatePage.vue'),
+				path: '/login',
+				name: 'login',
+				component: () => import('./views/account/LoginPage.vue'),
+				meta: { requiresAuth: false, requiresNoAuth: true, includeNav: true }
+			},
+			{
+				path: '/signup',
+				name: 'signup',
+				component: () => import('./views/account/SignupPage.vue'),
 				meta: { requiresAuth: false, requiresNoAuth: true, includeNav: true }
 			},
 			{
@@ -79,15 +85,9 @@ export const routes = [
 				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false }
 			},
 			{
-				path: '/login',
-				name: 'login',
-				component: () => import('./views/account/LoginPage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: true, includeNav: true }
-			},
-			{
-				path: '/profile-preferences',
-				name: 'profile-preferences',
-				component: () => import('./views/account/PreferencesPage.vue'),
+				path: '/profile',
+				name: 'profile',
+				component: () => import('./views/account/ProfilePage.vue'),
 				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: true }
 			},
 			{

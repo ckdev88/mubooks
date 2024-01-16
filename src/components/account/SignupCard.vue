@@ -43,15 +43,17 @@ async function createAccount() {
 <template>
 	<article class="card" id="card-signup">
 		<header>Create an account</header>
-		<form @submit.prevent="createAccount">
-			<label for="screenname">Screen name</label>
-			<input type="text" id="signup-screenname" v-model="f.screenname" />
-			<label for="email">Email address: *</label>
-			<input type="email" id="signup-email" v-model="f.email" required />
-			<label for="password">Password: *</label>
-			<input type="password" id="signup-password" v-model="f.password" required />
-			<button>Vamos</button>
-		</form>
+		<main>
+			<form @submit.prevent="createAccount">
+				<label for="screenname">Screen name</label>
+				<input type="text" id="signup-screenname" v-model="f.screenname" />
+				<label for="email">Email address: *</label>
+				<input type="email" id="signup-email" v-model="f.email" required />
+				<label for="password">Password: *</label>
+				<input type="password" id="signup-password" v-model="f.password" required />
+				<button>Create</button>
+			</form>
+		</main>
 		<footer class="content-right">
 			<a @click="useCardRotate('signup', 'login')">Already have an account</a>
 		</footer>

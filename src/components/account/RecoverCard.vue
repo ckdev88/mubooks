@@ -24,12 +24,14 @@ const email = ref('')
 			</div>
 </div> -->
 		<header>Forgot your password? Don't worry. Let's get it back.</header>
-		<form>
-			<label for="recover-email">Email address: *</label>
-			<input type="email" id="recover-email" v-model="email" required />
-			<p>We'll send a link to this email if it matches an existing MuBOOKS account.</p>
-			<button>Next</button>
-		</form>
+		<main>
+			<form>
+				<label for="recover-email">Email address: *</label>
+				<input type="email" id="recover-email" v-model="email" required />
+				<p>We'll send a link to this email if it matches an existing MuBOOKS account.</p>
+				<button>Next</button>
+			</form>
+		</main>
 		<button @click="useCardRotate('recover', 'login')" class="alt">Back</button>
 		<footer></footer>
 	</article>
