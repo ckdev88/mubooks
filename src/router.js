@@ -82,7 +82,7 @@ export const routes = [
 				path: '/welcome',
 				name: 'welcome',
 				component: () => import('./views/account/WelcomePage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false }
+				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: true }
 			},
 			{
 				path: '/profile',

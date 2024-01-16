@@ -81,13 +81,13 @@ main button {
 	border-width: 1px;
 	border-style: solid;
 	border-radius: 0.2rem;
-	margin-bottom: 0.75rem;
 }
 input[type='text'],
 input[type='password'],
 input[type='number'],
 input[type='email'],
 textarea {
+	margin-bottom: 0.75rem;
 	border-color: white;
 	background: white;
 }

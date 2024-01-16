@@ -6,7 +6,20 @@ console.log('authStore:', authStore)
 // TODO: make pinia sync with supabase auth.users
 </script>
 <template>
-	<h1>Welcome {{ authStore.screenname }}!</h1>
-	<h2>What do you want to do?</h2>
+	<h3>Hi {{ authStore.screenname }}, welcome to MuBOOKS</h3>
+	<p>
+		your journal for your books.<br />
+		Let's get started!
+	</p>
 	<RouterLink to="boekzoek">Find a book</RouterLink>
 </template>
+<style scoped>
+h3 {
+	margin-bottom: 0;
+	display: inline;
+}
+p {
+	margin-top: 0;
+	display: inline;
+}
+</style>

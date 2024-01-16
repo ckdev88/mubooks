@@ -32,8 +32,9 @@ const email = ref('')
 				<button>Next</button>
 			</form>
 		</main>
-		<button @click="useCardRotate('recover', 'login')" class="alt">Back</button>
-		<footer></footer>
+		<footer>
+			<button @click="useCardRotate('recover', 'login')" class="alt">Back</button>
+		</footer>
 	</article>
 </template>
 <style scoped>

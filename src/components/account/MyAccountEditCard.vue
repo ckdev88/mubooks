@@ -25,6 +25,11 @@ async function showCurrentUser() {
 	// TODO: add screen name
 	// TODO: add possibilities to modify data
 }
+
+async function handleSubmit(e) {
+	console.log(e)
+	useCardRotate()
+}
 onBeforeMount(() => {
 	showCurrentUser()
 })
@@ -36,17 +41,18 @@ onMounted(() => {
 	<div class="card">
 		<header>My account</header>
 		<main>
-			<dl>
-				<dt>Screen name:</dt>
-				<dd>{{ authStore.screenname }}</dd>
-				<dt>Email address</dt>
-				<dd>{{ authStore.email }}</dd>
-				<dt>Password</dt>
-				<dd>******</dd>
-			</dl>
+			<form @submit.prevent="handleSubmit">
+				<label>Screen name</label>
+				<input type="text" id="account-screenname" v-model="authStore.screenname" />
+				<label for="account-email">Email address</label>
+				<input type="email" :value="authStore.email" id="account-email" />
+				<label for="account-password">Password (leave empty to keep current)</label>
+				<input type="password" value="" id="account-password" />
+				<button>Save and return</button>
+			</form>
 		</main>
 		<footer>
-			<button @click="useCardRotate">change</button>
+			<a @click="useCardRotate">Return without saving</a>
 		</footer>
 	</div>
 </template>
