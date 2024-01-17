@@ -4,10 +4,12 @@
 }
 .adder header {
 	font-family: 'Merriweather', 'serif';
-	font-size: 1rem;
-	font-weight: 600;
+	font-size: 1.3rem;
+	font-weight: normal;
 	display: flex;
 	justify-content: space-between;
+	letter-spacing: -0.03rem;
+	padding-bottom: 0.5rem;
 }
 .adder a {
 	text-decoration: none;

@@ -1,7 +1,8 @@
 .quote {
 	font-style: italic;
 	text-align: center;
-	margin: 1.5rem auto;
+	font-size: 1.5rem;
+	margin: 3rem auto;
 }
 .quote main::before {
 	display: inline-block;
@@ -12,6 +13,7 @@
 	content: '”';
 }
 .quote footer {
+	margin-top: 0.7em;
 	font-weight: 600;
-	font-size: 0.9em;
+	font-size: 0.7em;
 }
