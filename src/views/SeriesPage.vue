@@ -62,7 +62,6 @@ export default {
 				hobbies: this.tmpHobbies,
 				isFavourited: this.tmpFavourite
 			})
-			// console.log('CAST:', this.cast)
 		}
 	}
 }
