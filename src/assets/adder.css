@@ -3,10 +3,9 @@
 	cursor: pointer;
 }
 .adder header {
-	font-family: Girassol, serif;
-	font-weight: bold;
-	font-size: 1.2rem;
-	margin-bottom: 1rem;
+	font-family: 'Merriweather', 'serif';
+	font-size: 1rem;
+	font-weight: 600;
 	display: flex;
 	justify-content: space-between;
 }

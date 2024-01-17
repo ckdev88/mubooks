@@ -1,13 +1,13 @@
 <script>
 import MuUserCard from '../components/MuUserCard.vue'
-import MuBookOverview from '../components/MuBookOverview.vue'
+import MuBooksOverview from '../components/MuBooksOverview.vue'
 import { useAuthStore } from '../stores/AuthStore'
 
 const loggedIn = useAuthStore()
 
 export default {
 	name: 'MuPage',
-	components: { MuUserCard, MuBookOverview },
+	components: { MuUserCard, MuBooksOverview },
 	data() {
 		return {
 			user: {
@@ -28,5 +28,5 @@ export default {
 <template>
 	{{ loggedInStatus }}
 	<MuUserCard :user="user" @change-name="changeFirstName" />
-	<MuBookOverview />
+	<MuBooksOverview />
 </template>

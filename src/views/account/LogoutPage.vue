@@ -24,7 +24,7 @@ async function logoutAccount() {
 }
 onMounted(async () => {
 	await logoutAccount()
-	router.push('login')
+	router.push({ name: 'login' })
 })
 </script>
 <template>

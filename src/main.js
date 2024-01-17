@@ -42,6 +42,7 @@ router.beforeEach(async (to, from) => {
 	document.body.classList.remove(from.name)
 
 	if (to.meta.requiresAuth || to.meta.requiresNoAuth) {
+		console.log('to.meta.requiresAuth:', to.meta.requiresAuth)
 		const localUser = await supabase.auth.getSession()
 		if (localUser.data.session === null) isAuthenticated = false
 		else isAuthenticated = true

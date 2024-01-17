@@ -3,12 +3,6 @@ main button.alt {
 	color: #333;
 	border-color: transparent;
 }
-.adder header {
-	font-family: Girassol, serif;
-	font-weight: bold;
-	font-size: 1.4rem;
-	margin-bottom: 0;
-}
 .adder button {
 	background-color: white;
 	background-size: cover;

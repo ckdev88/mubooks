@@ -5,7 +5,7 @@ import { useAuthStore } from '../stores/AuthStore'
 const authStore = useAuthStore()
 
 function goSearch() {
-	router.push('explore')
+	router.push({ name: 'explore' })
 	nav0Expanded.value = false
 	nav1Expanded.value = false
 }
@@ -23,9 +23,23 @@ const nav1Expanded = ref(false)
 const router = useRouter()
 
 const nav = (nr) => router.options.routes[nr].children
-const nav0 = nav(0).filter((item) => item.meta.includeNav === true)
+// const nav0 = nav(0).filter((item) => item.meta.includeNav === true)
+let nav0
 let nav1
 function populateNav() {
+	if (authStore.status === true) {
+		nav0 = nav(0).filter(
+			(item) =>
+				item.meta.includeNav === true &&
+				(item.meta.requiresAuth === true || item.meta.requiresNoAuth === false)
+		)
+	} else {
+		nav0 = nav(0).filter(
+			(item) =>
+				item.meta.includeNav === true &&
+				(item.meta.requiresAuth === false || item.meta.requiresNoAuth === true)
+		)
+	}
 	if (authStore.status === true) {
 		nav1 = nav(1).filter(
 			(item) =>
@@ -90,7 +104,9 @@ watch(useAuthStore(), () => {
 	>
 		<ul>
 			<li v-for="(route, index) in nav0" :key="index">
-				<RouterLink :to="route.path" @click="toggleNav">{{ route.name }}</RouterLink>
+				<RouterLink :to="route.path" @click="toggleNav">{{
+					route.meta.navName ? route.meta.navName : route.name
+				}}</RouterLink>
 			</li>
 		</ul>
 		<div class="history">

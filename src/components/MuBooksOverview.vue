@@ -212,7 +212,7 @@ export default {
 
 <template>
 	<div>
-		<h1>MuBOOKS</h1>
+		<h1>Mu saved books</h1>
 		<!-- <MuBooksOverviewList :booklist="booklist" /> -->
 
 		<article v-for="(book, index) in booklist" :key="index" class="book-summary">
@@ -222,7 +222,7 @@ export default {
 				</aside>
 				<div class="in-short">
 					<h2>
-						{{ book.title }} ({{ book.releaseYear }})
+						{{ book.title }}
 						<sub>{{ book.author_name }}</sub>
 					</h2>
 					{{ book.releaseYear }}<br />

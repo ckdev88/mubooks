@@ -6,7 +6,7 @@ console.log('router:', router)
 
 function goExplore() {
 	console.log('go zoek boek')
-	router.push('explore')
+	router.push({ name: 'explore' })
 }
 onMounted(() => {
 	console.log('mounted')

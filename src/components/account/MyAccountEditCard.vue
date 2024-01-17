@@ -12,7 +12,7 @@ async function showCurrentUser() {
 	if (authStore.status !== true) {
 		const { data, error } = await supabase.auth.getUser()
 		if (error) {
-			router.push('login')
+			router.push({ name: 'login' })
 			console.log('error:', error)
 		} else {
 			authStore.email = data.user.email

@@ -86,7 +86,7 @@ export default {
 </script>
 <template>
 	<!-- {{h1template}} -->
-	<RouterLink :to="{ name: 'home', params: 'title', query: { title: 'lekkeerrrrrr' } }"
+	<RouterLink :to="{ name: 'dashboard', params: 'title', query: { title: 'lekkeerrrrrr' } }"
 		>HOME</RouterLink
 	><br />
 

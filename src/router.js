@@ -1,109 +1,126 @@
-import HomePage from './views/HomePage.vue'
+import DashboardPage from './views/account/DashboardPage.vue'
 
 export const routes = [
 	{
 		path: '/',
+		redirect: { name: 'dashboard' },
 		children: [
-			{ path: '/', name: 'home', component: HomePage, meta: { includeNav: true } },
+			{
+				path: '/account/dashboard',
+				name: 'dashboard',
+				component: DashboardPage,
+				meta: { includeNav: true, requiresAuth: true, requiresNoAuth: false }
+			},
 			{
 				path: '/routeinfo',
 				name: 'routeinfo',
 				component: () => import('./views/RouteinfoPage.vue'),
 				props: { username: 'proptest' },
-				meta: { includeNav: true }
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
 			},
 			{
 				path: '/quotes',
 				name: 'quotes',
 				component: () => import('./views/QuotesPage.vue'),
-				meta: { includeNav: true }
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
 			},
 			{
 				path: '/states',
 				name: 'states',
 				component: () => import('./views/GlobalStates.vue'),
-				meta: { includeNav: false }
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false }
 			},
 			{
 				path: '/explore',
 				name: 'explore',
 				component: () => import('./views/ExplorePage.vue'),
-				meta: { includeNav: true }
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
 			},
 			{
 				path: '/books',
 				name: 'books',
 				component: () => import('./views/BooksPage.vue'),
-				meta: { includeNav: true }
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
 			},
 			{
 				path: '/mubooks',
 				name: 'mubooks',
 				component: () => import('./views/MuPage.vue'),
-				meta: { includeNav: true }
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
+			},
+			{
+				name: 'savedbooks',
+				path: '/saved-books',
+				component: () => import('./views/books/SavedBooksPage.vue'),
+				meta: {
+					navName: 'Saved books',
+					requiresAuth: true,
+					requiresNoAuth: false,
+					includeNav: true
+				}
 			},
 			{
 				path: '/bookstore',
 				name: 'bookstore',
 				component: () => import('./views/BookstorePage.vue'),
-				meta: { includeNav: true }
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
 			},
 			{
 				path: '/series',
 				name: 'series',
 				component: () => import('./views/SeriesPage.vue'),
-				meta: { includeNav: true }
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
 			}
 		]
 	},
 	{
-		path: '/login',
+		path: '/account/login',
 		children: [
 			{
-				path: '/login',
+				path: '/account/login',
 				name: 'login',
 				component: () => import('./views/account/LoginPage.vue'),
 				meta: { requiresAuth: false, requiresNoAuth: true, includeNav: true }
 			},
 			{
-				path: '/signup',
+				path: '/account/signup',
 				name: 'signup',
 				component: () => import('./views/account/SignupPage.vue'),
 				meta: { requiresAuth: false, requiresNoAuth: true, includeNav: true }
 			},
 			{
-				path: '/checkmail',
+				path: '/account/checkmail',
 				name: 'checkmail',
 				component: () => import('./views/account/CheckMailPage.vue'),
 				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false },
 				props: true
 			},
 			{
-				path: '/welcome',
-				name: 'welcome',
-				component: () => import('./views/account/WelcomePage.vue'),
+				path: '/account/dashboard',
+				name: 'dashboard',
+				component: () => import('./views/account/DashboardPage.vue'),
 				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: true }
 			},
 			{
-				path: '/profile',
+				path: '/account/profile',
 				name: 'profile',
 				component: () => import('./views/account/ProfilePage.vue'),
 				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: true }
 			},
 			{
-				path: '/profile-secret',
+				path: '/account/profile-secret',
 				name: 'profile-secret',
 				component: () => import('./views/account/SecretPage.vue'),
 				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: false }
 			},
 			{
-				path: '/logout',
+				path: '/account/logout',
 				name: 'logout',
 				component: () => import('./views/account/LogoutPage.vue'),
 				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: true }
 			},
 			{
-				path: '/profile-unauthorized',
+				path: '/account/profile-unauthorized',
 				name: 'profile-unauthorized',
 				component: () => import('./views/status/UnauthorizedPage.vue'),
 				meta: { requiresAuth: false, requiresNoAuth: true, includeNav: false }
@@ -143,7 +160,5 @@ export const routes = [
 			}
 		]
 	},
-
-	{},
 	{ path: '/:catchAll(.*)', name: '404', component: () => import('./views/status/404Page.vue') }
 ]
