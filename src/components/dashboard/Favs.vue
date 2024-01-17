@@ -1,7 +1,7 @@
 <script setup></script>
 <template>
 	<article class="adder">
-		<header>Mu Favs</header>
+		<header>Mu Favs<span>›</span></header>
 		<main>
 			<aside>
 				<button><img src="/img/favs-icon.png" /></button>

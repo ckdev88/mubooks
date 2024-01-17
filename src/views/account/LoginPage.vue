@@ -35,6 +35,9 @@ import RecoverCard from '../../components/account/RecoverCard.vue'
 h1 {
 	text-align: center;
 }
+#welcome-logo {
+	margin-bottom: 1rem;
+}
 #welcome-logo-img {
 	max-width: 33%;
 	display: block;

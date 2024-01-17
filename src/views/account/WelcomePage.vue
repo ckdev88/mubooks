@@ -19,13 +19,13 @@ import Explore from '../../components/dashboard/Explore.vue'
 	</p>
 	<br />
 	<br />
-	<Reading />
+	<Reading @click="$router.push('mubooks')" />
 	<Saved @click="$router.push('series')" />
-	<Favs />
+	<Favs @click="$router.push('series')" />
 	<Wishlist @click="$router.push('mubooks')" />
-	<Tropes />
-	<Stats />
-	<Explore />
+	<Tropes @click="$router.push('series')" />
+	<Stats @click="$router.push('series')" />
+	<Explore @click="$router.push('explore')" />
 </template>
 <style scoped>
 h3 {

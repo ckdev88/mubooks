@@ -31,7 +31,7 @@ async function fetchBook() {
 	<h1>Explore</h1>
 	<input type="text" v-model="explore.author" placeholder="Author..." @keyup.enter="fetchBook" />
 	<input type="text" v-model="explore.title" placeholder="Title..." @keyup.enter="fetchBook" />
-	<button @click="fetchBook">fetch books</button>
+	<button @click="fetchBook">Search</button>
 
 	<div v-for="(book, index) in foundBooks" :key="index" class="book-item">
 		<pre>{{ book }}</pre>

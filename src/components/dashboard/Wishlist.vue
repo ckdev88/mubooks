@@ -1,7 +1,7 @@
 <script setup></script>
 <template>
 	<article class="adder">
-		<header>Mu Wishlist</header>
+		<header>Mu Wishlist<span>›</span></header>
 		<main>
 			<aside>
 				<button><img src="/img/wishlist-icon.png" /></button>

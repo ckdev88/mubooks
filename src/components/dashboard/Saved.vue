@@ -1,7 +1,7 @@
 <script setup></script>
 <template>
 	<article class="adder">
-		<header>Mu Books</header>
+		<header>Mu Books<span>›</span></header>
 		<main>
 			<aside>
 				<button><img src="/img/save-books-icon.png" /></button>

@@ -26,9 +26,7 @@ export default {
 }
 </script>
 <template>
-	---
 	{{ loggedInStatus }}
-	===
 	<MuUserCard :user="user" @change-name="changeFirstName" />
 	<MuBookOverview />
 </template>

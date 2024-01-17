@@ -1,7 +1,5 @@
 .adder {
 	margin-bottom: 1rem;
-}
-.adder img {
 	cursor: pointer;
 }
 .adder header {
@@ -26,8 +24,8 @@
 	justify-content: left;
 	align-items: center;
 }
-.adder main:hover {
-	background-color: lightcyan;
+.adder:hover main {
+	background-color: white;
 }
 .adder aside {
 	font-size: 0.9rem;

@@ -1,7 +1,7 @@
 <script setup></script>
 <template>
 	<article class="adder">
-		<header>Mu Stats</header>
+		<header>Mu Stats<span>›</span></header>
 		<main>
 			<aside>
 				<button><img src="/img/graph-icon.jpg" /></button>

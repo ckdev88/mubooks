@@ -26,3 +26,16 @@ main button.alt {
 	width: auto;
 	/* transform: translateY(50%), translateX(50%); */
 }
+
+.badge {
+	font-size: 0.9em;
+	padding: 0.2rem;
+	border-radius: 0.5rem;
+	border-color: transparent;
+	font-weight: normal;
+	min-width: 4rem;
+	background-color: #f1e0c6;
+	color: #e1901e;
+	margin-top: 0.1rem;
+	margin-bottom: 0.1rem;
+}

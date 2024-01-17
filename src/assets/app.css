@@ -4,7 +4,8 @@
 	box-sizing: border-box;
 }
 .light-mode body {
-	background-color: #ffffff;
+	background-color: #f4f1ea;
+
 	/* background: linear-gradient( */
 	/* 	90deg, */
 	/* 	hsl(28, 100%, 88%) 0%, */

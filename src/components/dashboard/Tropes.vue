@@ -1,7 +1,7 @@
 <script setup></script>
 <template>
 	<article class="adder">
-		<header>Mu Tropes</header>
+		<header>Mu Tropes<span>›</span></header>
 		<main>
 			<aside>
 				<button><img src="/img/hotcold-icon.svg" /></button>
