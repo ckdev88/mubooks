@@ -8,6 +8,7 @@
 	justify-content: left;
 }
 .book-summary h2 {
+	font-size: 1.4rem;
 	font-family: 'Merriweather', 'serif';
 	margin-top: 0;
 }
@@ -44,13 +45,49 @@
 	width: auto;
 	display: inline-block;
 }
-.book-summary .marks span {
-	display: inline-block;
-	line-height: 1;
-	width: 1.5rem;
-	height: auto;
+.book-summary .mark {
+	font-size: 0.9rem;
+	line-height: 1.5em;
+}
+.book-summary .icon {
+	display: block;
+	float: left;
+	line-height: 1.5em;
+	height: 1em;
+	margin: 0.25em 0.75em 0.25em 0;
+	width: 1em;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
 	text-align: center;
 }
+/* TODO: icons should be svg, preferrably home-made, else unicode */
+.book-summary .icon-reading {
+	background-image: url('/img/icon-reading.png');
+}
+.book-summary .icon-read {
+	background-image: url('/img/icon-read.png');
+}
+.book-summary .icon-wishlist {
+	background-image: url('/img/icon-wishlist.png');
+}
+.book-summary .icon-favorites {
+	background-image: url('/img/icon-favorites.png');
+}
+.book-summary .icon-hide {
+	background-image: url('/img/icon-hide.png');
+}
+.book-summary .icon-remove {
+	background-image: url('/img/icon-remove.png');
+}
+
+/* .book-summary .marks span { */
+/* 	display: inline-block; */
+/* 	line-height: 1; */
+/* 	width: 1.5rem; */
+/* 	height: auto; */
+/* 	text-align: center; */
+/* } */
 .book-summary .rating {
 	text-align: center;
 	margin-bottom: 1rem;
@@ -72,11 +109,5 @@
 .book-summary .marks .icon-favorites,
 .book-summary .marks .icon-read {
 	font-weight: 900;
-}
-.book-summary .marks .icon-hide {
-	height: 0.5em;
-	display: inline-block;
-	margin-top: -1em;
-	margin-bottom: -1em;
 }
 /* it ends with us colleen hoover */

@@ -34,7 +34,7 @@ export const routes = [
 				path: '/reading-add',
 				name: 'reading-add',
 				component: () => import('./views/ReadingAddPage.vue'),
-				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: true }
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
 			},
 			{
 				path: '/explore',

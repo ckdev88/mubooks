@@ -248,21 +248,25 @@ export default {
 			</main>
 			<footer>
 				<div class="marks">
-					<span class="icon-reading">🕮</span> Mark as reading<br />
-					<span class="icon-read">🗸</span> Mark as read<br />
-					<div v-if="!favoriteBooks.includes(book.title)">
-						<a class="favorites" @click="addFavoriteBook(book.title)">
-							<span class="icon-favorites">♡</span> Add to favorites
-						</a>
+					<div class="mark">
+						<span class="icon icon-reading"></span>
+						Mark as reading<br />
 					</div>
-					<div v-else>
-						<span class="icon-favorites red">♡</span> Added to favorites<br />
-						<a class="favorites" @click="removeFavoriteBook(book.title)">
-							<span class="icon-favorites">♡</span> Remove from favorites
-						</a>
+					<div class="mark">
+						<span class="icon icon-read"></span> Mark as read<br />
+						<div v-if="!favoriteBooks.includes(book.title)">
+							<a class="favorites" @click="addFavoriteBook(book.title)">
+								<span class="icon icon-favorites"></span> Add to favorites
+							</a>
+						</div>
+						<div v-else>
+							<span class="icon icon-favorites"></span> Added to favorites<br />
+							<a class="favorites" @click="removeFavoriteBook(book.title)">
+								<span class="icon-favorites"></span> Remove from favorites
+							</a>
+						</div>
 					</div>
-					<span class="icon-remove"><img src="/img/remove-icon.svg" alt="" /></span>
-					Remove<br />
+					<div class="mark"><span class="icon icon-remove"></span> Remove<br /></div>
 				</div>
 				<div class="rating">
 					<h3>Rating</h3>

@@ -42,6 +42,10 @@ function refreshResults(s = explore.title) {
 	for (let i = 0; i < boeken.length; i++) {
 		if (s === boeken[i].title.toLowerCase()) {
 			state.results[count] = boeken[i]
+			state.results[count].titleshort = boeken[i].title.slice(0, 45)
+			if (boeken[i].title.length > 45) {
+				state.results[count].titleshort += '...'
+			}
 			if (boeken[i].image !== null)
 				state.results[count].cover = 'https://images.isbndb.com/covers' + boeken[i].image
 			count++
@@ -55,6 +59,11 @@ function refreshResults(s = explore.title) {
 		if (boeken[i].title.toLowerCase().includes(s) && boeken[i].title.toLowerCase() !== s) {
 			console.log(count)
 			state.results[count] = boeken[i]
+			if (boeken[i].title.length > 45) {
+				state.results[count].titleshort = boeken[i].title.slice(0, 45)
+				state.results[count].titleshort += '...'
+			} else state.results[count].titleshort = boeken[i].title
+			console.log(state.results[count])
 			if (boeken[i].image !== null)
 				state.results[count].cover = 'https://images.isbndb.com/covers' + boeken[i].image
 			count++
@@ -108,7 +117,7 @@ function refreshResults(s = explore.title) {
 					</aside>
 					<div class="in-short">
 						<h2>
-							{{ book.title }}
+							{{ book.titleshort }}
 							<sub
 								><span v-for="(author, index2) in book.authors" :key="index2"
 									>{{ author }}<br /> </span
@@ -137,15 +146,21 @@ function refreshResults(s = explore.title) {
 				</main>
 				<footer>
 					<div class="marks">
-						<span class="icon-reading">🕮</span> Save in my books<br />
-						<span class="icon-wishlist"><img src="/img/wishlist-icon.png" /></span>Add
-						to wishlist<br />
+						<div class="mark">
+							<span class="icon icon-reading"></span> Save in my books
+						</div>
+						<div class="mark">
+							<span class="icon icon-wishlist"></span>Add to wishlist
+						</div>
 						<!-- <div v-if="!favoriteBooks.includes(book.title)"> -->
-						<a class="favorites" @click="addFavoriteBook(book.title)">
-							<span class="icon-favorites">♡</span> Add to favorites </a
-						><br />
-						<span class="icon-hide"><img src="/img/hide-icon.png" /></span> Don't want
-						to see this again<br />
+						<div class="mark">
+							<a class="favorites" @click="addFavoriteBook(book.title)">
+								<span class="icon icon-favorites"></span>Add to favorites
+							</a>
+						</div>
+						<div class="mark">
+							<span class="icon icon-hide"></span> Don't want to see this again
+						</div>
 						<!-- </div> -->
 						<!-- <div v-else> -->
 						<!-- 	<span class="icon-favorites red">♡</span> Added to favorites<br /> -->
