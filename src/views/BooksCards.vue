@@ -158,7 +158,7 @@ button {
 	counter-reset: books-counter;
 }
 .book {
-	width: 10rem;
+	width: 9rem;
 	padding: 1rem;
 	border: 1px solid #333;
 	margin: 1rem;

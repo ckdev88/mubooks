@@ -58,7 +58,7 @@ h2 sub {
 	font-style: italic;
 	font-size: 0.6em;
 	font-weight: normal;
-	font-family: 'Merriweather', 'serif';
+	font-family: 'merriweather', 'serif';
 }
 </style>
 
