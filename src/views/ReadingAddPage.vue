@@ -1,21 +1,32 @@
 <script setup>
-import { reactive, ref } from 'vue'
-const foundBooks = ref({})
+import { reactive, ref, onUpdated, watch } from 'vue'
 
-// import bookData from '/data/sample100000.json'
 import bookData from '/data/books.json'
-//
+
+import { useMuBooksStore } from '../stores/MuBooksStore'
+const muBooksStore = useMuBooksStore()
+const addMyBook = muBooksStore.addMyBook
+const removeMyBook = muBooksStore.removeMyBook
+
+console.log('saved biioks...', muBooksStore.getSavedBooks)
+console.log('muBooksStore:', muBooksStore.bookList)
+import { useAlertStore } from '../stores/AlertStore'
+import { storeToRefs } from 'pinia'
+
+const { booksList, loading } = storeToRefs(muBooksStore)
+
+const alertStore = ref(useAlertStore())
+
+const booklist = ref(muBooksStore.bookList)
+console.log('booklist:', booklist.value)
 const boeken = bookData
-// console.log('boeken:', boeken)
 
 const state = reactive({
-	results: [],
+	results: ref(booklist),
 	resultCount: 0,
 	isSearched: false,
 	resultsWarning: null
 })
-const results = ref(boeken)
-console.log('results:', results)
 
 const explore = reactive({
 	api: 'http://openlibrary.org/search.json',
@@ -39,8 +50,11 @@ function refreshResults(s = explore.title) {
 	s = s.toLowerCase()
 	state.results = []
 	state.resultsWarning = null
+	// search loop exact match
 	for (let i = 0; i < boeken.length; i++) {
 		if (s === boeken[i].title.toLowerCase()) {
+			boeken[i].saved = muBooksStore.isSaved(boeken[i])
+			console.log(boeken[i].saved)
 			state.results[count] = boeken[i]
 			state.results[count].titleshort = boeken[i].title.slice(0, 45)
 			if (boeken[i].title.length > 45) {
@@ -51,19 +65,19 @@ function refreshResults(s = explore.title) {
 			count++
 		}
 	}
+	// search loop less exact match
 	for (let i = 0; i < boeken.length; i++) {
 		if (count > 20) {
 			state.resultsWarning = 'too many results'
 			break
 		}
 		if (boeken[i].title.toLowerCase().includes(s) && boeken[i].title.toLowerCase() !== s) {
-			console.log(count)
+			boeken[i].saved = muBooksStore.isSaved(boeken[i])
 			state.results[count] = boeken[i]
 			if (boeken[i].title.length > 45) {
 				state.results[count].titleshort = boeken[i].title.slice(0, 45)
 				state.results[count].titleshort += '...'
 			} else state.results[count].titleshort = boeken[i].title
-			console.log(state.results[count])
 			if (boeken[i].image !== null)
 				state.results[count].cover = 'https://images.isbndb.com/covers' + boeken[i].image
 			count++
@@ -72,7 +86,6 @@ function refreshResults(s = explore.title) {
 	state.isSearched = true
 	state.resultCount = count
 }
-
 // const fetchCurl = () => {
 // 	let ret = explore.api
 // 	ret += `?q=${explore.q}`
@@ -87,20 +100,25 @@ function refreshResults(s = explore.title) {
 // 		.then((res) => res.json())
 // 		.then((data) => (foundBooks.value = data.docs))
 // }
+function toggleFavBook(index, book) {
+	// TODO: dit hoort in de store MuBooksStore, als action & getter, reactivity is een issue
+	state.results[index].saved = !state.results[index].saved
+	if (state.results[index].saved === true) removeMyBook(book)
+	else addMyBook(book)
+}
 </script>
 
 <template>
+	loading: {{ loading }}
 	<h1>Find book to add</h1>
 	<!-- <input type="text" v-model="explore.author" placeholder="Author..." @keyup.enter="fetchBook" /> -->
 	<!-- <input type="text" v-model="explore.title" placeholder="Title..." @keyup.enter="fetchBook" /> -->
 	<form @submit.prevent="refreshResults(explore.title)">
-		<input type="text" v-model="explore.title" @keyup.enter="refreshResults(explore.title)" />
+		<input type="text" v-model="explore.title" />
 		<button>Search</button>
 	</form>
 
-	<!-- <div v-for="(boek, index) in boeken" :key="index"> -->
-	<!-- 	{{ boek.title }} -->
-	<!-- </div> -->
+	{{ alertStore.currentAlert }}
 	<div v-if="state.isSearched">
 		<div v-if="state.resultsWarning">
 			{{ state.resultsWarning }}
@@ -133,22 +151,23 @@ function refreshResults(s = explore.title) {
 						{{ book.synopsis.substring(0, 180) }}
 						...
 					</div>
-					<!-- <div class="tropes"> -->
-					<!-- 	<h3>Tropes</h3> -->
-					<!-- 	<span v-for="(topic, index) in book.topics" :key="index"> -->
-					<!-- 		<button @click="addTopic(topic)" class="badge">{{ topic }}</button> -->
-					<!-- 		<span v-if="index < book.topics.length - 1">, </span> -->
-					<!-- 	</span> -->
-					<!-- </div> -->
-					<!-- <div v-if="book.uri"> -->
-					<!-- 	<a :href="book.uri" target="_blank"><span>Read more on OpenLibrary</span></a> -->
-					<!-- </div> -->
+					<!-- <div class="tropes">
+						<h3>Tropes</h3>
+						<span v-for="(topic, index) in book.topics" :key="index">
+							<button @click="addTopic(topic)" class="badge">{{ topic }}</button>
+							<span v-if="index < book.topics.length - 1">, </span>
+						</span>
+					</div>
+					<div v-if="book.uri">
+						<a :href="book.uri" target="_blank"><span>Read more on OpenLibrary</span></a>
+					</div> -->
 				</main>
 				<footer>
 					<div class="marks">
-						<div class="mark">
-							<span class="icon icon-reading"></span> Save in my books
-						</div>
+						<a class="mark" @click="toggleFavBook(index, book)">
+							<span class="icon icon-reading"> </span>
+							{{ book.saved === true ? 'Remove from my books' : 'Save in my books' }}
+						</a>
 						<div class="mark">
 							<span class="icon icon-wishlist"></span>Add to wishlist
 						</div>
@@ -161,20 +180,23 @@ function refreshResults(s = explore.title) {
 						<div class="mark">
 							<span class="icon icon-hide"></span> Don't want to see this again
 						</div>
-						<!-- </div> -->
-						<!-- <div v-else> -->
-						<!-- 	<span class="icon-favorites red">♡</span> Added to favorites<br /> -->
-						<!-- 	<a class="favorites" @click="removeFavoriteBook(book.title)"> -->
-						<!-- 		<span class="icon-favorites">♡</span> Remove from favorites -->
-						<!-- 	</a> -->
-						<!-- </div> -->
-						<!-- <span class="icon-remove"><img src="/img/remove-icon.svg" alt="" /></span> -->
-						<!-- Remove<br /> -->
+
+						<!--						</div>
+						<div v-else>
+							<span class="icon-favorites red">♡</span> Added to favorites<br />
+							<a class="favorites" @click="removeFavoriteBook(book.title)">
+								<span class="icon-favorites">♡</span> Remove from favorites
+							</a>
+						</div>
+						<span class="icon-remove"><img src="/img/remove-icon.svg" alt="" /></span>
+						Remove<br /> -->
 					</div>
-					<!-- <div class="rating"> -->
-					<!-- 	<h3>Rating</h3> -->
-					<!-- 	<div class="stars">★★★☆☆</div> -->
-					<!-- </div> -->
+
+					<!--			<div class="rating">
+						<h3>Rating</h3>
+						<div class="stars">★★★☆☆</div>
+					</div> -->
+
 					<br />
 					<hr />
 				</footer>
