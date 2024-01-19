@@ -6,53 +6,54 @@ export const routes = [
 		redirect: { name: 'dashboard' },
 		children: [
 			{
-				path: '/account/dashboard',
+				path: '/dashboard',
 				name: 'dashboard',
 				component: DashboardPage,
-				meta: { includeNav: true, requiresAuth: true, requiresNoAuth: false }
+				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: true }
 			},
 			{
 				path: '/routeinfo',
 				name: 'routeinfo',
 				component: () => import('./views/RouteinfoPage.vue'),
 				props: { username: 'proptest' },
-				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false }
 			},
 			{
 				path: '/quotes',
 				name: 'quotes',
 				component: () => import('./views/QuotesPage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
-			},
-			{
-				path: '/states',
-				name: 'states',
-				component: () => import('./views/GlobalStates.vue'),
 				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false }
 			},
+			// {
+			// 	path: '/states',
+			// 	name: 'states',
+			// 	component: () => import('./views/GlobalStates.vue'),
+			// 	meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false }
+			// },
 			{
-				path: '/reading-add',
-				name: 'reading-add',
+				path: '/search',
+				name: 'search',
 				component: () => import('./views/ReadingAddPage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
+				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: true }
 			},
 			{
 				path: '/explore',
 				name: 'explore',
 				component: () => import('./views/ExplorePage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
+				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: false }
 			},
 			{
+				// search met google api, werkt aardig
 				path: '/books',
 				name: 'books',
 				component: () => import('./views/BooksPage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
+				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: false }
 			},
 			{
 				path: '/mubooks',
 				name: 'mubooks',
 				component: () => import('./views/MuPage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
+				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: false }
 			},
 			{
 				name: 'savedbooks',
@@ -69,13 +70,13 @@ export const routes = [
 				path: '/bookstore',
 				name: 'bookstore',
 				component: () => import('./views/BookstorePage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false }
 			},
 			{
 				path: '/series',
 				name: 'series',
 				component: () => import('./views/SeriesPage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: true }
+				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false }
 			}
 		]
 	},
@@ -102,7 +103,7 @@ export const routes = [
 				props: true
 			},
 			{
-				path: '/account/dashboard',
+				path: '/dashboard',
 				name: 'dashboard',
 				component: () => import('./views/account/DashboardPage.vue'),
 				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: true }
