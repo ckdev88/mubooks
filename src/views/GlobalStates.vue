@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { useCountStore } from './../stores/CountStore'
-const count = useCountStore()
+// import { useCountStore } from './../stores/CountStore'
+// const count = useCountStore()
 // console.log('count:', count)
 
 import { useAuthStore } from '../stores/AuthStore'
