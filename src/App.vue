@@ -1,10 +1,38 @@
 <script setup>
 import NavWrapper from './components/NavWrapper.vue'
+
+import bookData from '/data/books.json'
+const boeken = bookData
+
 // import GlobalCounter from './components/GlobalCounter.vue'
+
+// hacky bit ... TODO: make less hacky
+import { useAuthStore } from './stores/AuthStore'
+// const localUser = await supabase.auth.getSession()
+// console.log('localuser:', localUser)
+
+// const localUser = await supabase.auth.getSession()
+// console.log('localuserr2:', localUser)
+const authStore = useAuthStore()
+console.log('--==============================--authStore.uid:', authStore.uid)
+// if (localUser.data.session === null) {
+// 	console.log('not logged in, redirect to login in case not in logout page')
+// } else {
+// 	authStore.setStatus(
+// 		true,
+// 		localUser.data.session.user.user_metadata.screenname,
+// 		localUser.data.session.email,
+// 		localUser.data.session.email,
+// 		localUser.data.session.id
+// 	)
+// }
+// console.log('localuser email:', localUser.data.session.user.email)
+// console.log('localuser screenname:', localUser.data.session.user.user_metadata.screenname)
+// /hacky bit
 </script>
 
 <template>
-	<header id="header">
+	<header id="header" v-if="authStore.uid">
 		<NavWrapper />
 	</header>
 	<main id="main">
