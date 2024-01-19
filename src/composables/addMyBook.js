@@ -18,7 +18,7 @@ export default function addMyBook(book) {
 	localStorage.setItem('MyBooks', JSON.stringify(myBooks))
 	muBooksStore.bookList = myBooks
 
-	alertStore.currentAlert = ' Added book'
+	alertStore.currentAlert = 'Added book'
 	setTimeout(() => {
 		alertStore.currentAlert = null
 	}, 3000)
