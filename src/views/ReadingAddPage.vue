@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, onUpdated, watch } from 'vue'
+import { reactive, ref, onUpdated, watch, onBeforeMount } from 'vue'
 
 import bookData from '/data/books.json'
 
@@ -7,13 +7,10 @@ import { useMuBooksStore } from '../stores/MuBooksStore'
 const muBooksStore = useMuBooksStore()
 const addMyBook = muBooksStore.addMyBook
 const removeMyBook = muBooksStore.removeMyBook
+const addBookReading = muBooksStore.addBookReading
+const endBookReading = muBooksStore.endBookReading
 
-console.log('saved biioks...', muBooksStore.getSavedBooks)
-console.log('muBooksStore:', muBooksStore.bookList)
 import { useAlertStore } from '../stores/AlertStore'
-import { storeToRefs } from 'pinia'
-
-const { booksList, loading } = storeToRefs(muBooksStore)
 
 const alertStore = ref(useAlertStore())
 
@@ -39,7 +36,9 @@ const explore = reactive({
 	fields: '&fields=*'
 })
 
+let searchTermToShow = ref('')
 function refreshResults(s = explore.title) {
+	searchTermToShow = s
 	if (s.length < 3) {
 		state.resultsWarning = 'keep typing...'
 		state.isSearched = true
@@ -53,13 +52,17 @@ function refreshResults(s = explore.title) {
 	// search loop exact match
 	for (let i = 0; i < boeken.length; i++) {
 		if (s === boeken[i].title.toLowerCase()) {
+			// this part helps with reactivity
 			boeken[i].saved = muBooksStore.isSaved(boeken[i])
-			console.log(boeken[i].saved)
+			boeken[i].reading = muBooksStore.isReading(boeken[i])
+			boeken[i].finished = muBooksStore.isFinished(boeken[i])
+
 			state.results[count] = boeken[i]
-			state.results[count].titleshort = boeken[i].title.slice(0, 45)
+
 			if (boeken[i].title.length > 45) {
+				state.results[count].titleshort = boeken[i].title.slice(0, 45)
 				state.results[count].titleshort += '...'
-			}
+			} else state.results[count].titleshort = boeken[i].title
 			if (boeken[i].image !== null)
 				state.results[count].cover = 'https://images.isbndb.com/covers' + boeken[i].image
 			count++
@@ -67,13 +70,17 @@ function refreshResults(s = explore.title) {
 	}
 	// search loop less exact match
 	for (let i = 0; i < boeken.length; i++) {
-		if (count > 20) {
+		if (count > 30) {
 			state.resultsWarning = 'too many results'
 			break
 		}
 		if (boeken[i].title.toLowerCase().includes(s) && boeken[i].title.toLowerCase() !== s) {
 			boeken[i].saved = muBooksStore.isSaved(boeken[i])
+			boeken[i].reading = muBooksStore.isReading(boeken[i])
+			boeken[i].finished = muBooksStore.isFinished(boeken[i])
+
 			state.results[count] = boeken[i]
+
 			if (boeken[i].title.length > 45) {
 				state.results[count].titleshort = boeken[i].title.slice(0, 45)
 				state.results[count].titleshort += '...'
@@ -102,15 +109,50 @@ function refreshResults(s = explore.title) {
 // }
 function toggleFavBook(index, book) {
 	// TODO: dit hoort in de store MuBooksStore, als action & getter, reactivity is een issue
+	if (state.results[index].saved === true) {
+		muBooksStore.removeMyBook(book)
+		console.log('removing book')
+	} else {
+		console.log('adding book')
+		muBooksStore.addMyBook(book)
+	}
 	state.results[index].saved = !state.results[index].saved
-	if (state.results[index].saved === true) removeMyBook(book)
-	else addMyBook(book)
+}
+// function addReadingBook(index, book) {
+// 	// addMyBook(book, true)
+// 	// setTimeout(() => {
+//
+// 	addBookReading(book, true)
+//
+// 	// }, 2000)
+// }
+// function endReadingBook(index, book) {
+// 	if(state.results[index].reading === true){
+// 	console.log(state.results[index].reading)
+// 	endBookReading(book)
+// 	}
+// }
+function toggleReadingBook(index, book) {
+	if (state.results[index].saved === false) toggleFavBook(index, book)
+
+	if (state.results[index].reading === false) {
+		console.log('reading true, finished false')
+		muBooksStore.addBookReading(book)
+	} else {
+		console.log('finished true, reading false')
+		muBooksStore.endBookReading(book)
+	}
+	state.results[index].reading = !state.results[index].reading
+	state.results[index].finished = !state.results[index].finished
 }
 </script>
 
 <template>
-	loading: {{ loading }}
-	<h1>Find book to add</h1>
+	<h1>Search</h1>
+	<p>
+		Find the book you want to add by title. <br />At this moment only books released after 2019
+		are available.
+	</p>
 	<!-- <input type="text" v-model="explore.author" placeholder="Author..." @keyup.enter="fetchBook" /> -->
 	<!-- <input type="text" v-model="explore.title" placeholder="Title..." @keyup.enter="fetchBook" /> -->
 	<form @submit.prevent="refreshResults(explore.title)">
@@ -118,17 +160,24 @@ function toggleFavBook(index, book) {
 		<button>Search</button>
 	</form>
 
-	{{ alertStore.currentAlert }}
+	<div id="alert" v-if="alertStore.currentAlert">
+		<div>{{ alertStore.currentAlert }}</div>
+	</div>
 	<div v-if="state.isSearched">
-		<div v-if="state.resultsWarning">
+		<p v-if="state.resultsWarning">
 			{{ state.resultsWarning }}
-		</div>
+		</p>
 		<div v-else>
 			<h2 class="resultsfound">
-				{{ state.resultCount }} books found for "{{ explore.title }}"
+				{{ state.resultCount }} books found for <i>"{{ searchTermToShow }}"</i>
 			</h2>
 
-			<article v-for="(book, index) in state.results" :key="index" class="book-summary">
+			<article
+				v-for="(book, index) in state.results"
+				:key="index"
+				class="book-summary"
+				:class="book.saved ? 'saved' : ''"
+			>
 				<header>
 					<aside class="cover">
 						<img v-if="book.cover" :src="book.cover" alt="" />
@@ -164,22 +213,48 @@ function toggleFavBook(index, book) {
 				</main>
 				<footer>
 					<div class="marks">
-						<a class="mark" @click="toggleFavBook(index, book)">
-							<span class="icon icon-reading"> </span>
-							{{ book.saved === true ? 'Remove from my books' : 'Save in my books' }}
-						</a>
+						<div class="mark">
+							<a v-if="book.saved === false" @click="toggleFavBook(index, book)"
+								><span class="icon icon-add"></span>Save in my books
+							</a>
+							<a v-else @click="toggleFavBook(index, book)"
+								><span class="icon icon-remove"></span>Remove from my books</a
+							>
+						</div>
+						<div class="mark">
+							<a
+								@click="toggleReadingBook(index, book)"
+								v-if="book.reading === false"
+							>
+								<span class="icon icon-reading"></span>
+								I am reading this book
+							</a>
+							<a @click="toggleReadingBook(index, book)" v-else>
+								<span class="icon icon-read"></span>I am finished reading this book
+							</a>
+						</div>
+						<!-- TODO: wishlist -->
+						<!-- 
 						<div class="mark">
 							<span class="icon icon-wishlist"></span>Add to wishlist
 						</div>
+-->
 						<!-- <div v-if="!favoriteBooks.includes(book.title)"> -->
-						<div class="mark">
-							<a class="favorites" @click="addFavoriteBook(book.title)">
+
+						<!-- TODO: favorites -->
+						<!-- 
+					<div class="mark">
+<a class="favorites" @click="addFavoriteBook(book.title)">
 								<span class="icon icon-favorites"></span>Add to favorites
 							</a>
-						</div>
+							</div>
+-->
+						<!-- TODO: hide -->
+						<!-- 
 						<div class="mark">
 							<span class="icon icon-hide"></span> Don't want to see this again
 						</div>
+-->
 
 						<!--						</div>
 						<div v-else>
@@ -197,7 +272,6 @@ function toggleFavBook(index, book) {
 						<div class="stars">★★★☆☆</div>
 					</div> -->
 
-					<br />
 					<hr />
 				</footer>
 			</article>

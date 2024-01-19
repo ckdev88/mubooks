@@ -30,7 +30,7 @@ import QuoteCard from '../../components/QuoteCard.vue'
 		Let's get started!
 	</p>
 	<QuoteCard />
-	<Reading @click="$router.push({ name: 'reading-add' })" />
+	<Reading @click="$router.push({ name: 'search' })" />
 	<Saved @click="$router.push({ name: 'series' })" />
 	<Favs @click="$router.push({ name: 'series' })" />
 	<Wishlist @click="$router.push({ name: 'mubooks' })" />
@@ -38,13 +38,4 @@ import QuoteCard from '../../components/QuoteCard.vue'
 	<Stats @click="$router.push({ name: 'series' })" />
 	<Explore @click="$router.push({ name: 'explore' })" />
 </template>
-<style scoped>
-h1 {
-	margin-bottom: 0;
-	font-weight: normal;
-}
-p {
-	margin-top: 0;
-	display: inline;
-}
-</style>
+<style scoped></style>

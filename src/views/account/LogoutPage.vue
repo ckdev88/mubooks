@@ -18,7 +18,8 @@ async function logoutAccount() {
 		return false
 	} else {
 		console.log('loggingout "logoutpage.vue"')
-		authStore.setLoginStatus(false)
+		authStore.setLoginStatus(false) // TODO: vervangen door doLogout, cleanup
+		authStore.doLogout()
 		return true
 	}
 }

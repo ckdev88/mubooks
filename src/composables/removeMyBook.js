@@ -20,7 +20,12 @@ export default function removeMyBook(book) {
 			if (myBooks[i].title !== book.title) {
 				newArr.push({
 					title: myBooks[i].title,
-					date_published: myBooks[i].date_published
+					date_published: myBooks[i].date_published,
+					authors: myBooks[i].authors,
+					pages: myBooks[i].pages,
+					image: myBooks[i].image,
+					reading: myBooks[i].reading,
+					read: 'function removeMyBook'
 				})
 			}
 		}

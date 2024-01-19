@@ -37,5 +37,4 @@ onMounted(() => {
 			<MyAccountEditCard />
 		</div>
 	</div>
-	<RouterLink to="logout">Log out</RouterLink>
 </template>
