@@ -8,7 +8,7 @@
 	font-weight: normal;
 	display: flex;
 	justify-content: space-between;
-	letter-spacing: -0.03rem;
+	letter-spacing: -0.04em;
 	padding-bottom: 0.5rem;
 }
 .adder a {
@@ -24,6 +24,7 @@
 	display: flex;
 	justify-content: left;
 	align-items: center;
+	line-height: 1.5em;
 }
 .adder:hover main {
 	background-color: white;

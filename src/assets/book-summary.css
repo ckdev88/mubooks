@@ -3,6 +3,28 @@
 	padding: 0 0 1rem;
 	margin: 0;
 }
+.book-summary hr {
+	margin-top: 1rem;
+}
+.search .book-summary.saved {
+	padding: 0.5rem;
+	background-color: hsl(325, 55%, 93%);
+	margin-bottom: 1rem;
+	border-radius: 0.5rem;
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+}
+.book-summary.reading {
+	padding: 0.5rem;
+	background-color: hsl(325, 55%, 93%);
+	margin-bottom: 1rem;
+	border-radius: 0.5rem;
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+}
+.search .book-summary.saved hr {
+	display: none;
+}
 .book-summary header {
 	display: flex;
 	justify-content: left;
@@ -62,6 +84,9 @@
 	text-align: center;
 }
 /* TODO: icons should be svg, preferrably home-made, else unicode */
+.book-summary .icon-add {
+	background-image: url('/img/icon-add.svg');
+}
 .book-summary .icon-reading {
 	background-image: url('/img/icon-reading.png');
 }

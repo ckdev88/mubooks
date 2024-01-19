@@ -1,8 +1,10 @@
 .quote {
 	font-style: italic;
 	text-align: center;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	margin: 3rem auto;
+	width: 100%;
+	box-sizing: border-box;
 }
 .quote main::before {
 	display: inline-block;
