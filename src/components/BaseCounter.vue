@@ -1,6 +1,7 @@
 <script>
 import { useCount } from './../composables/useCountStore'
-// import { useCountStore } from '../stores/CountStore'
+// import { useCountStore } from '../stores/CountStore' // TODO: got lost, how, where? any use for
+// this file?
 
 export default {
 	setup() {

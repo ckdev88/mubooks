@@ -5,7 +5,7 @@ import { useAuthStore } from '../stores/AuthStore'
 const authStore = useAuthStore()
 
 function goSearch() {
-	router.push({ name: 'explore' })
+	router.push({ name: 'search' })
 	nav0Expanded.value = false
 	nav1Expanded.value = false
 }

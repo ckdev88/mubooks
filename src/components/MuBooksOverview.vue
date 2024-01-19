@@ -3,6 +3,9 @@ import MuBooksOverviewStats from '/src/components/MuBooksOverviewStats.vue'
 import MuBooksOverviewAddBook from '/src/components/MuBooksOverviewAddBook.vue'
 import MuBooksOverviewList from '/src/components/MuBooksOverviewList.vue'
 
+import { useMuBooksStore } from '../stores/MuBooksStore'
+const muBooksStore = useMuBooksStore()
+
 export default {
 	name: 'BooksOverview',
 	components: { MuBooksOverviewStats, MuBooksOverviewAddBook, MuBooksOverviewList },
