@@ -70,13 +70,13 @@ export const routes = [
 				path: '/bookstore',
 				name: 'bookstore',
 				component: () => import('./views/BookstorePage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false }
+				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: false }
 			},
 			{
 				path: '/series',
 				name: 'series',
 				component: () => import('./views/SeriesPage.vue'),
-				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false }
+				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: false }
 			}
 		]
 	},
@@ -101,12 +101,6 @@ export const routes = [
 				component: () => import('./views/account/CheckMailPage.vue'),
 				meta: { requiresAuth: false, requiresNoAuth: false, includeNav: false },
 				props: true
-			},
-			{
-				path: '/dashboard',
-				name: 'dashboard',
-				component: () => import('./views/account/DashboardPage.vue'),
-				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: true }
 			},
 			{
 				path: '/account/profile',

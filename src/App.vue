@@ -1,11 +1,6 @@
 <script setup>
 import NavWrapper from './components/NavWrapper.vue'
 
-import bookData from '/data/books.json'
-const boeken = bookData
-
-// import GlobalCounter from './components/GlobalCounter.vue'
-
 // hacky bit ... TODO: make less hacky
 import { useAuthStore } from './stores/AuthStore'
 // const localUser = await supabase.auth.getSession()
@@ -14,7 +9,8 @@ import { useAuthStore } from './stores/AuthStore'
 // const localUser = await supabase.auth.getSession()
 // console.log('localuserr2:', localUser)
 const authStore = useAuthStore()
-console.log('--==============================--authStore.uid:', authStore.uid)
+if (!authStore.uid) $router.push({ name: 'login' })
+
 // if (localUser.data.session === null) {
 // 	console.log('not logged in, redirect to login in case not in logout page')
 // } else {

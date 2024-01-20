@@ -3,10 +3,9 @@ import { supabase } from '../clients/supabase'
 // TODO: apply supabase to global states
 
 // TODO: apply supabase to global states
-const localSession = async () => {
-	return await supabase.auth.getSession()
-}
-console.log('localsession:', localSession)
+const localSession = await supabase.auth.getSession()
+
+// console.log('localsession:', localSession)
 
 /* 1337 deze erin
 const localSession = await supabase.auth.getSession()
@@ -36,17 +35,8 @@ if (localSession.data.session === null) {
 }
 */
 
-
-
-
-
-
-
-
 export const useAuthStore = defineStore('AuthStore', {
-	
-
-/* 1337 deze erin
+	/* 1337 deze erin
 	state: () => ({
 		status: st,
 		screenname: sc,
@@ -63,10 +53,7 @@ export const useAuthStore = defineStore('AuthStore', {
 	}),
 */
 
-
-
-
-state: () => ({
+	state: () => ({
 		status: false,
 		screenname: '',
 		username: '',
