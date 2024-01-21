@@ -10,7 +10,7 @@ const removeMyBook = muBooksStore.removeMyBook
 const addBookReading = muBooksStore.addBookReading
 const endBookReading = muBooksStore.endBookReading
 
-import { useAlertStore } from '../stores/AlertStore'
+import { useAlertStore } from '../../stores/AlertStore'
 
 const alertStore = ref(useAlertStore())
 
