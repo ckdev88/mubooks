@@ -61,7 +61,7 @@ export const useAuthStore = defineStore('AuthStore', {
 		email: '',
 		uid: '',
 		link: 'login'
-	}), // 1337 deze state eruit
+	}), // 1337 TODO: deze state eruit
 	actions: {
 		setUsername(s = '') {
 			this.username = s
