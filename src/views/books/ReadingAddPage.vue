@@ -3,7 +3,7 @@ import { reactive, ref, onUpdated, watch, onBeforeMount } from 'vue'
 
 import bookData from '/data/books.json'
 
-import { useMuBooksStore } from '../stores/MuBooksStore'
+import { useMuBooksStore } from '../../stores/MuBooksStore'
 const muBooksStore = useMuBooksStore()
 const addMyBook = muBooksStore.addMyBook
 const removeMyBook = muBooksStore.removeMyBook
