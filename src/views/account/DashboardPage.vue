@@ -3,8 +3,7 @@ import { useAuthStore } from '../../stores/AuthStore'
 const authStore = useAuthStore()
 import { useRouter } from 'vue-router'
 const router = useRouter()
-console.log('authStore.status:', authStore.status)
-console.log('authStore.status:', authStore.status)
+console.log('authStore.status (dashboardPage):', authStore.status)
 if (authStore.status === false) {
 	// TODO: although this check is fine, it shouldnt be needed and caught in main.js, in de
 	// beforeEach loop

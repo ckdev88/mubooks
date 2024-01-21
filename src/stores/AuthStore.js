@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
-import { supabase } from '../clients/supabase'
+// import { supabase } from '../clients/supabase'
 // TODO: apply supabase to global states
 
 // TODO: apply supabase to global states
-const localSession = await supabase.auth.getSession()
-
+// const localSession = async () => {
+// 	await supabase.auth.getSession().then((res) => console.log('res', res))
+// }
 // console.log('localsession:', localSession)
 
 /* 1337 deze erin

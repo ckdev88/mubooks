@@ -3,6 +3,7 @@ import { ref, onMounted, onUpdated, watch, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/AuthStore'
 const authStore = useAuthStore()
+console.log('authStore in navwrapper:', authStore)
 
 function goSearch() {
 	router.push({ name: 'search' })

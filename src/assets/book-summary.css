@@ -6,6 +6,11 @@
 .book-summary hr {
 	margin-top: 1rem;
 }
+.book-summary {
+	transition:
+		padding 0.15s linear,
+		background-color 0.15s linear;
+}
 .search .book-summary.saved {
 	padding: 0.5rem;
 	background-color: hsl(325, 55%, 93%);
@@ -73,6 +78,7 @@
 }
 .book-summary .icon {
 	display: block;
+	clear: both;
 	float: left;
 	line-height: 1.5em;
 	height: 1em;

@@ -9,7 +9,6 @@
 	); /* iets lichter dan basis: hsl(42, 31%, 94%) / #f4f1ea, rgb(244, 242, 235) */
 }
 .card header {
-	font-family: Girassol, serif;
 	font-weight: bold;
 	font-size: 1.4rem;
 	margin-bottom: 1rem;

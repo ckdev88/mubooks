@@ -4,10 +4,10 @@ import { createApp, ref } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { createPinia } from 'pinia'
 import { routes } from './router'
-
 import { supabase } from '/src/clients/supabase'
 
 import App from './App.vue'
+import { useAuthStore } from './stores/AuthStore'
 // import { useAuthStore } from './stores/AuthStore' // 1337 deze erin
 
 const app = createApp(App)
@@ -42,10 +42,8 @@ router.beforeEach(async (to, from) => {
 	document.body.classList.add(to.name)
 	document.body.classList.remove(from.name)
 
-
-
-// 1337 deze erin
-/*
+	// 1337 deze erin
+	/*
 	// hacky bit ... TODO: make less hacky
 	const authStore = useAuthStore()
 	const localUser = await supabase.auth.getSession()
@@ -67,17 +65,35 @@ router.beforeEach(async (to, from) => {
 	// /hacky bit
 
 */
-// /1337 deze erin
-
-
-
-
-
+	// /1337 deze erin
+	console.log('to:', to)
+	console.log('to.meta', to.meta)
 	if (to.meta.requiresAuth || to.meta.requiresNoAuth) {
+		// if (to.meta.requiresAuth === true && isAuthenticated === false) {
+		// 	console.log('go login already!')
+		// 	return { name: 'login' }
+		// }
 		console.log('to.meta.requiresAuth:', to.meta.requiresAuth)
+		console.log(
+			'isAuthenticated',
+			isAuthenticated,
+			'isAuthenticated.value',
+			isAuthenticated.value
+		)
 		const localUser = await supabase.auth.getSession() // 1337 deze weg
+		console.log('localUser (main.js):', localUser)
 		if (localUser.data.session === null) isAuthenticated = false
 		else isAuthenticated = true
+
+		// 1337 dit moet veel netter
+		console.log('isAuthenticated vauit bla:', isAuthenticated)
+		useAuthStore().status = isAuthenticated
+		useAuthStore().screenname = localUser.data.session.user.user_metadata.screenname
+		useAuthStore().email = localUser.data.session.user.email
+		useAuthStore().username = localUser.data.session.user.email
+		useAuthStore().uid = localUser.data.session.user.uid
+		// 1337 /dit moet veel netter
+
 		if (isAuthenticated.value === false && to.meta.requiresAuth) {
 			// not authenticated, redirect to login'
 			return { name: 'login' }
@@ -92,6 +108,7 @@ const pinia = createPinia()
 
 app.use(router)
 app.use(pinia)
+
 app.mount('#app')
 
 // TODO: apply dark mode option when light mode is all pretty and stuff
