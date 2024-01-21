@@ -106,7 +106,7 @@ input[type='submit'] {
 	text-align: center;
 	font-size: 1rem;
 }
-main button:hover,
+main form button:hover,
 input[type='submit']:hover {
 	background-color: hsl(325, 60%, 41%);
 }

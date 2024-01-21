@@ -7,7 +7,7 @@ import { routes } from './router'
 import { supabase } from '/src/clients/supabase'
 
 import App from './App.vue'
-import { useAuthStore } from './stores/AuthStore'
+// import { useAuthStore } from './stores/AuthStore'
 // import { useAuthStore } from './stores/AuthStore' // 1337 deze erin
 
 const app = createApp(App)
@@ -87,11 +87,12 @@ router.beforeEach(async (to, from) => {
 
 		// 1337 dit moet veel netter
 		console.log('isAuthenticated vauit bla:', isAuthenticated)
-		useAuthStore().status = isAuthenticated
-		useAuthStore().screenname = localUser.data.session.user.user_metadata.screenname
-		useAuthStore().email = localUser.data.session.user.email
-		useAuthStore().username = localUser.data.session.user.email
-		useAuthStore().uid = localUser.data.session.user.uid
+		// if(useAuthStore
+		// useAuthStore().status = isAuthenticated
+		// useAuthStore().screenname = localUser.data.session.user.user_metadata.screenname
+		// useAuthStore().email = localUser.data.session.user.email
+		// useAuthStore().username = localUser.data.session.user.email
+		// useAuthStore().uid = localUser.data.session.user.uid
 		// 1337 /dit moet veel netter
 
 		if (isAuthenticated.value === false && to.meta.requiresAuth) {

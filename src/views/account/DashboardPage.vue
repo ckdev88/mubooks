@@ -29,7 +29,7 @@ import QuoteCard from '../../components/QuoteCard.vue'
 		Let's get started!
 	</p>
 	<QuoteCard />
-	<Reading @click="$router.push({ name: 'savedbooks' })" />
+	<Reading />
 	<Saved @click="$router.push({ name: 'savedbooks' })" />
 	<Favs @click="$router.push({ name: 'series' })" />
 	<Wishlist @click="$router.push({ name: 'mubooks' })" />

@@ -9,11 +9,20 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 		getBookList() {
 			return this.bookList
 		},
+
 		getSmallBooks() {
 			return this.bookList.filter((book) => book.pages < 150)
 		},
 		getSavedBooks() {
 			return this.bookList
+		},
+		getReadingBook() {
+			console.log(
+				'asdasd',
+				this.bookList.filter((book) => book.reading === true)
+			)
+
+			return this.bookList.filter((book) => book.reading === true)
 		}
 	},
 	actions: {
