@@ -7,8 +7,6 @@ import ReadingItem from '../ReadingItem.vue'
 // if no, router.push to search
 
 // import { useMuBooksStore } from '../../stores/MuBooksStore'
-import { ref } from 'vue'
-const boeken = ref(JSON.parse(localStorage.getItem('MyBooks')))
 // const muBooksStore = useMuBooksStore()
 // const readingBook = muBooksStore.getReadingBook
 // console.log('readingBook:', readingBook)

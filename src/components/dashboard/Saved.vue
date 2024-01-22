@@ -1,12 +1,9 @@
-<script setup></script>
+<script setup>
+import SavedItems from '../SavedItems.vue'
+</script>
 <template>
-	<article class="adder">
+	<article class="adder" @click="$router.push({ name: 'savedbooks' })">
 		<header>Mu Books<span>›</span></header>
-		<main>
-			<aside>
-				<button><img src="/img/save-books-icon.png" /></button>
-			</aside>
-			Let's start saving books.
-		</main>
+		<SavedItems />
 	</article>
 </template>
