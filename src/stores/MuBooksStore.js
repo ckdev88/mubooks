@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { useAlertStore } from '../stores/AlertStore'
-const alertStore = useAlertStore()
 
 export const useMuBooksStore = defineStore('MuBooksStore', {
 	state: () => ({ bookList: JSON.parse(localStorage.getItem('MyBooks')), loading: false }),
@@ -46,9 +45,9 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 			// ... and into this state // is state here useful if in the template itself it's also
 			// defined? reference: SavedBooksPage.vue
 			this.bookList = myBooks
-			alertStore.currentAlert = 'marked book as reading'
+			useAlertStore().currentAlert = 'marked book as reading'
 			setTimeout(() => {
-				alertStore.currentAlert = null
+				useAlertStore().currentAlert = null
 			}, 3000)
 		},
 		endBookReading(index) {
@@ -90,9 +89,9 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 			localStorage.setItem('MyBooks', JSON.stringify(newArr))
 			// ... and into this state
 			this.bookList = myBooks
-			alertStore.currentAlert = 'Finished reading'
+			useAlertStore().currentAlert = 'Finished reading'
 			setTimeout(() => {
-				alertStore.currentAlert = null
+				useAlertStore().currentAlert = null
 			}, 3000)
 			console.log('new MyBooks:', JSON.parse(localStorage.getItem('MyBooks')))
 		},
@@ -116,9 +115,9 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 			// ... and into this state
 			this.bookList = myBooks
 
-			alertStore.currentAlert = 'Added book'
+			useAlertStore().currentAlert = 'Added book'
 			setTimeout(() => {
-				alertStore.currentAlert = null
+				useAlertStore().currentAlert = null
 			}, 3000)
 
 			console.log('this.bookList (addMyBook):', this.bookList)
@@ -187,9 +186,9 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 
 				// getBookList()
 
-				alertStore.currentAlert = 'Removed book'
+				useAlertStore().currentAlert = 'Removed book'
 				setTimeout(() => {
-					alertStore.currentAlert = null
+					useAlertStore().currentAlert = null
 				}, 3000)
 			}
 		}
