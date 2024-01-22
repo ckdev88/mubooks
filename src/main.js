@@ -2,7 +2,7 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { createPinia } from 'pinia'
+import { createPinia, defineStore } from 'pinia'
 import { routes } from './router'
 import { supabase } from '/src/clients/supabase'
 import { useStatusStore } from './stores/statusStore'
@@ -34,6 +34,15 @@ router.beforeEach(async (to, from) => {
 		)
 	}
 })
+
+// import { defineStore } from 'pinia'
+// router.beforeEach((to, from) => {
+//   // ✅ use the store within a navigation guard
+//   const auth = useAuthStore()
+//   if (to.meta.requiresAuth && !auth.isAuthenticated) {
+//     return '/login'
+//   }
+// })
 
 const pinia = createPinia()
 

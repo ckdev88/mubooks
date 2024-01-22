@@ -93,7 +93,7 @@ export const useAuthStore = defineStore('AuthStore', {
 			this.screenname = screenname
 			this.username = email
 			this.email = email
-			uid = uid
+			this.uid = uid
 		},
 		doLogout() {
 			this.status = false

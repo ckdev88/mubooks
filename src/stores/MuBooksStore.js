@@ -52,24 +52,16 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 		},
 		endBookReading(index) {
 			// TODO: later slim mergen met addBookReading()
-			console.log('start action endBookReading')
-
-			console.log('endReadingBook...')
 			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
-			console.log('myBooks:', myBooks)
 			let newArr = []
 
 			var readingVal
 			var finishedVal
 			for (let i = 0; i < myBooks.length; i++) {
-				console.log(myBooks[i].title)
-				console.log(myBooks[index].title)
 				if (i === index) {
-					console.log('oi?')
 					readingVal = false
 					finishedVal = true
 				} else {
-					console.log('oal')
 					readingVal = myBooks[i].reading
 					finishedVal = myBooks[i].finished
 				}
@@ -84,7 +76,6 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 				})
 			}
 
-			console.log('newArr in endBookReading:', newArr)
 			// stringify array intoarray storage
 			localStorage.setItem('MyBooks', JSON.stringify(newArr))
 			// ... and into this state
@@ -93,10 +84,8 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 			setTimeout(() => {
 				useAlertStore().currentAlert = null
 			}, 3000)
-			console.log('new MyBooks:', JSON.parse(localStorage.getItem('MyBooks')))
 		},
 		addMyBook(book, reading = false) {
-			console.log('add book')
 			// get current localstorage and convert to arr
 			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
 			if (!myBooks) myBooks = []
@@ -137,17 +126,15 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 			return false
 		},
 		isReading(index) {
+			// TODO: wordt nog gelezen maar doet dus niets, opruimen
 			console.log('-------------')
-			console.log(index)
-			// console.log(this.bookList[index].reading)
-			console.log(this.bookList)
-			console.log('rrrrrrrrrrrrr')
-
 			// if (this.bookList[index].reading === true) return true
 			// return false
 		},
 		isFinished(index) {
-			console.log('this.booklist:', this.booklist)
+			// TODO: wordt nog gelezen maar doet dus niets, opruimen
+			console.log('------- isfinished check, nodig? ----')
+			//this.booklist:', this.booklist)
 			// const savedArr = this.bookList
 			// if (savedArr) {
 			// 	for (let i = 0; i < savedArr.length; i++) {
@@ -156,16 +143,6 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 			// }
 			return false
 		},
-		// 	toggleReadingBook(index){
-		// if (state.results[index].saved === false) toggleFavBook(index, book)
-		//
-		// for (let i = 0; i < state.results.length; i++) {
-		// 	state.results[i].reading = false
-		// }
-		// state.results[index].reading = !state.results[index].reading
-		// if (state.results[index].reading === true) state.results[index].finished = false
-		//
-		// 	},
 
 		removeMyBook(index) {
 			// console.log('remove book:', book)
@@ -182,7 +159,6 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 				localStorage.setItem('MyBooks', JSON.stringify(myBooks))
 				// ... and into store
 				this.bookList = myBooks
-				console.log('removed book', this.bookList)
 
 				// getBookList()
 

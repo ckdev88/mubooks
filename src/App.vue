@@ -37,7 +37,9 @@ let loggedIn
 if (localStorage.getItem('user') === null) loggedIn = false
 else {
 	if (JSON.parse(localStorage.getItem('user')).loggedin !== null) {
-		loggedIn = JSON.parse(localStorage.getItem('user')).loggedin
+		let user = localStorage.getItem('user')
+		authStore.setStatus(true, user.screenname, user.email, user.uid)
+		loggedIn = user.loggedin
 	}
 }
 </script>

@@ -15,8 +15,7 @@ const state = reactive({
 	isSearched: false,
 	resultsWarning: null
 })
-console.log(state.results)
-console.log('****')
+// console.log(state.results)
 
 let count = 0
 state.resultsWarning = null
