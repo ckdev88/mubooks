@@ -33,7 +33,7 @@ export const routes = [
 			{
 				path: '/search',
 				name: 'search',
-				component: () => import('./views/books/ReadingAddPage.vue'),
+				component: () => import('./views/books/SearchPage.vue'),
 				meta: { requiresAuth: true, requiresNoAuth: false, includeNav: true }
 			},
 			{

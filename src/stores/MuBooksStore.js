@@ -1,15 +1,13 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 import { useAlertStore } from '../stores/AlertStore'
 const alertStore = useAlertStore()
 
 export const useMuBooksStore = defineStore('MuBooksStore', {
-	state: () => ({ bookList: ref(JSON.parse(localStorage.getItem('MyBooks'))), loading: false }),
+	state: () => ({ bookList: JSON.parse(localStorage.getItem('MyBooks')), loading: false }),
 	getters: {
 		getBookList() {
 			return this.bookList
 		},
-
 		getSmallBooks() {
 			return this.bookList.filter((book) => book.pages < 150)
 		},
@@ -17,11 +15,7 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 			return this.bookList
 		},
 		getReadingBook() {
-			console.log(
-				'asdasd',
-				this.bookList.filter((book) => book.reading === true)
-			)
-
+			// TODO: use (i.e. in ReadingItem.vue) or remove
 			return this.bookList.filter((book) => book.reading === true)
 		}
 	},
@@ -31,45 +25,33 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 			if (this.booklist[index].saved === true) this.addMyBook(book)
 		},
 
-		addBookReading(book) {
+		addBookReading(index) {
 			console.log('start action addBookReading')
 
 			// only one book at a time can have reading: TRUE, others get FALSE
 			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
 			// console.log('myBooks[0]:', myBooks[0])
-			let newArr = []
 
-			var finishedVal
-			var readingVal
-			for (let i = 0; i < myBooks.length; i++) {
-				if (myBooks[i].title == book.title) {
-					readingVal = true
-					finishedVal = false
-				} else {
-					readingVal = false
-					finishedVal = true
+			// turn on reading
+			if (myBooks[index].reading === false) {
+				for (let i = 0; i < myBooks.length; i++) {
+					myBooks[i].reading = false
 				}
-				newArr.push({
-					title: myBooks[i].title,
-					date_published: myBooks[i].date_published,
-					authors: myBooks[i].authors,
-					pages: myBooks[i].pages,
-					image: myBooks[i].image,
-					reading: readingVal,
-					finished: finishedVal
-				})
+				myBooks[index].reading = !myBooks[index].reading
+				if (myBooks[index].reading === true) myBooks[index].finished = false
 			}
 
 			// stringify array intoarray storage
-			localStorage.setItem('MyBooks', JSON.stringify(newArr))
-			// ... and into this state
+			localStorage.setItem('MyBooks', JSON.stringify(myBooks))
+			// ... and into this state // is state here useful if in the template itself it's also
+			// defined? reference: SavedBooksPage.vue
 			this.bookList = myBooks
-			alertStore.currentAlert = 'Added book to reading'
+			alertStore.currentAlert = 'marked book as reading'
 			setTimeout(() => {
 				alertStore.currentAlert = null
 			}, 3000)
 		},
-		endBookReading(book) {
+		endBookReading(index) {
 			// TODO: later slim mergen met addBookReading()
 			console.log('start action endBookReading')
 
@@ -82,8 +64,8 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 			var finishedVal
 			for (let i = 0; i < myBooks.length; i++) {
 				console.log(myBooks[i].title)
-				console.log(book.title)
-				if (myBooks[i].title == book.title) {
+				console.log(myBooks[index].title)
+				if (i === index) {
 					console.log('oi?')
 					readingVal = false
 					finishedVal = true
@@ -155,55 +137,52 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 			}
 			return false
 		},
-		isReading(book) {
-			console.log('check is reading')
-			const savedArr = this.bookList
-			if (savedArr) {
-				for (let i = 0; i < savedArr.length; i++) {
-					if (savedArr[i].reading === book.reading) return true
-				}
-			}
-			return false
-		},
-		isFinished(book) {
-			const savedArr = this.bookList
-			if (savedArr) {
-				for (let i = 0; i < savedArr.length; i++) {
-					if (savedArr[i].finished === book.finished) return true
-				}
-			}
-			return false
-		},
+		isReading(index) {
+			console.log('-------------')
+			console.log(index)
+			// console.log(this.bookList[index].reading)
+			console.log(this.bookList)
+			console.log('rrrrrrrrrrrrr')
 
-		removeMyBook(book) {
+			// if (this.bookList[index].reading === true) return true
+			// return false
+		},
+		isFinished(index) {
+			console.log('this.booklist:', this.booklist)
+			// const savedArr = this.bookList
+			// if (savedArr) {
+			// 	for (let i = 0; i < savedArr.length; i++) {
+			// 		if (savedArr[i].finished === this.bookList[index].finished) return true
+			// 	}
+			// }
+			return false
+		},
+		// 	toggleReadingBook(index){
+		// if (state.results[index].saved === false) toggleFavBook(index, book)
+		//
+		// for (let i = 0; i < state.results.length; i++) {
+		// 	state.results[i].reading = false
+		// }
+		// state.results[index].reading = !state.results[index].reading
+		// if (state.results[index].reading === true) state.results[index].finished = false
+		//
+		// 	},
+
+		removeMyBook(index) {
 			// console.log('remove book:', book)
 
 			// get current localstorage and convert to arr
 			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
 			if (!myBooks) console.log('there is nothing to remove')
 			else {
-				// find identifyer (by title at the moment) :TODO: make it ID based on something like ISBN,
+				// find identifyer (by index at the moment) :TODO: make it ID based on something like ISBN,
 				// ISBN13, ISBN10, OLID, AMZONID or whatever, dno yet
 
-				// pop the found object out of there / rebuild array without the "removed" one
-				let newArr = []
-				for (let i = 0; i < myBooks.length; i++) {
-					if (myBooks[i].title !== book.title) {
-						newArr.push({
-							title: myBooks[i].title,
-							date_published: myBooks[i].date_published,
-							authors: myBooks[i].authors,
-							image: myBooks[i].image,
-							pages: myBooks[i].pages,
-							reading: myBooks[i].reading,
-							finished: myBooks[i].finished
-						})
-					}
-				}
-				// stringify array into localstorage
-				localStorage.setItem('MyBooks', JSON.stringify(newArr))
+				myBooks.splice(index, 1)
+
+				localStorage.setItem('MyBooks', JSON.stringify(myBooks))
 				// ... and into store
-				this.bookList = newArr
+				this.bookList = myBooks
 				console.log('removed book', this.bookList)
 
 				// getBookList()

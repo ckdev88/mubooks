@@ -220,18 +220,7 @@ function toggleReadingBook(index, book) {
 								><span class="icon icon-remove"></span>Remove from my books</a
 							>
 						</div>
-						<div class="mark">
-							<a
-								@click="toggleReadingBook(index, book)"
-								v-if="book.reading === false"
-							>
-								<span class="icon icon-reading"></span>
-								I am reading this book
-							</a>
-							<a @click="toggleReadingBook(index, book)" v-else>
-								<span class="icon icon-read"></span>I am finished reading this book
-							</a>
-						</div>
+
 						<!-- TODO: wishlist -->
 						<!-- 
 						<div class="mark">
@@ -286,55 +275,3 @@ h2.resultsfound {
 	margin: 1.5em 0;
 }
 </style>
-
-<!---->
-<!-- notes: -->
-<!---->
-<!-- /* -->
-<!-- 			notes for searching: -->
-<!-- 			- return only the newest version -->
-<!-- 			- use only 1 language for now: eng/en, exclude all others -->
-<!-- 			- only return if it has a book cover -->
-<!-- 			- have an option to only search for ebooks. if exists, have 2 possible responses: ebook -->
-<!-- 			  & pshysical book -->
-<!-- 			- abilities to search for tropes, genres, triggers, subjects etc -->
-<!-- 			- response per book: title, writer, cover, links, synopsys, link to forum or something? -->
-<!-- 			- writer should be correct, for detection it might be important to do a seperate search -->
-<!-- 			  to link the correct writer to the book (relevance, most editions of the book by writer -->
-<!-- 			  X, etc. -->
-<!---->
-<!-- TODO: my reading journal ideas, per year: -->
-<!-- 	TODO: beginning quote, inleiding.. -->
-<!-- 	TODO: book of the year (tournament playoff layout, maybe divide in months, so 12 in total) -->
-<!-- 	TODO: turven how much books... goals on the side (i.e. 50 books per year) -->
-<!-- 	TODO: series tracker -->
-<!-- 	TODO: reading formats (meh) -->
-<!-- 	TODO: anticipated releases -->
-<!---->
-<!-- https://www.tiktok.com/@sarahsbookss/video/7318622997210746113 -->
-<!---->
-<!---->
-<!---->
-<!--       return this.booklist.filter((book) => book.genres.indexOf('dark romance') > -1) -->
-<!---->
-<!---->
-<!-- 			*/ -->
-<!-- // // fetch('http://openlibrary.org/api/get?key=/b/OL1001932M') -->
-<!---->
-
-<!-- Key: {{ book.key }} <br /> -->
-<!-- Ebook access: {{ book.ebook_access }}<br /> -->
-<!-- Languages: -->
-<!-- <span v-for="(lang, index) in book.language" :key="index"> -->
-<!-- 	{{ lang }}{{ book.language.length - 1 > index ? ', ' : '' }} -->
-<!-- </span> -->
-
-<!-- 
-
-test books: 
-K. M. Moronova - the fabric of our souls
-Penelope Douglas - Credence
-
-
-
--->

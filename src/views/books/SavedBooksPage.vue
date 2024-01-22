@@ -1,35 +1,20 @@
-<!-- TODO: BooksOverview moet het gaan worden, later verwerken -->
-<!-- <script setup>
-import BooksOverview from '../../components/MuBooksOverview.vue'
-</script>
-<template>
-	<h1>My Saved Books</h1>
-	<BooksOverview />
-
-</template>
-
--->
-
 <script setup>
-// TODO: hier meot echt heel hard opgeruimd gaan worden
 import { reactive, ref } from 'vue'
 
 import { useMuBooksStore } from '../../stores/MuBooksStore'
 const muBooksStore = useMuBooksStore()
 
 import { useAlertStore } from '../../stores/AlertStore'
+import PostsPage from '../PostsPage.vue'
 
 const alertStore = ref(useAlertStore())
 
-const boeken = ref(JSON.parse(localStorage.getItem('MyBooks')))
-
 const state = reactive({
-	results: ref(boeken),
+	results: muBooksStore.getSavedBooks,
 	resultCount: 0,
 	isSearched: false,
 	resultsWarning: null
 })
-console.log('---==----')
 console.log(state.results)
 console.log('****')
 
@@ -78,24 +63,47 @@ function toggleFavBook(index, book) {
 	// console.log('removing book')
 	state.results[index].saved = !state.results[index].saved
 }
-function toggleReadingBook(index, book) {
+function markAsReading(index, book) {
+	// edit local reactive arr
 	if (state.results[index].saved === false) toggleFavBook(index, book)
 
+	// turn on reading
 	if (state.results[index].reading === false) {
-		// console.log('reading true, finished false')
-		muBooksStore.addBookReading(book)
-	} else {
-		// console.log('finished true, reading false')
-		muBooksStore.endBookReading(book)
+		for (let i = 0; i < state.results.length; i++) {
+			state.results[i].reading = false
+		}
+		state.results[index].reading = !state.results[index].reading
+		if (state.results[index].reading === true) state.results[index].finished = false
 	}
-	state.results[index].reading = !state.results[index].reading
-	state.results[index].finished = !state.results[index].finished
+
+	// edit localstorage
+	if (state.results[index].reading === true) {
+		muBooksStore.addBookReading(index)
+	}
+	// 	muBooksStore.addBookReading(index)
+	// } else {
+	// 	console.log('finished true, reading false')
+	// 	state.results[index].reading = false
+	// 	muBooksStore.endBookReading(index)
+	// }
+
+	// // state.results[index].reading = !state.results[index].reading
+	// console.log('state.results[index].reading:', state.results[index].reading)
+	// state.results[index].finished = !state.results[index].finished
+	// console.log('state.results[index].finished:', state.results[index].finished)
 }
-function removeBook(index, book) {
+function markAsRead(index, book) {
+	state.results[index].finished = true
+	state.results[index].reading = false
+	//edit localstorage
+}
+function removeBook(index) {
 	// console.log('remove book from state using index')
-	state.results.splice(index, 1)
+	// state.results.splice(index, 1)
+
 	// console.log('remove book from localstorage using book')
-	muBooksStore.removeMyBook(book)
+	muBooksStore.removeMyBook(index)
+	state.results.boeken = muBooksStore.getSavedBooks
 }
 </script>
 
@@ -159,14 +167,28 @@ function removeBook(index, book) {
 						><span class="icon icon-remove"></span>Remove from my books</a
 					>
 				</div>
+				<!-- {{ muBooksStore.isReading(index) }} -->
+				<!-- {{ index }} -->
+				<!-- {{ book }} -->
 				<div class="mark">
-					<a @click="toggleReadingBook(index, book)" v-if="book.reading === false">
+					<a @click="markAsReading(index, book)" v-if="book.reading === false">
 						<span class="icon icon-reading"></span>
-						I am reading this book
+						Mark as reading
 					</a>
-					<a @click="toggleReadingBook(index, book)" v-else>
-						<span class="icon icon-read"></span>I am finished reading this book
+					<span v-else class="marked">
+						<span class="icon icon-reading"></span>Marked as reading...</span
+					>
+				</div>
+				<div class="mark">
+					<a
+						@click="markAsRead(index, book)"
+						v-if="book.reading === true && book.finished === false"
+					>
+						<span class="icon icon-read"></span>Mark as read
 					</a>
+					<span v-if="book.finished === true" class="marked"
+						><span class="icon icon-read"></span>Marked as read</span
+					>
 				</div>
 				<!-- TODO: wishlist -->
 				<!-- 

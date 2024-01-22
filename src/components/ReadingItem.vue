@@ -17,7 +17,6 @@ if (localStorage.getItem('MyBooks') !== null) {
 			break
 		}
 	}
-	console.log('readingNow:', readingNow)
 }
 </script>
 <template>
@@ -33,18 +32,6 @@ if (localStorage.getItem('MyBooks') !== null) {
 		<aside>
 			<button><img src="/img/plus-icon.svg" /></button>
 		</aside>
-
 		If you're already reading a book, let's add it here.
 	</main>
 </template>
-<style>
-.dashboard .readingnow .book-summary {
-	display: flex;
-}
-.dashboard .readingnow .book-summary {
-	align-items: center;
-}
-.dashboard .readingnow h2 {
-	line-height: 1.5em;
-}
-</style>
