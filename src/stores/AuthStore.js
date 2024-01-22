@@ -68,7 +68,7 @@ export const useAuthStore = defineStore('AuthStore', {
 		},
 		setLoginStatus(s = false) {
 			// user.role: authenticated / user.aud: authenticated
-			console.log('set loginStatus to ', s)
+			// console.log('set loginStatus to ', s)
 			this.status = s
 			if (s === false) {
 				this.setUsername()
@@ -86,12 +86,12 @@ export const useAuthStore = defineStore('AuthStore', {
 			// user.id
 			this.uid = s
 		},
-		setStatus(status, screenname, username, email, uid) {
+		setStatus(status, screenname, email, uid) {
 			// TODO: bit hacky, needs to be better,
 			// see main.js for hacky call
 			this.status = status
 			this.screenname = screenname
-			this.username = username
+			this.username = email
 			this.email = email
 			uid = uid
 		},

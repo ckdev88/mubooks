@@ -29,7 +29,7 @@ onBeforeMount(() => {
 	showCurrentUser()
 })
 onMounted(() => {
-	console.log(authStore.username)
+	console.log('mounted', authStore.username)
 })
 </script>
 <template>

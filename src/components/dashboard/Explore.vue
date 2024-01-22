@@ -2,15 +2,11 @@
 import { onMounted } from 'vue'
 import { useRouter, RouterLink } from 'vue-router'
 const router = useRouter()
-console.log('router:', router)
 
 function goExplore() {
-	console.log('go zoek boek')
+	// console.log('go zoek boek')
 	router.push({ name: 'explore' })
 }
-onMounted(() => {
-	console.log('mounted')
-})
 </script>
 <template>
 	<article class="adder alt">

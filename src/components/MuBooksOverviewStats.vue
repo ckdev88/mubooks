@@ -19,8 +19,6 @@ export default {
 	},
 	computed: {
 		amountBigBooks() {
-			// console.log('showing big books > 150 pages');
-			// console.log('this.booklist:', this.booklist);
 			let amountbigbooks = 0
 			for (let i = 0; i < this.booklist.length; i++) {
 				const element = this.booklist[i]

@@ -15,7 +15,6 @@ import { useAlertStore } from '../../stores/AlertStore'
 const alertStore = ref(useAlertStore())
 
 const booklist = ref(muBooksStore.bookList)
-console.log('booklist:', booklist.value)
 const boeken = bookData
 
 const state = reactive({

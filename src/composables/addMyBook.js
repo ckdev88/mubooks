@@ -22,6 +22,4 @@ export default function addMyBook(book) {
 	setTimeout(() => {
 		alertStore.currentAlert = null
 	}, 3000)
-
-	console.log('muBooksStore.bookList:', muBooksStore.bookList)
 }

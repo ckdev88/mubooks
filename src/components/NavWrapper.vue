@@ -3,7 +3,17 @@ import { ref, onMounted, onUpdated, watch, onBeforeMount } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/AuthStore'
 const authStore = useAuthStore()
-console.log('authStore in navwrapper:', authStore)
+
+import { useStatusStore } from '../stores/statusStore'
+const statusStore = useStatusStore()
+
+if (statusStore.status.loggedin === true) {
+	authStore.status = statusStore.status.loggedin
+	authStore.email = statusStore.status.email
+	authStore.screenname = statusStore.status.screenname
+	authStore.username = statusStore.status.username
+	authStore.uid = statusStore.status.uid
+}
 
 function goSearch() {
 	router.push({ name: 'search' })
@@ -28,11 +38,9 @@ const nav = (nr) => router.options.routes[nr].children
 let nav0
 let nav1
 function populateNav() {
-	if (authStore.status === true) {
+	if (statusStore.status.loggedin === true) {
 		nav0 = nav(0).filter(
-			(item) =>
-				item.meta.includeNav === true &&
-				(item.meta.requiresAuth === true || item.meta.requiresNoAuth === false)
+			(item) => item.meta.includeNav === true && item.meta.requiresAuth === true
 		)
 	} else {
 		nav0 = nav(0).filter(
@@ -45,13 +53,15 @@ function populateNav() {
 		nav1 = nav(1).filter(
 			(item) =>
 				item.meta.includeNav === true &&
-				(item.meta.requiresAuth === true || item.meta.requiresNoAuth === false)
+				item.meta.requiresAuth === true &&
+				item.meta.requiresNoAuth === false
 		)
 	} else {
 		nav1 = nav(1).filter(
 			(item) =>
 				item.meta.includeNav === true &&
-				(item.meta.requiresAuth === false || item.meta.requiresNoAuth === true)
+				item.meta.requiresAuth === false &&
+				item.meta.requiresNoAuth === true
 		)
 	}
 }

@@ -81,7 +81,9 @@ export const routes = [
 		]
 	},
 	{
-		path: '/account/login',
+		path: '/login',
+		redirect: { name: 'login' },
+		meta: { requiresAuth: false, requiresNoAuth: true, includeNav: false },
 		children: [
 			{
 				path: '/account/login',

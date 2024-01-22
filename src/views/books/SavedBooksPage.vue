@@ -22,7 +22,6 @@ import { useAlertStore } from '../../stores/AlertStore'
 const alertStore = ref(useAlertStore())
 
 const boeken = ref(JSON.parse(localStorage.getItem('MyBooks')))
-console.log('booklist:', boeken.value)
 
 const state = reactive({
 	results: ref(boeken),

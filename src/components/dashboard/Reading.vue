@@ -8,7 +8,6 @@
 // import { useMuBooksStore } from '../../stores/MuBooksStore'
 import { ref } from 'vue'
 const boeken = ref(JSON.parse(localStorage.getItem('MyBooks')))
-console.log('booklist:', boeken.value)
 // const muBooksStore = useMuBooksStore()
 // const readingBook = muBooksStore.getReadingBook
 // console.log('readingBook:', readingBook)

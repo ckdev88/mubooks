@@ -1,19 +1,13 @@
 <script setup>
 import { useAuthStore } from '../../stores/AuthStore'
 const authStore = useAuthStore()
+import { supabase } from '../../clients/supabase'
 import { useRouter } from 'vue-router'
+import { useStatusStore } from '../../stores/statusStore'
+const statusStore = useStatusStore()
 const router = useRouter()
-console.log('authStore.status (dashboardPage):', authStore.status)
-if (authStore.status === false) {
-	// TODO: although this check is fine, it shouldnt be needed and caught in main.js, in de
-	// beforeEach loop
-	router.push({ name: 'login' })
-}
 
-console.log('authStore:', authStore)
-console.log('authStore.status:', authStore.status)
 import Reading from '../../components/dashboard/Reading.vue'
-// TODO: make pinia sync with supabase auth.users
 import Saved from '../../components/dashboard/Saved.vue'
 import Favs from '../../components/dashboard/Favs.vue'
 import Wishlist from '../../components/dashboard/Wishlist.vue'

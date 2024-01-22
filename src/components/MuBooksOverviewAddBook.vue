@@ -36,7 +36,6 @@ export default {
 	emits: ['addbooktmp'],
 	methods: {
 		addToBooklist() {
-			console.log('addtobooklist: ', this.addbooktmp)
 			this.$emit('addbooktmp', this.addbooktmp)
 		}
 	}

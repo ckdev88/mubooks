@@ -1,38 +1,49 @@
 <script setup>
 import NavWrapper from './components/NavWrapper.vue'
-
 import { useRouter } from 'vue-router'
-const router = useRouter()
-import bookData from '/data/books.json'
-// import GlobalCounter from './components/GlobalCounter.vue'
 
 // hacky bit ... TODO: make less hacky
 import { useAuthStore } from './stores/AuthStore'
-// const localUser = await supabase.auth.getSession()
-// console.log('localuser:', localUser)
-
-// const localUser = await supabase.auth.getSession()
-// console.log('localuserr2:', localUser)
 const authStore = useAuthStore()
-if (!authStore.uid) router.push({ name: 'login' })
-// if (localUser.data.session === null) {
-// 	console.log('not logged in, redirect to login in case not in logout page')
-// } else {
-// 	authStore.setStatus(
-// 		true,
-// 		localUser.data.session.user.user_metadata.screenname,
-// 		localUser.data.session.email,
-// 		localUser.data.session.email,
-// 		localUser.data.session.id
-// 	)
-// }
-// console.log('localuser email:', localUser.data.session.user.email)
-// console.log('localuser screenname:', localUser.data.session.user.user_metadata.screenname)
-// /hacky bit
+import { useStatusStore } from './stores/statusStore'
+// const statusStore = useStatusStore()
+// import { supabase } from './clients/supabase'
+
+// supabase.auth.getUser().then(
+// 	(value) => {
+// 		useStatusStore().setStatusLogin(
+// 			value.data.user.id,
+// 			value.data.user.email,
+// 			value.data.user.user_metadata.screenname
+// 		)
+//
+// 		console.log('222222222222222222222222222222222')
+// 		authStore.setStatus(
+// 			useStatusStore.loggedin,
+// 			useStatusStore.screenname,
+// 			useStatusStore.username,
+// 			useStatusStore.email,
+// 			useStatusStore.uid
+// 		)
+// 	},
+// 	(error) => {
+// 		console.log('error:', error)
+// 		useStatusStore().setStatusLogout()
+// 	}
+// )
+//
+// useAuthStore().screenname = statusStore.status.screenname
+let loggedIn
+if (localStorage.getItem('user') === null) loggedIn = false
+else {
+	if (JSON.parse(localStorage.getItem('user')).loggedin !== null) {
+		loggedIn = JSON.parse(localStorage.getItem('user')).loggedin
+	}
+}
 </script>
 
 <template>
-	<header id="header" v-if="authStore.status">
+	<header id="header" v-if="authStore.status === true || loggedIn === true">
 		<NavWrapper />
 	</header>
 	<main id="main">

@@ -20,6 +20,9 @@ async function logoutAccount() {
 		console.log('loggingout "logoutpage.vue"')
 		authStore.setLoginStatus(false) // TODO: vervangen door doLogout, cleanup
 		authStore.doLogout()
+
+		localStorage.removeItem('user')
+
 		return true
 	}
 }

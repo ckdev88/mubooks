@@ -193,7 +193,6 @@ export default {
 			console.log('topics:', newbook.topics)
 			this.booklist.push(newbook)
 			this.cleanform() // TODO: fix
-			console.log('new version of booklist:', this.booklist)
 		},
 		cleanform() {
 			this.abTitle = null
