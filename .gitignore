@@ -27,3 +27,6 @@ coverage
 *.sw?
 
 materiaal
+# books-dataset.jsonl
+# final.jsonl
+# data

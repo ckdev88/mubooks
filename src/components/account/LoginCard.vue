@@ -26,7 +26,7 @@ async function loginAccount() {
 		authStore.setUsername(data.session.user.email)
 		authStore.setUid(data.session.user.id)
 		authStore.setScreenname(data.session.user.user_metadata.screenname)
-		router.push('welcome')
+		router.push({ name: 'dashboard' })
 	}
 }
 
@@ -52,7 +52,7 @@ async function logoutAccount() {
 }
 
 function toProfile() {
-	router.push('profile')
+	router.push({ name: 'profile' })
 }
 onUpdated(() => {
 	console.log('loginstatus in loginpage.vue:', authStore.status)

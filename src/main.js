@@ -1,69 +1,59 @@
 import './assets/main.css'
 
-import { createApp, ref } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
-import { createPinia } from 'pinia'
+import { createApp } from 'vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import { createPinia, defineStore } from 'pinia'
 import { routes } from './router'
-
 import { supabase } from '/src/clients/supabase'
+import { useStatusStore } from './stores/statusStore'
 
 import App from './App.vue'
 
 const app = createApp(App)
 let router = createRouter({
-	history: createWebHistory(),
+	history: createWebHashHistory(),
 	routes
 })
-
-// ---------------------------------------------------------------
-//
-// router.beforeEach(async (to) => {
-// 	// clear alert on route change
-// 	const alertStore = useAlertStore()
-// 	alertStore.clear()
-//
-// 	// redirect to login page if not logged in and trying to access a restricted page
-// 	const publicPages = ['/account/login', '/account/register']
-// 	const authRequired = !publicPages.includes(to.path)
-// 	const authStore = useAuthStore()
-//
-// 	if (authRequired && !authStore.user) {
-// 		authStore.returnUrl = to.fullPath
-// 		return '/account/login'
-// 	}
-// })
-
-// ---------------------------------------------------------------
-
-let isAuthenticated = ref(false)
 
 router.beforeEach(async (to, from) => {
 	document.body.classList.add(to.name)
 	document.body.classList.remove(from.name)
 
-	if (to.meta.requiresAuth || to.meta.requiresNoAuth) {
-		const localUser = await supabase.auth.getSession()
-		if (localUser.data.session === null) isAuthenticated = false
-		else isAuthenticated = true
-		if (isAuthenticated.value === false && to.meta.requiresAuth) {
-			// not authenticated, redirect to login'
-			return { name: 'login' }
-		} else if (isAuthenticated === true && to.meta.requiresNoAuth) {
-			// already authenticated, redirect to profile
-			return { name: 'profile' }
-		}
+	const localUser = await supabase.auth.getSession() // 1337 deze weg
+
+	if (localUser.data.session === null) {
+		// isAuthenticated = false
+		useStatusStore.setStatusLogout
+		if (to.meta.requiresAuth) return { name: 'login' }
+	} else {
+		// isAuthenticated = true
+		useStatusStore().setStatusLogin(
+			localUser.data.session.user.id,
+			localUser.data.session.user.email,
+			localUser.data.session.user.user_metadata.screenname
+		)
 	}
 })
+
+// import { defineStore } from 'pinia'
+// router.beforeEach((to, from) => {
+//   // ✅ use the store within a navigation guard
+//   const auth = useAuthStore()
+//   if (to.meta.requiresAuth && !auth.isAuthenticated) {
+//     return '/login'
+//   }
+// })
 
 const pinia = createPinia()
 
 app.use(router)
 app.use(pinia)
+
 app.mount('#app')
 
 // TODO: apply dark mode option when light mode is all pretty and stuff
+document.getElementsByTagName('html')[0].classList.add('light-mode')
 // if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 // 	document.getElementsByTagName('html')[0].classList.add('dark-mode')
 // } else {
-document.getElementsByTagName('html')[0].classList.add('light-mode')
 // }

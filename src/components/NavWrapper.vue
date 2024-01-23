@@ -4,8 +4,19 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/AuthStore'
 const authStore = useAuthStore()
 
+import { useStatusStore } from '../stores/statusStore'
+const statusStore = useStatusStore()
+
+if (statusStore.status.loggedin === true) {
+	authStore.status = statusStore.status.loggedin
+	authStore.email = statusStore.status.email
+	authStore.screenname = statusStore.status.screenname
+	authStore.username = statusStore.status.username
+	authStore.uid = statusStore.status.uid
+}
+
 function goSearch() {
-	router.push('boekzoek')
+	router.push({ name: 'search' })
 	nav0Expanded.value = false
 	nav1Expanded.value = false
 }
@@ -23,20 +34,34 @@ const nav1Expanded = ref(false)
 const router = useRouter()
 
 const nav = (nr) => router.options.routes[nr].children
-const nav0 = nav(0).filter((item) => item.meta.includeNav === true)
+// const nav0 = nav(0).filter((item) => item.meta.includeNav === true)
+let nav0
 let nav1
 function populateNav() {
+	if (statusStore.status.loggedin === true) {
+		nav0 = nav(0).filter(
+			(item) => item.meta.includeNav === true && item.meta.requiresAuth === true
+		)
+	} else {
+		nav0 = nav(0).filter(
+			(item) =>
+				item.meta.includeNav === true &&
+				(item.meta.requiresAuth === false || item.meta.requiresNoAuth === true)
+		)
+	}
 	if (authStore.status === true) {
 		nav1 = nav(1).filter(
 			(item) =>
 				item.meta.includeNav === true &&
-				(item.meta.requiresAuth === true || item.meta.requiresNoAuth === false)
+				item.meta.requiresAuth === true &&
+				item.meta.requiresNoAuth === false
 		)
 	} else {
 		nav1 = nav(1).filter(
 			(item) =>
 				item.meta.includeNav === true &&
-				(item.meta.requiresAuth === false || item.meta.requiresNoAuth === true)
+				item.meta.requiresAuth === false &&
+				item.meta.requiresNoAuth === true
 		)
 	}
 }
@@ -90,7 +115,9 @@ watch(useAuthStore(), () => {
 	>
 		<ul>
 			<li v-for="(route, index) in nav0" :key="index">
-				<RouterLink :to="route.path" @click="toggleNav">{{ route.name }}</RouterLink>
+				<RouterLink :to="route.path" @click="toggleNav">{{
+					route.meta.navName ? route.meta.navName : route.name
+				}}</RouterLink>
 			</li>
 		</ul>
 		<div class="history">

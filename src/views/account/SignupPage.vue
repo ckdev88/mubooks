@@ -29,8 +29,6 @@ async function createAccount() {
 	if (error) {
 		console.log(error)
 	} else {
-		console.log('adding user:', data)
-		console.log(' user:', data.user.id)
 		authStore.setEmail(f.email)
 		authStore.setScreenname(f.screenname)
 		authStore.setUid(data.user.id)

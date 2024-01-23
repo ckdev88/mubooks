@@ -1,6 +1,10 @@
 import { ref } from 'vue'
 
 let rotate = ref(false)
+
+// TODO: manier vinden om functionaliteit van nu composable setDraaideurHeight hierin te
+// implementeren.
+
 export default function useCardRotate(from = '', to = '') {
 	rotate.value = !rotate.value
 	const el = document.getElementsByClassName('cards-draaideur')[0]

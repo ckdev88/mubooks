@@ -6,13 +6,7 @@ const email = ref('')
 </script>
 <template>
 	<article class="card" id="card-recover">
-		<img
-			src="/public/img/recover-icon.png"
-			width="82"
-			height="82"
-			alt=""
-			class="recover-icon"
-		/>
+		<img src="/img/recover-icon.png" width="82" height="82" alt="" class="recover-icon" />
 		<!-- 
 		<div class="icon-forgot-password">
 			<div class="head">

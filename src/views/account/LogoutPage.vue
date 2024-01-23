@@ -18,13 +18,17 @@ async function logoutAccount() {
 		return false
 	} else {
 		console.log('loggingout "logoutpage.vue"')
-		authStore.setLoginStatus(false)
+		authStore.setLoginStatus(false) // TODO: vervangen door doLogout, cleanup
+		authStore.doLogout()
+
+		localStorage.removeItem('user')
+
 		return true
 	}
 }
 onMounted(async () => {
 	await logoutAccount()
-	router.push('login')
+	router.push({ name: 'login' })
 })
 </script>
 <template>

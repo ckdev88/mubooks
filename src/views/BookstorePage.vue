@@ -86,7 +86,7 @@ export default {
 </script>
 <template>
 	<!-- {{h1template}} -->
-	<RouterLink :to="{ name: 'home', params: 'title', query: { title: 'lekkeerrrrrr' } }"
+	<RouterLink :to="{ name: 'dashboard', params: 'title', query: { title: 'lekkeerrrrrr' } }"
 		>HOME</RouterLink
 	><br />
 
@@ -170,7 +170,7 @@ button {
 	counter-reset: books-counter;
 }
 .book {
-	width: 10rem;
+	width: 9rem;
 	padding: 1rem;
 	border: 1px solid #333;
 	margin: 1rem;

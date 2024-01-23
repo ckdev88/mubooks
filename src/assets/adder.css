@@ -1,0 +1,81 @@
+.adder {
+	margin-bottom: 1rem;
+	cursor: pointer;
+}
+.adder header {
+	font-family: 'Merriweather', 'serif';
+	font-size: 1.3rem;
+	font-weight: normal;
+	display: flex;
+	justify-content: space-between;
+	letter-spacing: -0.04em;
+	padding-bottom: 0.5rem;
+}
+.adder a {
+	text-decoration: none;
+	color: #6a0088;
+}
+
+.adder main {
+	border-radius: 0.3rem;
+	background-color: #f4f1ea;
+	/* background-color: #409970; */
+	padding: 0.5rem;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	line-height: 1.5em;
+}
+.adder:hover main {
+	background-color: white;
+}
+.adder aside {
+	font-size: 0.9rem;
+}
+
+.adder.alt header {
+	font-size: 1.3rem;
+	text-align: center;
+	display: block;
+}
+.adder .adder.alt {
+	text-align: center;
+	justify-content: space-around;
+}
+.adder.alt img {
+	margin: 1rem auto;
+}
+.adder.alt aside {
+	text-align: center;
+}
+
+.adder .savedbooks .book-cover {
+	display: inline-block;
+	padding: 0.2rem;
+	border-radius: 1rem;
+	box-shadow: 0 0 0.2rem #666;
+	width: calc(100% / 3);
+	height: 15rem;
+	background: white;
+	object-fit: cover;
+}
+.adder .savedbooks .book-cover + .book-cover {
+	margin-left: -4rem;
+}
+.adder .savedbooks .book-cover div {
+	background: transparent;
+	object-fit: cover;
+	height: 15rem;
+	padding: 0.2rem;
+	box-sizing: border-box;
+	border-radius: 0.5rem;
+}
+
+.adder .savedbooks .book-cover img {
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	max-height: 100%;
+	object-fit: cover;
+	border-radius: 0.5rem;
+}

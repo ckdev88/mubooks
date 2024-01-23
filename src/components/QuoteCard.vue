@@ -529,15 +529,8 @@ const quotes = [
 const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
 </script>
 <template>
-	<p class="quote">
-		{{ randomQuote.quote }}<br /><sub>- {{ randomQuote.book }}, {{ randomQuote.author }}</sub>
-	</p>
+	<article class="quote">
+		<main>{{ randomQuote.quote }}</main>
+		<footer>{{ randomQuote.book }}, {{ randomQuote.author }}</footer>
+	</article>
 </template>
-<style scoped>
-p.quote {
-	font-style: italic;
-}
-p.quote sub {
-	font-style: normal;
-}
-</style>

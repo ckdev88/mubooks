@@ -12,7 +12,7 @@ async function showCurrentUser() {
 	if (authStore.status !== true) {
 		const { data, error } = await supabase.auth.getUser()
 		if (error) {
-			router.push('login')
+			router.push({ name: 'login' })
 			console.log('error:', error)
 		} else {
 			authStore.email = data.user.email
@@ -29,7 +29,7 @@ onBeforeMount(() => {
 	showCurrentUser()
 })
 onMounted(() => {
-	console.log(authStore.username)
+	console.log('mounted', authStore.username)
 })
 </script>
 <template>
