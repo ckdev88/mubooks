@@ -37,7 +37,8 @@ async function fetchBook() {
 		<pre>{{ book }}</pre>
 		<h2>
 			{{ book.title }}
-			<br /><sub>
+			<br />
+			<sub>
 				<span v-for="(author, index) in book.author_name" :key="index"
 					>{{ author }}<span v-if="book.author_name.length > index + 1">, </span></span
 				></sub
