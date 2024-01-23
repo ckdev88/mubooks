@@ -27,7 +27,7 @@ coverage
 *.sw?
 
 materiaal
-ooi
+release.sh
 # books-dataset.jsonl
 # final.jsonl
 # data
