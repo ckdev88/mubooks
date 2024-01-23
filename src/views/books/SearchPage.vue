@@ -142,9 +142,9 @@ function toggleReadingBook(index, book) {
 	state.results[index].finished = !state.results[index].finished
 }
 
-async function addToWishlist(index, book) {
+function addToWishlist(index, book) {
 	// save book first
-	if (state.results[index].saved === false) await toggleFavBook(index, book, true)
+	if (state.results[index].saved === false) toggleFavBook(index, book, true)
 
 	// modify state.results: saved: true
 	state.results[index].onWishlist = true

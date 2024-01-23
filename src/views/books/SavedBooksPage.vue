@@ -62,6 +62,30 @@ function toggleFavBook(index, book) {
 	// console.log('removing book')
 	state.results[index].saved = !state.results[index].saved
 }
+
+function addToWishlist(index, book) {
+	// TODO: is duplicate, also at least in searchpage.vue
+	// save book first
+	if (state.results[index].saved === false) toggleFavBook(index, book, true)
+
+	// modify state.results: saved: true
+	state.results[index].onWishlist = true
+	// modify pinia store & localstorage: [i].onWishlist=true
+	muBooksStore.addBookWishlist(book)
+}
+
+function removeFromWishlist(index, book) {
+	// TODO: is duplicate, also at least in searchpage.vue
+	console.log('remove from wishlist')
+	// modify state.results: onWishlist:false
+	state.results[index].onWishlist = false
+
+	// modify pinia store & localstorage: [i].onWishlist=false
+	muBooksStore.removeBookWishlist(book)
+
+	// let myBooks = JSON.parse(localStorage.getItem('MyBooks')
+}
+
 function markAsReading(index, book) {
 	// edit local reactive arr
 	if (state.results[index].saved === false) toggleFavBook(index, book)
@@ -190,7 +214,17 @@ function removeBook(index) {
 					>
 				</div>
 
-				<div class="mark"><span class="icon icon-wishlist"></span>Add to wishlist</div>
+				<div class="mark">
+					<a
+						v-if="!book.onWishlist || book.saved === false"
+						@click="addToWishlist(index, book)"
+					>
+						<span class="icon icon-wishlist"></span>Add to wishlist
+					</a>
+					<a v-else-if="book.onWishlist" @click="removeFromWishlist(index, book)">
+						<span class="icon icon-wishlist"></span>Remove from Wishlist
+					</a>
+				</div>
 
 				<!-- <div v-if="!favoriteBooks.includes(book.title)"> -->
 
