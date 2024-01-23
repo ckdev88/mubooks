@@ -15,7 +15,6 @@
 	text-decoration: none;
 	color: #6a0088;
 }
-
 .adder main {
 	border-radius: 0.3rem;
 	background-color: #f4f1ea;
@@ -32,7 +31,6 @@
 .adder aside {
 	font-size: 0.9rem;
 }
-
 .adder.alt header {
 	font-size: 1.3rem;
 	text-align: center;
@@ -48,7 +46,6 @@
 .adder.alt aside {
 	text-align: center;
 }
-
 .adder .savedbooks .book-cover {
 	display: inline-block;
 	padding: 0.2rem;
@@ -70,7 +67,6 @@
 	box-sizing: border-box;
 	border-radius: 0.5rem;
 }
-
 .adder .savedbooks .book-cover img {
 	display: block;
 	box-sizing: border-box;
