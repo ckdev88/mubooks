@@ -5,10 +5,6 @@ import bookData from '/data/books.json'
 
 import { useMuBooksStore } from '../../stores/MuBooksStore'
 const muBooksStore = useMuBooksStore()
-const addMyBook = muBooksStore.addMyBook
-const removeMyBook = muBooksStore.removeMyBook
-const addBookReading = muBooksStore.addBookReading
-const endBookReading = muBooksStore.endBookReading
 
 import { useAlertStore } from '../../stores/AlertStore'
 
@@ -106,14 +102,15 @@ function refreshResults(s = explore.title) {
 // 		.then((res) => res.json())
 // 		.then((data) => (foundBooks.value = data.docs))
 // }
-function toggleFavBook(index, book) {
+function toggleFavBook(index, book, wishlist = false) {
 	// TODO: dit hoort in de store MuBooksStore, als action & getter, reactivity is een issue
+	let wishlistVal = wishlist
 	if (state.results[index].saved === true) {
 		muBooksStore.removeMyBook(book)
 		console.log('removing book')
 	} else {
 		console.log('adding book')
-		muBooksStore.addMyBook(book)
+		muBooksStore.addMyBook(book, false, wishlistVal)
 	}
 	state.results[index].saved = !state.results[index].saved
 }
@@ -143,6 +140,27 @@ function toggleReadingBook(index, book) {
 	}
 	state.results[index].reading = !state.results[index].reading
 	state.results[index].finished = !state.results[index].finished
+}
+
+async function addToWishlist(index, book) {
+	// save book first
+	if (state.results[index].saved === false) await toggleFavBook(index, book, true)
+
+	// modify state.results: saved: true
+	state.results[index].onWishlist = true
+	// modify pinia store & localstorage: [i].onWishlist=true
+	muBooksStore.addBookWishlist(book)
+}
+
+function removeFromWishlist(index, book) {
+	console.log('remove from wishlist')
+	// modify state.results: onWishlist:false
+	state.results[index].onWishlist = false
+
+	// modify pinia store & localstorage: [i].onWishlist=false
+	muBooksStore.removeBookWishlist(book)
+
+	// let myBooks = JSON.parse(localStorage.getItem('MyBooks')
 }
 </script>
 
@@ -221,12 +239,18 @@ function toggleReadingBook(index, book) {
 							>
 						</div>
 
-						<!-- TODO: wishlist -->
-						<!-- 
 						<div class="mark">
-							<span class="icon icon-wishlist"></span>Add to wishlist
+							<a
+								v-if="!book.onWishlist || book.saved === false"
+								@click="addToWishlist(index, book)"
+							>
+								<span class="icon icon-wishlist"></span>Add to wishlist
+							</a>
+							<a v-else-if="book.onWishlist" @click="removeFromWishlist(index, book)">
+								<span class="icon icon-wishlist"></span>Remove from Wishlist
+							</a>
 						</div>
--->
+
 						<!-- <div v-if="!favoriteBooks.includes(book.title)"> -->
 
 						<!-- TODO: favorites -->

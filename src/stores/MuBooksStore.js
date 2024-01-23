@@ -16,15 +16,48 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 		getReadingBook() {
 			// TODO: use (i.e. in ReadingItem.vue) or remove
 			return this.bookList.filter((book) => book.reading === true)
+		},
+		getWishlist() {
+			return this.bookList.filter((book) => book.onWishlist === true)
 		}
 	},
 	actions: {
+		// addMyBook(book, reading = false, wishlist = false) {
+		addMyBook(book, reading = false) {
+			// get current localstorage and convert to arr
+			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
+			if (!myBooks) myBooks = []
+			myBooks.push({
+				// build object and push it in the array
+				title: book.title,
+				date_published: book.date_published,
+				authors: book.authors,
+				pages: book.pages,
+				image: 'https://images.isbndb.com/covers' + book.image,
+				reading: reading,
+				finished: false,
+				onWishlist: false
+			})
+			// stringify array into localstorage
+			localStorage.setItem('MyBooks', JSON.stringify(myBooks))
+			// ... and into this state
+			this.bookList = myBooks
+
+			useAlertStore().currentAlert = 'Added book'
+			setTimeout(() => {
+				useAlertStore().currentAlert = null
+			}, 3000)
+
+			return this.bookList
+		},
 		saveBookToggle(index, book) {
+			// done from search-page
 			this.booklist[index].saved = !this.booklist[index].saved
 			if (this.booklist[index].saved === true) this.addMyBook(book)
 		},
 
 		addBookReading(index) {
+			// done from savedbooks-page
 			console.log('start action addBookReading')
 
 			// only one book at a time can have reading: TRUE, others get FALSE
@@ -51,6 +84,7 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 			}, 3000)
 		},
 		endBookReading(index) {
+			// done from savedbooks-page
 			// TODO: later slim mergen met addBookReading()
 			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
 			let newArr = []
@@ -85,33 +119,33 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 				useAlertStore().currentAlert = null
 			}, 3000)
 		},
-		addMyBook(book, reading = false) {
-			// get current localstorage and convert to arr
+		addBookWishlist(book) {
+			// done directly from search page
+			// edit state (book has te be saved, so part of bookList first)
+			for (let i = 0; i < this.bookList.length; i++) {
+				if (this.bookList[i].title === book.title) this.bookList[i].onWishlist = true
+			}
+			// edit localstorage
 			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
-			if (!myBooks) myBooks = []
-			myBooks.push({
-				// build object and push it in the array
-				title: book.title,
-				date_published: book.date_published,
-				authors: book.authors,
-				pages: book.pages,
-				image: 'https://images.isbndb.com/covers' + book.image,
-				reading: reading,
-				finished: false
-			})
-			// stringify array into localstorage
+			for (let i = 0; i < myBooks.length; i++) {
+				if (myBooks[i].title === book.title) {
+					myBooks[i].onWishlist = true
+				}
+			}
 			localStorage.setItem('MyBooks', JSON.stringify(myBooks))
-			// ... and into this state
-			this.bookList = myBooks
-
-			useAlertStore().currentAlert = 'Added book'
-			setTimeout(() => {
-				useAlertStore().currentAlert = null
-			}, 3000)
-
-			console.log('this.bookList (addMyBook):', this.bookList)
-
-			return this.bookList
+		},
+		removeBookWishlist(book) {
+			// done directly from search page
+			// edit state
+			for (let i = 0; i < this.bookList.length; i++) {
+				if (this.bookList[i].title === book.title) this.bookList[i].onWishlist = false
+			}
+			// edit localstorage
+			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
+			for (let i = 0; i < myBooks.length; i++) {
+				if (myBooks[i].title === book.title) myBooks[i].onWishlist = false
+			}
+			localStorage.setItem('MyBooks', JSON.stringify(myBooks))
 		},
 
 		isSaved(book) {
@@ -144,9 +178,9 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 			return false
 		},
 
-		removeMyBook(index) {
-			// console.log('remove book:', book)
+		addToWishlist(book) {},
 
+		removeMyBook(index) {
 			// get current localstorage and convert to arr
 			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
 			if (!myBooks) console.log('there is nothing to remove')

@@ -1,12 +1,9 @@
-<script setup></script>
+<script setup>
+import WishlistItems from '../WishlistItems.vue'
+</script>
 <template>
 	<article class="adder">
-		<header>Mu Wishlist<span>›</span></header>
-		<main>
-			<aside>
-				<button><img src="/img/icon-wishlist.png" /></button>
-			</aside>
-			Next in line.
-		</main>
+		<header @click="$router.push({ name: 'wishlist' })">Mu Wishlist<span>›</span></header>
+		<WishlistItems />
 	</article>
 </template>

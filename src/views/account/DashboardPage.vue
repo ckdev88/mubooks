@@ -31,7 +31,7 @@ if (statusStore.status.screenname !== null && authStore.screenname === undefined
 	<Reading />
 	<Saved />
 	<Favs @click="$router.push({ name: 'savedbooks' })" />
-	<Wishlist @click="$router.push({ name: 'savedbooks' })" />
+	<Wishlist />
 	<!-- series, mubooks, wishlist -->
 	<Tropes @click="$router.push({ name: 'savedbooks' })" />
 	<Stats @click="$router.push({ name: 'savedbooks' })" />

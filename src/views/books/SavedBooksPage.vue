@@ -189,12 +189,9 @@ function removeBook(index) {
 						><span class="icon icon-read"></span>Marked as read</span
 					>
 				</div>
-				<!-- TODO: wishlist -->
-				<!-- 
-						<div class="mark">
-							<span class="icon icon-wishlist"></span>Add to wishlist
-						</div>
--->
+
+				<div class="mark"><span class="icon icon-wishlist"></span>Add to wishlist</div>
+
 				<!-- <div v-if="!favoriteBooks.includes(book.title)"> -->
 
 				<!-- TODO: favorites -->

@@ -67,6 +67,17 @@ export const routes = [
 				}
 			},
 			{
+				name: 'wishlist',
+				path: '/wishlist',
+				component: () => import('./views/books/WishlistPage.vue'),
+				meta: {
+					navName: 'Wishlist',
+					requiresAuth: true,
+					requiresNoAuth: false,
+					includeNav: true
+				}
+			},
+			{
 				path: '/bookstore',
 				name: 'bookstore',
 				component: () => import('./views/BookstorePage.vue'),
