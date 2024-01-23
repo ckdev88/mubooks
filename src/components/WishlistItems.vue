@@ -1,9 +1,12 @@
 <script setup>
+import { ref } from 'vue'
 import { useMuBooksStore } from '../stores/MuBooksStore'
 const muBooksStore = useMuBooksStore()
 let hasbooks = false
-if (muBooksStore.getWishlist !== null) hasbooks = true
-const books = muBooksStore.getWishlist.slice(0, 4)
+let books = ref(muBooksStore.getWishlist.slice(0, 4))
+if (books.value.length > 0) {
+	hasbooks = true
+}
 </script>
 
 <template>

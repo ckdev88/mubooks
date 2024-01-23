@@ -6,7 +6,6 @@ const muBooksStore = useMuBooksStore()
 const state = reactive({
 	books: muBooksStore.getWishlist
 })
-console.log(state.booklist)
 
 function removeFromWishlist(index, book) {
 	// TODO: is duplicate, but slightly improved (duplicate at least in searchpage.vue)
@@ -18,7 +17,7 @@ function removeFromWishlist(index, book) {
 </script>
 <template>
 	<h1>Wishlist</h1>
-	<p>Books I'm hoping to read soon.</p>
+	<p>Books I will read read soon.</p>
 	<main class="wishlist">
 		<article class="book-summary" v-for="(book, index) in state.books" :key="index">
 			<aside class="cover"><img :src="book.image" /></aside>

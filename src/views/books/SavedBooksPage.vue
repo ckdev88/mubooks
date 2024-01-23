@@ -5,71 +5,35 @@ import { useMuBooksStore } from '../../stores/MuBooksStore'
 const muBooksStore = useMuBooksStore()
 
 import { useAlertStore } from '../../stores/AlertStore'
-import PostsPage from '../PostsPage.vue'
+// import PostsPage from '../PostsPage.vue'
 
 const alertStore = ref(useAlertStore())
 
 const state = reactive({
-	results: muBooksStore.getSavedBooks,
+	books: muBooksStore.getSavedBooks,
 	resultCount: 0,
 	isSearched: false,
 	resultsWarning: null
 })
-// console.log(state.results)
 
 let count = 0
 state.resultsWarning = null
-/*
-state.results = []
-// search loop exact match
-for (let i = 0; i < boeken.length; i++) {
-	// this part helps with reactivity
-	boeken[i].saved = muBooksStore.isSaved(boeken[i])
-	boeken[i].reading = muBooksStore.isReading(boeken[i])
-	boeken[i].finished = muBooksStore.isFinished(boeken[i])
 
-	state.results[count] = boeken[i]
-
-	if (boeken[i].title.length > 45) {
-		state.results[count].titleshort = boeken[i].title.slice(0, 45)
-		state.results[count].titleshort += '...'
-	} else state.results[count].titleshort = boeken[i].title
-	if (boeken[i].image !== null)
-		state.results[count].cover = 'https://images.isbndb.com/covers' + boeken[i].image
-	count++
-}
-// search loop less exact match
-for (let i = 0; i < boeken.length; i++) {
-	boeken[i].saved = muBooksStore.isSaved(boeken[i])
-	boeken[i].reading = muBooksStore.isReading(boeken[i])
-	boeken[i].finished = muBooksStore.isFinished(boeken[i])
-
-	state.results[count] = boeken[i]
-
-	if (boeken[i].title.length > 45) {
-		state.results[count].titleshort = boeken[i].title.slice(0, 45)
-		state.results[count].titleshort += '...'
-	} else state.results[count].titleshort = boeken[i].title
-	if (boeken[i].image !== null)
-		state.results[count].cover = 'https://images.isbndb.com/covers' + boeken[i].image
-	count++
-}
-*/
 function toggleFavBook(index, book) {
 	// TODO: dit hoort in de store MuBooksStore, als action & getter, reactivity is een issue
-	// if (state.results[index].saved === true) {
+	// if (state.books[index].saved === true) {
 	muBooksStore.removeMyBook(book)
 	// console.log('removing book')
-	state.results[index].saved = !state.results[index].saved
+	state.books[index].saved = !state.books[index].saved
 }
 
 function addToWishlist(index, book) {
 	// TODO: is duplicate, also at least in searchpage.vue
 	// save book first
-	if (state.results[index].saved === false) toggleFavBook(index, book, true)
+	if (state.books[index].saved === false) toggleFavBook(index, book, true)
 
-	// modify state.results: saved: true
-	state.results[index].onWishlist = true
+	// modify state.books: saved: true
+	state.books[index].onWishlist = true
 	// modify pinia store & localstorage: [i].onWishlist=true
 	muBooksStore.addBookWishlist(book)
 }
@@ -77,8 +41,8 @@ function addToWishlist(index, book) {
 function removeFromWishlist(index, book) {
 	// TODO: is duplicate, also at least in searchpage.vue
 	console.log('remove from wishlist')
-	// modify state.results: onWishlist:false
-	state.results[index].onWishlist = false
+	// modify state.books: onWishlist:false
+	state.books[index].onWishlist = false
 
 	// modify pinia store & localstorage: [i].onWishlist=false
 	muBooksStore.removeBookWishlist(book)
@@ -88,45 +52,35 @@ function removeFromWishlist(index, book) {
 
 function markAsReading(index, book) {
 	// edit local reactive arr
-	if (state.results[index].saved === false) toggleFavBook(index, book)
+	if (state.books[index].saved === false) toggleFavBook(index, book)
 
 	// turn on reading
-	if (state.results[index].reading === false) {
-		for (let i = 0; i < state.results.length; i++) {
-			state.results[i].reading = false
+	if (state.books[index].reading === false) {
+		for (let i = 0; i < state.books.length; i++) {
+			state.books[i].reading = false
 		}
-		state.results[index].reading = !state.results[index].reading
-		if (state.results[index].reading === true) state.results[index].finished = false
+		state.books[index].reading = !state.books[index].reading
+		if (state.books[index].reading === true) state.books[index].finished = false
 	}
 
 	// edit localstorage
-	if (state.results[index].reading === true) {
+	if (state.books[index].reading === true) {
 		muBooksStore.addBookReading(index)
 	}
-	// 	muBooksStore.addBookReading(index)
-	// } else {
-	// 	console.log('finished true, reading false')
-	// 	state.results[index].reading = false
-	// 	muBooksStore.endBookReading(index)
-	// }
-
-	// // state.results[index].reading = !state.results[index].reading
-	// console.log('state.results[index].reading:', state.results[index].reading)
-	// state.results[index].finished = !state.results[index].finished
-	// console.log('state.results[index].finished:', state.results[index].finished)
 }
 function markAsRead(index, book) {
-	state.results[index].finished = true
-	state.results[index].reading = false
+	state.books[index].finished = true
+	state.books[index].reading = false
 	//edit localstorage
 }
 function removeBook(index) {
 	// console.log('remove book from state using index')
-	// state.results.splice(index, 1)
+	// state.books.splice(index, 1)
 
 	// console.log('remove book from localstorage using book')
 	muBooksStore.removeMyBook(index)
-	state.results.boeken = muBooksStore.getSavedBooks
+	// state.books.boeken = muBooksStore.getSavedBooks
+	state.books.splice(index, 1)
 }
 </script>
 
@@ -145,7 +99,7 @@ function removeBook(index) {
 	</p>
 
 	<article
-		v-for="(book, index) in state.results"
+		v-for="(book, index) in state.books"
 		:key="index"
 		class="book-summary"
 		:class="book.reading ? 'reading' : ''"
