@@ -33,12 +33,17 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 	actions: {
 		// addMyBook(book, reading = false, wishlist = false) {
 		addMyBook(book, reading = false) {
+			// if(book.title.length>45){
+			// 	book.title_short=book.title.slice(0,45)+'...'
+			// }else book.title_short=book.title;
+			//
 			// get current localstorage and convert to arr
 			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
 			if (!myBooks) myBooks = []
 			myBooks.push({
 				// build object and push it in the array
 				title: book.title,
+				// title_short: book.title,
 				date_published: book.date_published,
 				authors: book.authors,
 				pages: book.pages,
@@ -111,6 +116,7 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 				}
 				newArr.push({
 					title: myBooks[i].title,
+					title_short: myBooks[i].title_short,
 					date_published: myBooks[i].date_published,
 					authors: myBooks[i].authors,
 					pages: myBooks[i].pages,

@@ -78,6 +78,17 @@ export const routes = [
 				}
 			},
 			{
+				name: 'favorites',
+				path: '/favorites',
+				component: () => import('./views/books/FavoritesPage.vue'),
+				meta: {
+					navName: 'Favorites',
+					requiresAuth: true,
+					requiresNoAuth: false,
+					includeNav: true
+				}
+			},
+			{
 				path: '/bookstore',
 				name: 'bookstore',
 				component: () => import('./views/BookstorePage.vue'),

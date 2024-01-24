@@ -9,6 +9,10 @@ if (muBooksStore.getSavedBooks !== false) {
 	books = ref(muBooksStore.getSavedBooks.slice(0, 4))
 	if (books.value.length > 0) hasbooks = true
 }
+
+console.log(muBooksStore.getSavedBooks)
+console.log(books)
+console.log(hasbooks)
 </script>
 
 <template>
@@ -28,7 +32,7 @@ if (muBooksStore.getSavedBooks !== false) {
 		</div>
 	</main>
 
-	<main v-else @click="$router.push({ name: 'search' })">
+	<main v-else @click="$router.push({ name: 'search' })" class="toadd">
 		<aside>
 			<button>
 				<img src="/img/save-books-icon.png" @click="$router.push({ name: 'search' })" />

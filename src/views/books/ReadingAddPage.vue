@@ -229,8 +229,7 @@ function toggleReadingBook(index, book) {
 								I am reading this book
 							</a>
 							<a @click="toggleReadingBook(index, book)" v-else>
-								<span class="icon icon-read"></span>I am finished reading this
-								book
+								<span class="icon icon-read"></span>I am finished reading this book
 							</a>
 						</div>
 						<!-- TODO: wishlist -->

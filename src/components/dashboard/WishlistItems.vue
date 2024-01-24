@@ -27,7 +27,7 @@ if (muBooksStore.getWishlist !== false) {
 			</article>
 		</div>
 	</main>
-	<main v-else @click="$router.push({ name: 'savedbooks' })">
+	<main v-else @click="$router.push({ name: 'savedbooks' })" class="toadd">
 		<aside>
 			<button><img src="/img/icon-wishlist.png" /></button>
 		</aside>

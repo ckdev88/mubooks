@@ -153,8 +153,6 @@ function addToWishlist(index, book) {
 }
 
 function removeFromWishlist(index, book) {
-	console.log('remove from wishlist')
-	// modify state.results: onWishlist:false
 	state.results[index].onWishlist = false
 
 	// modify pinia store & localstorage: [i].onWishlist=false
