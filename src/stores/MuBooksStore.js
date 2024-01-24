@@ -19,6 +19,9 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 		},
 		getWishlist() {
 			return this.bookList.filter((book) => book.onWishlist === true)
+		},
+		getFavorites() {
+			return this.bookList.filter((book) => book.isFavorite === true)
 		}
 	},
 	actions: {
@@ -36,7 +39,8 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 				image: 'https://images.isbndb.com/covers' + book.image,
 				reading: reading,
 				finished: false,
-				onWishlist: false
+				onWishlist: false,
+				isFavorite: false
 			})
 			// stringify array into localstorage
 			localStorage.setItem('MyBooks', JSON.stringify(myBooks))
@@ -148,6 +152,34 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 			localStorage.setItem('MyBooks', JSON.stringify(myBooks))
 		},
 
+		addBookFavorites(book) {
+			// done directly from search page
+			// edit state (book has te be saved, so part of bookList first)
+			for (let i = 0; i < this.bookList.length; i++) {
+				if (this.bookList[i].title === book.title) this.bookList[i].isFavorite = true
+			}
+			// edit localstorage
+			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
+			for (let i = 0; i < myBooks.length; i++) {
+				if (myBooks[i].title === book.title) {
+					myBooks[i].isFavorite = true
+				}
+			}
+			localStorage.setItem('MyBooks', JSON.stringify(myBooks))
+		},
+		removeBookFavorites(book) {
+			// done directly from search page
+			// edit state
+			for (let i = 0; i < this.bookList.length; i++) {
+				if (this.bookList[i].title === book.title) this.bookList[i].isFavorite = false
+			}
+			// edit localstorage
+			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
+			for (let i = 0; i < myBooks.length; i++) {
+				if (myBooks[i].title === book.title) myBooks[i].isFavorite = false
+			}
+			localStorage.setItem('MyBooks', JSON.stringify(myBooks))
+		},
 		isSaved(book) {
 			// check if incoming book is marked as saved in localstorage
 			// const savedArr = JSON.parse(localStorage.getItem('MyBooks'))

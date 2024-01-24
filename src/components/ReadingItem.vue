@@ -5,7 +5,6 @@ let readingNow = ref(null)
 
 if (localStorage.getItem('MyBooks') !== null) {
 	const boeken = JSON.parse(localStorage.getItem('MyBooks'))
-	console.log('boeken', boeken)
 	for (let i = 0; i < boeken.length; i++) {
 		if (boeken[i].reading === true) {
 			if (boeken[i].title.length > 45) {

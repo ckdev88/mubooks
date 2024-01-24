@@ -16,7 +16,7 @@ const state = reactive({
 	isSearched: false,
 	resultsWarning: null
 })
-if (state.books.length === 0) useRouter().push({ name: 'search' })
+if (state.books.length === 0 || state.books === null) useRouter().push({ name: 'search' })
 
 state.resultsWarning = null
 
@@ -31,7 +31,8 @@ function toggleFavBook(index, book) {
 function addToWishlist(index, book) {
 	// TODO: is duplicate, also at least in searchpage.vue
 	// save book first
-	if (state.books[index].saved === false) toggleFavBook(index, book, true)
+	if (state.books[index].saved === false) toggleFavBook(index, book, true) // TODO: is true hier
+	// nodig als 3e argument?
 
 	// modify state.books: saved: true
 	state.books[index].onWishlist = true
@@ -39,18 +40,25 @@ function addToWishlist(index, book) {
 	muBooksStore.addBookWishlist(book)
 }
 
-function removeFromWishlist(index, book) {
-	// TODO: is duplicate, also at least in searchpage.vue
-	console.log('remove from wishlist')
-	// modify state.books: onWishlist:false
-	state.books[index].onWishlist = false
+function addToFavorites(index, book) {
+	if (state.books[index].saved === false) {
+		toggleFavBook(index, book)
+	}
+	state.books[index].isFavorite = true
+	muBooksStore.addBookFavorites(book)
+}
 
-	// modify pinia store & localstorage: [i].onWishlist=false
-	muBooksStore.removeBookWishlist(book)
+function removeFromFavorites(index, book) {
+	// TODO: is duplicate, also at least in searchpage.vue
+	console.log('remove from favorites')
+	// modify state.books
+	state.books[index].isFavorite = false
+
+	// modify pinia store & localstorage
+	muBooksStore.removeFromFavorites(book)
 
 	// let myBooks = JSON.parse(localStorage.getItem('MyBooks')
 }
-
 function markAsReading(index, book) {
 	// edit local reactive arr
 	if (state.books[index].saved === false) toggleFavBook(index, book)
@@ -183,14 +191,18 @@ function removeBook(index) {
 
 				<!-- <div v-if="!favoriteBooks.includes(book.title)"> -->
 
-				<!-- TODO: favorites -->
-				<!-- 
-					<div class="mark">
-<a class="favorites" @click="addFavoriteBook(book.title)">
-								<span class="icon icon-favorites"></span>Add to favorites
-							</a>
-							</div>
--->
+				<div class="mark">
+					<a
+						v-if="!book.isFavorite || book.saved === false"
+						@click="addToFavorites(index, book)"
+					>
+						<span class="icon icon-favorites"></span>Add to favorites
+					</a>
+					<a v-else-if="book.isFavorite" @click="removeFromFavorites(index, book)">
+						<span class="icon icon-favorites"></span>Remove from favorites
+					</a>
+				</div>
+
 				<!-- TODO: hide -->
 				<!-- 
 						<div class="mark">

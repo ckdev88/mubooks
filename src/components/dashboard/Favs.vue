@@ -1,12 +1,9 @@
-<script setup></script>
+<script setup>
+import FavoritesItems from '../FavoritesItems.vue'
+</script>
 <template>
 	<article class="adder">
-		<header>Mu Favs<span>›</span></header>
-		<main>
-			<aside>
-				<button><img src="/img/favs-icon.png" /></button>
-			</aside>
-			Only the best ones here.
-		</main>
+		<header @click="$router.push({ name: 'favorites' })">Mu Favs<span>›</span></header>
+		<FavoritesItems />
 	</article>
 </template>
