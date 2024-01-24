@@ -21,7 +21,7 @@ if (muBooksStore.getReadingBook !== false) {
 			</div>
 		</article>
 	</main>
-	<main v-else @click="$router.push({ name: 'search' })">
+	<main v-else @click="$router.push({ name: 'savedbooks' })">
 		<aside>
 			<button><img src="/img/plus-icon.svg" /></button>
 		</aside>
