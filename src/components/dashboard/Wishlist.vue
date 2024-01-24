@@ -1,5 +1,5 @@
 <script setup>
-import WishlistItems from '../WishlistItems.vue'
+import WishlistItems from './WishlistItems.vue'
 </script>
 <template>
 	<article class="adder">

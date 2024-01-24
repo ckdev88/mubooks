@@ -1,11 +1,13 @@
 <script setup>
 import { ref } from 'vue'
-import { useMuBooksStore } from '../stores/MuBooksStore'
+import { useMuBooksStore } from '../../stores/MuBooksStore'
 const muBooksStore = useMuBooksStore()
 let hasbooks = false
-let books = ref(muBooksStore.getFavorites.slice(0, 4))
-if (books.value.length > 0) {
-	hasbooks = true
+let books = []
+
+if (muBooksStore.getFavorites !== false) {
+	books = ref(muBooksStore.getFavorites.slice(0, 4))
+	if (books.value.length > 0) hasbooks = true
 }
 </script>
 

@@ -5,22 +5,28 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 	state: () => ({ bookList: JSON.parse(localStorage.getItem('MyBooks')), loading: false }),
 	getters: {
 		getBookList() {
+			if (localStorage.getItem('MyBooks') === null) return false
 			return this.bookList
 		},
 		getSmallBooks() {
+			if (localStorage.getItem('MyBooks') === null) return false
 			return this.bookList.filter((book) => book.pages < 150)
 		},
 		getSavedBooks() {
+			if (localStorage.getItem('MyBooks') === null) return false
 			return this.bookList
 		},
 		getReadingBook() {
 			// TODO: use (i.e. in ReadingItem.vue) or remove
+			if (localStorage.getItem('MyBooks') === null) return false
 			return this.bookList.filter((book) => book.reading === true)
 		},
 		getWishlist() {
+			if (localStorage.getItem('MyBooks') === null) return false
 			return this.bookList.filter((book) => book.onWishlist === true)
 		},
 		getFavorites() {
+			if (localStorage.getItem('MyBooks') === null) return false
 			return this.bookList.filter((book) => book.isFavorite === true)
 		}
 	},

@@ -9,7 +9,7 @@ const statusStore = useStatusStore()
 
 import Reading from '../../components/dashboard/Reading.vue'
 import Saved from '../../components/dashboard/Saved.vue'
-import Favs from '../../components/dashboard/Favs.vue'
+import Favorites from '../../components/dashboard/Favorites.vue'
 import Wishlist from '../../components/dashboard/Wishlist.vue'
 import Tropes from '../../components/dashboard/Tropes.vue'
 import Stats from '../../components/dashboard/Stats.vue'
@@ -30,7 +30,7 @@ if (statusStore.status.screenname !== null && authStore.screenname === undefined
 	<QuoteCard />
 	<Reading />
 	<Saved />
-	<Favs @click="$router.push({ name: 'savedbooks' })" />
+	<Favorites @click="$router.push({ name: 'savedbooks' })" />
 	<Wishlist />
 	<!-- series, mubooks, wishlist -->
 	<Tropes @click="$router.push({ name: 'savedbooks' })" />

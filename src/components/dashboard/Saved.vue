@@ -1,5 +1,5 @@
 <script setup>
-import SavedItems from '../SavedItems.vue'
+import SavedItems from './SavedItems.vue'
 </script>
 <template>
 	<article class="adder" @click="$router.push({ name: 'savedbooks' })">
