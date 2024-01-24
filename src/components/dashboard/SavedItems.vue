@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useMuBooksStore } from '../../stores/MuBooksStore'
 const muBooksStore = useMuBooksStore()
+
 let hasbooks = false
 let books = []
 
@@ -9,10 +10,6 @@ if (muBooksStore.getSavedBooks !== false) {
 	books = ref(muBooksStore.getSavedBooks.slice(0, 4))
 	if (books.value.length > 0) hasbooks = true
 }
-
-console.log(muBooksStore.getSavedBooks)
-console.log(books)
-console.log(hasbooks)
 </script>
 
 <template>
@@ -35,7 +32,7 @@ console.log(hasbooks)
 	<main v-else @click="$router.push({ name: 'search' })" class="toadd">
 		<aside>
 			<button>
-				<img src="/img/save-books-icon.png" @click="$router.push({ name: 'search' })" />
+				<img src="/img/save-books-icon.png" />
 			</button>
 		</aside>
 		Let's start saving books.

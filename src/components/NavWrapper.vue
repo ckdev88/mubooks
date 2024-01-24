@@ -38,7 +38,8 @@ const nav = (nr) => router.options.routes[nr].children
 let nav0
 let nav1
 function populateNav() {
-	if (statusStore.status.loggedin === true) {
+	// console.log('authStore:', authStore)
+	if (authStore.status === true) {
 		nav0 = nav(0).filter(
 			(item) => item.meta.includeNav === true && item.meta.requiresAuth === true
 		)
@@ -65,12 +66,8 @@ function populateNav() {
 		)
 	}
 }
-onBeforeMount(() => {
-	populateNav()
-})
-watch(useAuthStore(), () => {
-	populateNav()
-})
+onMounted(populateNav)
+watch(useAuthStore(), populateNav)
 </script>
 
 <template>

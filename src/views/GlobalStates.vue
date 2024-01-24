@@ -6,7 +6,7 @@ import { ref } from 'vue'
 
 import { useAuthStore } from '../stores/AuthStore'
 const authStore = useAuthStore()
-console.log('authStore:', authStore)
+// console.log('authStore:', authStore)
 let tmpnaam = ref(authStore.username)
 </script>
 <template>

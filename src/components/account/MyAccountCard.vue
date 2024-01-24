@@ -28,9 +28,6 @@ async function showCurrentUser() {
 onBeforeMount(() => {
 	showCurrentUser()
 })
-onMounted(() => {
-	console.log('mounted', authStore.username)
-})
 </script>
 <template>
 	<div class="card">

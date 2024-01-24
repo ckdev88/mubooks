@@ -54,12 +54,6 @@ async function rotateWithoutSaving(){
 onBeforeMount(() => {
 	loadCurrentUser()
 })
-onMounted(() => {
-	console.log(authStore.username)
-
-
-
-})
 </script>
 <template>
 	<div class="card">

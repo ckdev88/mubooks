@@ -49,15 +49,13 @@ function refreshResults(s = explore.title) {
 		if (s === boeken[i].title.toLowerCase()) {
 			// this part helps with reactivity
 			boeken[i].saved = muBooksStore.isSaved(boeken[i])
-			boeken[i].reading = muBooksStore.isReading(boeken[i])
-			boeken[i].finished = muBooksStore.isFinished(boeken[i])
 
 			state.results[count] = boeken[i]
 
-			if (boeken[i].title.length > 45) {
-				state.results[count].titleshort = boeken[i].title.slice(0, 45)
-				state.results[count].titleshort += '...'
-			} else state.results[count].titleshort = boeken[i].title
+			if (boeken[i].title.length > 35) {
+				state.results[count].title_short = boeken[i].title.slice(0, 35)
+				state.results[count].title_short += '...'
+			} else state.results[count].title_short = boeken[i].title
 			if (boeken[i].image !== null)
 				state.results[count].cover = 'https://images.isbndb.com/covers' + boeken[i].image
 			count++
@@ -71,15 +69,13 @@ function refreshResults(s = explore.title) {
 		}
 		if (boeken[i].title.toLowerCase().includes(s) && boeken[i].title.toLowerCase() !== s) {
 			boeken[i].saved = muBooksStore.isSaved(boeken[i])
-			boeken[i].reading = muBooksStore.isReading(boeken[i])
-			boeken[i].finished = muBooksStore.isFinished(boeken[i])
 
 			state.results[count] = boeken[i]
 
-			if (boeken[i].title.length > 45) {
-				state.results[count].titleshort = boeken[i].title.slice(0, 45)
-				state.results[count].titleshort += '...'
-			} else state.results[count].titleshort = boeken[i].title
+			if (boeken[i].title.length > 35) {
+				state.results[count].title_short = boeken[i].title.slice(0, 35)
+				state.results[count].title_short += '...'
+			} else state.results[count].title_short = boeken[i].title
 			if (boeken[i].image !== null)
 				state.results[count].cover = 'https://images.isbndb.com/covers' + boeken[i].image
 			count++
@@ -102,32 +98,18 @@ function refreshResults(s = explore.title) {
 // 		.then((res) => res.json())
 // 		.then((data) => (foundBooks.value = data.docs))
 // }
+
 function toggleFavBook(index, book, wishlist = false) {
 	// TODO: dit hoort in de store MuBooksStore, als action & getter, reactivity is een issue
 	let wishlistVal = wishlist
 	if (state.results[index].saved === true) {
 		muBooksStore.removeMyBook(book)
-		console.log('removing book')
 	} else {
-		console.log('adding book')
 		muBooksStore.addMyBook(book, false, wishlistVal)
 	}
 	state.results[index].saved = !state.results[index].saved
 }
-// function addReadingBook(index, book) {
-// 	// addMyBook(book, true)
-// 	// setTimeout(() => {
-//
-// 	addBookReading(book, true)
-//
-// 	// }, 2000)
-// }
-// function endReadingBook(index, book) {
-// 	if(state.results[index].reading === true){
-// 	console.log(state.results[index].reading)
-// 	endBookReading(book)
-// 	}
-// }
+
 function toggleReadingBook(index, book) {
 	if (state.results[index].saved === false) toggleFavBook(index, book)
 
@@ -199,7 +181,7 @@ function removeFromWishlist(index, book) {
 					</aside>
 					<div class="in-short">
 						<h2>
-							{{ book.titleshort }}
+							{{ book.title_short }}
 							<sub
 								><span v-for="(author, index2) in book.authors" :key="index2"
 									>{{ author }}<br /> </span

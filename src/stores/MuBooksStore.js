@@ -33,17 +33,16 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 	actions: {
 		// addMyBook(book, reading = false, wishlist = false) {
 		addMyBook(book, reading = false) {
-			// if(book.title.length>45){
-			// 	book.title_short=book.title.slice(0,45)+'...'
-			// }else book.title_short=book.title;
-			//
+			if (book.title.length > 35) {
+				book.title_short = book.title.slice(0, 35) + '...'
+			} else book.title_short = book.title
 			// get current localstorage and convert to arr
 			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
 			if (!myBooks) myBooks = []
 			myBooks.push({
 				// build object and push it in the array
 				title: book.title,
-				// title_short: book.title,
+				title_short: book.title_short,
 				date_published: book.date_published,
 				authors: book.authors,
 				pages: book.pages,
@@ -73,7 +72,6 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 
 		addBookReading(index) {
 			// done from savedbooks-page
-			console.log('start action addBookReading')
 
 			// only one book at a time can have reading: TRUE, others get FALSE
 			let myBooks = JSON.parse(localStorage.getItem('MyBooks'))
@@ -201,24 +199,6 @@ export const useMuBooksStore = defineStore('MuBooksStore', {
 					if (savedArr[i].title === book.title) return true
 				}
 			}
-			return false
-		},
-		isReading(index) {
-			// TODO: wordt nog gelezen maar doet dus niets, opruimen
-			console.log('-------------')
-			// if (this.bookList[index].reading === true) return true
-			// return false
-		},
-		isFinished(index) {
-			// TODO: wordt nog gelezen maar doet dus niets, opruimen
-			console.log('------- isfinished check, nodig? ----')
-			//this.booklist:', this.booklist)
-			// const savedArr = this.bookList
-			// if (savedArr) {
-			// 	for (let i = 0; i < savedArr.length; i++) {
-			// 		if (savedArr[i].finished === this.bookList[index].finished) return true
-			// 	}
-			// }
 			return false
 		},
 

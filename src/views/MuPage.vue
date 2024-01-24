@@ -18,8 +18,8 @@ export default {
 	},
 	methods: {
 		changeFirstName() {
-			console.log('useAuthStore:', loggedIn)
-			console.log('useAuthStore:', loggedIn.status)
+			// console.log('useAuthStore:', loggedIn)
+			// console.log('useAuthStore:', loggedIn.status)
 			this.user.firstname = 'Klaas'
 		}
 	}

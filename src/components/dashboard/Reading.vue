@@ -1,5 +1,5 @@
 <script setup>
-import ReadingItem from '../ReadingItem.vue'
+import ReadingItem from './ReadingItem.vue'
 // check if there are any saved books
 // if yes, check if any of saved books are marked as reading
 // if yes, router.push to saved books

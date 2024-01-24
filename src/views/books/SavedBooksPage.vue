@@ -119,7 +119,7 @@ function removeBook(index) {
 			</aside>
 			<div class="in-short">
 				<h2>
-					{{ book.title }}
+					{{ book.title_short }}
 					<sub
 						><span v-for="(author, index2) in book.authors" :key="index2"
 							>{{ author }}<br /> </span
@@ -153,16 +153,13 @@ function removeBook(index) {
 						><span class="icon icon-remove"></span>Remove from my books</a
 					>
 				</div>
-				<!-- {{ muBooksStore.isReading(index) }} -->
-				<!-- {{ index }} -->
-				<!-- {{ book }} -->
 				<div class="mark">
 					<a @click="markAsReading(index, book)" v-if="book.reading === false">
 						<span class="icon icon-reading"></span>
 						Mark as reading
 					</a>
 					<span v-else class="marked">
-						<span class="icon icon-reading"></span>Marked as reading...</span
+						<span class="icon icon-reading"></span>Marked as reading</span
 					>
 				</div>
 				<div class="mark">

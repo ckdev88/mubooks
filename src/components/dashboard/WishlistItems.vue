@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useMuBooksStore } from '../../stores/MuBooksStore'
 const muBooksStore = useMuBooksStore()
+
 let hasbooks = false
 let books = []
 
