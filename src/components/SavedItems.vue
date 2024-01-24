@@ -1,13 +1,16 @@
 <script setup>
+import { ref } from 'vue'
 import { useMuBooksStore } from '../stores/MuBooksStore'
-let hasSaved = false
 const muBooksStore = useMuBooksStore()
-if (muBooksStore.getSavedBooks !== null) hasSaved = true
-const books = muBooksStore.getSavedBooks.slice(0, 4)
+let hasbooks = false
+let books = ref(muBooksStore.getSavedBooks.slice(0, 4))
+if (books.value.length > 0) {
+	hasbooks = true
+}
 </script>
 
 <template>
-	<main v-if="hasSaved" class="savedbooks deck">
+	<main v-if="hasbooks" class="savedbooks deck">
 		<div class="deck-container">
 			<article
 				class="book-cover"
@@ -23,9 +26,11 @@ const books = muBooksStore.getSavedBooks.slice(0, 4)
 		</div>
 	</main>
 
-	<main v-else>
+	<main v-else @click="$router.push({ name: 'search' })">
 		<aside>
-			<button><img src="/img/save-books-icon.png" /></button>
+			<button>
+				<img src="/img/save-books-icon.png" @click="$router.push({ name: 'search' })" />
+			</button>
 		</aside>
 		Let's start saving books.
 	</main>

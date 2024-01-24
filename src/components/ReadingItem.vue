@@ -28,7 +28,7 @@ if (localStorage.getItem('MyBooks') !== null) {
 			</div>
 		</article>
 	</main>
-	<main v-else>
+	<main v-else @click="$router.push({ name: 'search' })">
 		<aside>
 			<button><img src="/img/plus-icon.svg" /></button>
 		</aside>

@@ -1,5 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 import { useMuBooksStore } from '../../stores/MuBooksStore'
 const muBooksStore = useMuBooksStore()
@@ -15,8 +16,8 @@ const state = reactive({
 	isSearched: false,
 	resultsWarning: null
 })
+if (state.books.length === 0) useRouter().push({ name: 'search' })
 
-let count = 0
 state.resultsWarning = null
 
 function toggleFavBook(index, book) {

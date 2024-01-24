@@ -25,7 +25,7 @@ if (books.value.length > 0) {
 			</article>
 		</div>
 	</main>
-	<main v-else>
+	<main v-else @click="$router.push({ name: 'savedbooks' })">
 		<aside>
 			<button><img src="/img/icon-wishlist.png" /></button>
 		</aside>
