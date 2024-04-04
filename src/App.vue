@@ -8,6 +8,7 @@ const authStore = useAuthStore()
 import { useStatusStore } from './stores/statusStore'
 // const statusStore = useStatusStore()
 // import { supabase } from './clients/supabase'
+
 // supabase.auth.getUser().then(
 // 	(value) => {
 // 		useStatusStore().setStatusLogin(

@@ -45,6 +45,3 @@ export const useAuthStore = defineStore({
 		}
 	}
 })
-function bla(){
-	sdjfh
-}

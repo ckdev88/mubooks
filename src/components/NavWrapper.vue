@@ -20,17 +20,14 @@ function goSearch() {
 	nav0Expanded.value = false
 	nav1Expanded.value = false
 }
-
 function toggleNav() {
 	nav0Expanded.value = !nav0Expanded.value
 	nav1Expanded.value = false
 }
-
 function toggleNav1() {
 	nav1Expanded.value = !nav1Expanded.value
 	nav0Expanded.value = false
 }
-
 // TODO: nav & nav1 super dirty, make it nice, also in css #nav #nav1
 const nav0Expanded = ref(false)
 const nav1Expanded = ref(false)
@@ -40,7 +37,6 @@ const nav = (nr) => router.options.routes[nr].children
 // const nav0 = nav(0).filter((item) => item.meta.includeNav === true)
 let nav0
 let nav1
-
 function populateNav() {
 	// console.log('authStore:', authStore)
 	if (authStore.status === true) {
