@@ -10,11 +10,10 @@ const props = defineProps({
   }
 })
 </script>
-
 <template>
-  <h1>Compo ({{ this.$route.name }})</h1>
-  <BaseCounter />
-  <hr style="margin-top: 1rem; margin-bottom: 0.5rem" />
-  <UserCard :user="{ name: 'Benny', food: 'Sashimi' }" />
-  <StatieGeld />
+	<h1>Compo ({{ this.$route.name }})</h1>
+	<BaseCounter />
+	<hr style="margin-top: 1rem; margin-bottom: 0.5rem" />
+	<UserCard :user="{ name: 'Benny', food: 'Sashimi' }" />
+	<StatieGeld />
 </template>
